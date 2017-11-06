@@ -1,8 +1,9 @@
 Asset Setup
 1. Select "Edit > Project Settings > Game Jolt API" (this will create your GameJolt API settings object)
-2. Edit the settings in your inspector window, you MUST enter your "Game ID" and "Private Key".
+2. Edit the settings in your inspector window, you MUST enter your "Game ID" and "Private Key" (these can be obtained from your game's Game Jolt site under: Settings -> Game API -> API Settings).
 3. Try out an example scene in order to see if everything works correctly.
 
+For more detailed instructions, have a look at the documentation: http://loicteixeira.github.io/gj-unity-api/tutorial.html
 
 
 Other settings
