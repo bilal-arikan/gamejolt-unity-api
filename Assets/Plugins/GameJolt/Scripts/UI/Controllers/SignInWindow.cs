@@ -1,5 +1,6 @@
 ﻿using UnityEngine.UI;
 using System;
+using UnityEngine;
 
 namespace GameJolt.UI.Controllers
 {
@@ -9,6 +10,7 @@ namespace GameJolt.UI.Controllers
 		public InputField tokenField;
 		public Text errorMessage;
 		public Toggle rememberMeToggle;
+		public Toggle showTokenToggle;
 
 		Action<bool> signedInCallback;
 		Action<bool> userFetchedCallback;
@@ -27,6 +29,7 @@ namespace GameJolt.UI.Controllers
 			rememberMeToggle.isOn = API.Manager.Instance.GetStoredUserCredentials(out username, out token);
 			usernameField.text = username;
 			tokenField.text = token;
+			showTokenToggle.isOn = false;
 		}
 
 		public override void Dismiss(bool success)
@@ -73,6 +76,11 @@ namespace GameJolt.UI.Controllers
 					}
 				}, rememberMeToggle.isOn);
 			}
+		}
+
+		public void ShowToken(bool show) {
+			tokenField.contentType = show ? InputField.ContentType.Standard : InputField.ContentType.Password;
+			tokenField.ActivateInputField();
 		}
 	}
 }

@@ -211,7 +211,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Alpha
-    path: SignInPanel/RememberMe
+    path: SignInPanel/CheckBoxes
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -235,7 +235,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.y
-    path: SignInPanel/RememberMe
+    path: SignInPanel/CheckBoxes
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -533,7 +533,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_Alpha
-    path: SignInPanel/RememberMe
+    path: SignInPanel/CheckBoxes
     classID: 225
     script: {fileID: 0}
   - curve:
@@ -557,7 +557,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
     attribute: m_AnchoredPosition.y
-    path: SignInPanel/RememberMe
+    path: SignInPanel/CheckBoxes
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
