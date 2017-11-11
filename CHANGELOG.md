@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - New `GameJolt.API.Manager.HasUser` property, which returns true if there is a current user (which is not necessarily signed in).
 - New `GameJolt.API.Manager.HasSignedInUser` property, which returns true if there is an authenticated user.
 - Added `Show Token` toggle to the sign in window.
+- New `GameJolt.API.Manager.ShowLeaderboards(Action<bool> callback, int? activeTable, params int[] visibleTables)` method, which shows only the provided tables and also opens the table given by the activeTable parameter.
 
 
 ## [2.3.0][v2_3_0] (2017-11-08)

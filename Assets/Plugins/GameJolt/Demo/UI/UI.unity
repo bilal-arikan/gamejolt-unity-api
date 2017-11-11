@@ -393,7 +393,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 250601043}
+      - m_Target: {fileID: 141097215}
         m_MethodName: ShowLeaderboards
         m_Mode: 1
         m_Arguments:

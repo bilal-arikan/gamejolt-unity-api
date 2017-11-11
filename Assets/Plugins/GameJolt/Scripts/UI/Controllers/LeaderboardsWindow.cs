@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
+using GameJolt.API.Objects;
 
 namespace GameJolt.UI.Controllers
 {
@@ -17,43 +19,56 @@ namespace GameJolt.UI.Controllers
 		int[] tableIDs;
 		int currentTab;
 		
-		public override void Show(Action<bool> callback)
-		{
+		public override void Show(Action<bool> callback) {
+			Show(callback, null, null);
+		}
+
+		public void Show(Action<bool> callback, int? activeTable, int[] visibleTables) {
 			animator.SetTrigger("Leaderboards");
 			animator.SetTrigger("ShowLoadingIndicator");
-			this.callback = callback; 
+			this.callback = callback;
 
 			API.Scores.GetTables(tables => {
-				if (tables != null)
-				{
+				// preprocess tables to match the visible tables provided by the user
+				if(tables != null && visibleTables != null && visibleTables.Length > 0) {
+					tables = tables.Where(x => visibleTables.Contains(x.ID)).ToArray();
+				}
+				if(tables != null && tables.Length > 0) {
 					// Create the right number of children.
 					Populate(tabsContainer, tableButton, tables.Length);
+					int activeId = GetActiveTableId(tables, activeTable);
 
 					// Update children's text. 
 					tableIDs = new int[tables.Length];
-					for (int i = 0; i < tables.Length; ++i)
-					{
-						tabsContainer.GetChild(i).GetComponent<TableButton>().Init(tables[i], i, this, tables[i].Primary);
+					for(int i = 0; i < tables.Length; ++i) {
+						tabsContainer.GetChild(i).GetComponent<TableButton>().Init(tables[i], i, this, tables[i].ID == activeId);
 
 						// Keep IDs information and current tab for use when switching tabs.
 						tableIDs[i] = tables[i].ID;
-						if (tables[i].Primary)
-						{
+						if(tables[i].ID == activeId) {
 							currentTab = i;
 						}
 					}
 
-					SetScores();
-				}
-				else
-				{
+					SetScores(activeId);
+				} else {
 					// TODO: Show error notification
 					animator.SetTrigger("HideLoadingIndicator");
 					Dismiss(false);
 				}
 			});
 		}
-		
+
+		private int GetActiveTableId(Table[] tables, int? activeTable) {
+			if(activeTable.HasValue && tables.Any(x => x.ID == activeTable.Value)) // try to use the provided table id
+				return activeTable.Value;
+			// try to find the primary table
+			var primary = tables.FirstOrDefault(x => x.Primary);
+			if(primary != null) return primary.ID;
+			// the first table is used as a fallback
+			return tables[0].ID;
+		}
+
 		public override void Dismiss(bool success)
 		{
 			animator.SetTrigger("Dismiss");
@@ -77,7 +92,7 @@ namespace GameJolt.UI.Controllers
 			SetScores(tableIDs[currentTab]);
 		}
 
-		void SetScores(int tableID = 0)
+		void SetScores(int tableID)
 		{
 			API.Scores.Get(scores => {
 				if (scores != null)

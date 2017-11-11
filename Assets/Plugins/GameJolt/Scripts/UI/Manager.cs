@@ -117,6 +117,16 @@ namespace GameJolt.UI
 		{
 			leaderboardsWindow.Show(callback);
 		}
+
+		/// <summary>
+		/// Shows the leaderboards window.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
+		/// <param name="activeTable">The table which should be active. If null, the primary table is active.</param>
+		/// <param name="visibleTables">The ids of the tables to be shown. If null or empty, all tables are shown.</param>
+		public void ShowLeaderboards(Action<bool> callback, int? activeTable, params int[] visibleTables) {
+			leaderboardsWindow.Show(callback, activeTable, visibleTables);
+		}
 		#endregion Leaderboards
 
 		#region Notifications

@@ -39,6 +39,12 @@ public class UITest : MonoBehaviour
 			string.Format("Notification <b>#{0}</b>", ++notificationQueued));
 	}
 
+	public void ShowLeaderboards() {
+		GameJolt.UI.Manager.Instance.ShowLeaderboards();
+		// if you only want to show certain tables, you can provide them as additional arguments:
+		// GameJolt.UI.Manager.Instance.ShowLeaderboards(null, null, 123, 456, 789, ...);
+	}
+
 	public void Pause()
 	{
 		Time.timeScale = 0f;
