@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+### Add
+- New `GameJolt.API.Manager.HasUser` property, which returns true if there is a current user (which is not necessarily signed in).
+- New `GameJolt.API.Manager.HasSignedInUser` property, which returns true if there is an authenticated user.
+- Added `Show Token` toggle to the sign in window.
+
 
 ## [2.3.0][v2_3_0] (2017-11-08)
 
