@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class UITest : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class UITest : MonoBehaviour
 
 	public void SignOutButtonClicked()
 	{
-		if (GameJolt.API.Manager.Instance.CurrentUser != null)
+		if (GameJolt.API.Manager.Instance.HasUser)
 		{
 			showTrophiesButton.interactable = false;
 			GameJolt.API.Manager.Instance.CurrentUser.SignOut();

@@ -99,6 +99,16 @@ namespace GameJolt.API
 			}
 		}
 
+		/// <summary>
+		/// Checks if there is a user (which must not necessarily be signed in)
+		/// </summary>
+		public bool HasUser { get { return currentUser != null; } }
+
+		/// <summary>
+		/// Returns true if there is a current user and this user is already authenticated.
+		/// </summary>
+		public bool HasSignedInUser { get { return HasUser && currentUser.IsAuthenticated; } }
+
 #if UNITY_EDITOR
 		/// <summary>
 		/// Emulate auto connect in the editor, the same way it would happen with a WebGL build.

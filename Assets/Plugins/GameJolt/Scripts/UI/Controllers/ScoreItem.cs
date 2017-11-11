@@ -16,7 +16,7 @@ namespace GameJolt.UI.Controllers
 			username.text = score.PlayerName;
 			value.text = score.Text;
 
-			bool isUserScore = score.UserID != 0 && API.Manager.Instance.CurrentUser != null && API.Manager.Instance.CurrentUser.ID == score.UserID;
+			bool isUserScore = score.UserID != 0 && API.Manager.Instance.HasUser && API.Manager.Instance.CurrentUser.ID == score.UserID;
 			username.color = isUserScore ? highlightColour : defaultColour;
 			value.color = isUserScore ? highlightColour : defaultColour;
 		}

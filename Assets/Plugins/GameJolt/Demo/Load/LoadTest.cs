@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 public class LoadTest : MonoBehaviour
 {
@@ -19,7 +17,7 @@ public class LoadTest : MonoBehaviour
 	}
 
 	public void SignOutButtonClicked() {
-		if(GameJolt.API.Manager.Instance.CurrentUser == null) {
+		if(!GameJolt.API.Manager.Instance.HasUser) {
 			GameJolt.UI.Manager.Instance.QueueNotification("You're not signed in");
 		} else {
 			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
@@ -28,7 +26,7 @@ public class LoadTest : MonoBehaviour
 	}
 
 	public void IsSignedInButtonClicked() {
-		if (GameJolt.API.Manager.Instance.CurrentUser != null) {
+		if (GameJolt.API.Manager.Instance.HasUser) {
 			GameJolt.UI.Manager.Instance.QueueNotification(
 				"Signed in as " + GameJolt.API.Manager.Instance.CurrentUser.Name);
 		}

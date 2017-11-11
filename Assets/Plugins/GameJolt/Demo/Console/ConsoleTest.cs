@@ -55,7 +55,7 @@ public class ConsoleTest : MonoBehaviour
 	{
 		Debug.Log("Sign Out. Click to see source.");
 
-		var isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
+		var isSignedIn = GameJolt.API.Manager.Instance.HasUser;
 		if (isSignedIn)
 		{
 			GameJolt.API.Manager.Instance.CurrentUser.SignOut();

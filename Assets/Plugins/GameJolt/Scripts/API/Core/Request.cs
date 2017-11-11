@@ -80,7 +80,7 @@ namespace GameJolt.API.Core
 			
 			if (requireVerified)
 			{
-				if (Manager.Instance.CurrentUser == null || !Manager.Instance.CurrentUser.IsAuthenticated)
+				if (!Manager.Instance.HasSignedInUser)
 				{
 					return "Missing Authenticated User.";
 				}

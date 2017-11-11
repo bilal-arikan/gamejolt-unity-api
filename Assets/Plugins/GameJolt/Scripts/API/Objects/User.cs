@@ -203,7 +203,7 @@ namespace GameJolt.API.Objects
 		/// <param name="rememberMe">Whether the user's credentials should be stored in the player prefs.</param>
 		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null, bool rememberMe = false)
 		{
-			if (Manager.Instance.CurrentUser != null)
+			if (Manager.Instance.HasUser)
 			{
 				Debug.LogWarning("Another user is currently signed in. Sign it out first.");
 
