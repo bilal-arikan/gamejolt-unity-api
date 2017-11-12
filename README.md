@@ -1,10 +1,10 @@
 ## Game Jolt Unity API
 Game Jolt [Game API](http://gamejolt.com/api/doc/game/) wrapper for [Unity](http://unity3d.com/).
 
-Check out the [documentation](http://loicteixeira.github.io/gj-unity-api/).
+Check out the [documentation](http://InfectedBytes.github.io/gj-unity-api/).
 
 ## License
-Released under [MIT](https://raw.githubusercontent.com/loicteixeira/gj-unity-api/master/LICENSE.txt).
+Released under [MIT](https://raw.githubusercontent.com/InfectedBytes/gj-unity-api/master/LICENSE.txt).
 
 ## Development
 
@@ -20,7 +20,7 @@ The documentation is generated with [Doxygen](https://www.stack.nl/~dimitri/doxy
 
 The configuration file can be found at `/Documentation/Doxyfile`. Unfortunately the paths are absolute and will depend on the developer machine.
 
-To update the documentation, run `make doc_generate`. To preview it, run `make doc_serve` and visit `http://localhost:8000/`. Finally, to publish the documentation, `commit` the changes to `master` and `push` to `origin`, then run `make doc_publish` to copy the `Documentation/Output/html` subdirectory to the `gh-pages` branch so the documentation will be available at [loicteixeira.github.io/gj-unity-api/](http://loicteixeira.github.io/gj-unity-api/).
+To update the documentation, run `make doc_generate`. To preview it, run `make doc_serve` and visit `http://localhost:8000/`. Finally, to publish the documentation, `commit` the changes to `master` and `push` to `origin`, then run `make doc_publish` to copy the `Documentation/Output/html` subdirectory to the `gh-pages` branch so the documentation will be available at [InfectedBytes.github.io/gj-unity-api/](http://InfectedBytes.github.io/gj-unity-api/).
 
 ### Release new version
 

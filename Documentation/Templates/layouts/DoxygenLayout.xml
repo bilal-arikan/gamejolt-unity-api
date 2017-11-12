@@ -24,8 +24,8 @@
       <tab type="globals" visible="yes" title="" intro=""/>
     </tab>
     <tab type="examples" visible="yes" title="" intro=""/> -->
-    <tab type="user" visible="yes" title="Issues Tracker" url="https://github.com/loicteixeira/gj-unity-api/issues" />
-    <tab type="user" visible="yes" title="Source (GitHub)" url="https://github.com/loicteixeira/gj-unity-api" />
+    <tab type="user" visible="yes" title="Issues Tracker" url="https://github.com/InfectedBytes/gj-unity-api/issues" />
+    <tab type="user" visible="yes" title="Source (GitHub)" url="https://github.com/InfectedBytes/gj-unity-api" />
   </navindex>
 
   <!-- Layout definition for a class page -->
