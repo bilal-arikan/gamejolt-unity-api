@@ -91,6 +91,13 @@ namespace GameJolt.API.Objects
 		/// </para>
 		/// </remarks>
 		public Sprite Image { get; set; }
+
+		/// <summary>
+		/// The Gamejolt API does not yet return whether a trophy is secret or not, 
+		/// therefore this value is not received from Gamejolt, instead it is filled 
+		/// from the <see cref="Settings.secretTrophies"/> setting.
+		/// </summary>
+		public bool IsSecret { get; set; }
 		#endregion Fields & Properties
 		
 		#region Constructors
@@ -109,6 +116,7 @@ namespace GameJolt.API.Objects
 			Description = description;
 			Difficulty = difficulty;
 			Unlocked = unlocked;
+			IsSecret = Manager.Instance.IsSecretTrophy(ID);
 		}
 
 		/// <summary>
@@ -133,6 +141,7 @@ namespace GameJolt.API.Objects
 			Description = data["description"].Value;
 			ImageURL = data["image_url"].Value;
 			Unlocked = data["achieved"].Value != "false";
+			IsSecret = Manager.Instance.IsSecretTrophy(ID);
 
 			try
 			{

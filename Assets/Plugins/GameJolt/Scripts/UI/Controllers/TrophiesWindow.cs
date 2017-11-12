@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 
 namespace GameJolt.UI.Controllers
 {
@@ -17,8 +18,9 @@ namespace GameJolt.UI.Controllers
 			this.callback = callback;
 
 			API.Trophies.Get(trophies => {
-				if (trophies != null)
-				{
+				if (trophies != null) {
+					// filter out all trophies which are secret and not yet unlocked
+					trophies = trophies.Where(x => !x.IsSecret || x.Unlocked).ToArray();
 					// Create children if there are none.
 					if (container.childCount == 0)
 					{
