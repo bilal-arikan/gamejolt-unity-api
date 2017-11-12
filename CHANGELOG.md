@@ -98,13 +98,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.3.0...HEAD
-[v2_3_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.3.0
-[v2_2_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.2.0
-[v2_1_3]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.3
-[v2_1_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.2
-[v2_1_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
-[v2_1_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.0
-[v2_0_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.2
-[v2_0_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.1
-[v2_0_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.0
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.3.0...HEAD
+[v2_3_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.3.0
+[v2_2_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.2.0
+[v2_1_3]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.1.3
+[v2_1_2]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.1.2
+[v2_1_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.1.1
+[v2_1_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.1.0
+[v2_0_2]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.0.2
+[v2_0_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.0.1
+[v2_0_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.0.0

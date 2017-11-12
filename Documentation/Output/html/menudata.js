@@ -4,5 +4,5 @@ var menudata={children:[
 {text:"FAQ",url:"faq.html"},
 {text:"Documentation",url:"annotated.html"},
 {text:"Downloads",url:"downloads.html"},
-{text:"Issues Tracker",url:"https://github.com/loicteixeira/gj-unity-api/issues"},
-{text:"Source (GitHub)",url:"https://github.com/loicteixeira/gj-unity-api"}]}
+{text:"Issues Tracker",url:"https://github.com/InfectedBytes/gj-unity-api/issues"},
+{text:"Source (GitHub)",url:"https://github.com/InfectedBytes/gj-unity-api"}]}
