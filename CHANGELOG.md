@@ -15,58 +15,58 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Add
 - New `GameJolt.API.DataStore.GetKeys(bool global, string pattern, Action<string[]> callback)` method to fetch all datastore keys matching the provided pattern.
-- New "Remember me" functionality for SignIn (user credentials stored in PlayerPrefs with XTEA encryption), see issue #18
+- New "Remember me" functionality for SignIn (user credentials stored in PlayerPrefs with XTEA encryption), see issue loicteixeira/gj-unity-api#18
 - Demo scenes
 
 ### Changed
 - Changed SignIn signature to `void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null, bool rememberMe = false)`
 
 ### Fixed
-- Users.Get(int[] ids, ...) throws an exception #79
+- Users.Get(int[] ids, ...) throws an exception loicteixeira/gj-unity-api#79
 
 ## [2.2.0][v2_2_0] (2017-08-13)
 
 ### Add
-- New `GameJolt.API.Scores.GetRank(int value, int table = 0, Action<int> callback = null)` method to fetch the rank of a given score value. #29
-- New `GameJolt.API.Misc.GetTime(Action<DateTime> callback)` method to get the server time. #24
-- `User.SignIn` and `GameJolt.UI.Manager.Instance.ShowSignIn` now accept a second callback `Action<bool> userFetchedCallback = null` which is called once all the attributes of the user have been populated. The first callback is called like before, as soon as the user has been successfully signed-in. #48
+- New `GameJolt.API.Scores.GetRank(int value, int table = 0, Action<int> callback = null)` method to fetch the rank of a given score value. loicteixeira/gj-unity-api#29
+- New `GameJolt.API.Misc.GetTime(Action<DateTime> callback)` method to get the server time. loicteixeira/gj-unity-api#24
+- `User.SignIn` and `GameJolt.UI.Manager.Instance.ShowSignIn` now accept a second callback `Action<bool> userFetchedCallback = null` which is called once all the attributes of the user have been populated. The first callback is called like before, as soon as the user has been successfully signed-in. loicteixeira/gj-unity-api#48
   - *Thanks to @movrajr for reporting the issue and discussing solutions.*
 
 ### Changed
-- Use HTTPS for API calls. #76
-- Use API version `1.2`. #23
+- Use HTTPS for API calls. loicteixeira/gj-unity-api#76
+- Use API version `1.2`. loicteixeira/gj-unity-api#23
   - *Thanks to @jianmingyong for his insight.*
 
 ## [2.1.3][v2_1_3] (2017-07-19)
 
 ### Fixed
-- Unity 2017.1 compatibility. #73
+- Unity 2017.1 compatibility. loicteixeira/gj-unity-api#73
   - *Thanks to @DanielJMus for his contribution and @mgeorgedeveloper for his help.*
 
 ## [2.1.2][v2_1_2] (2017-04-09)
 
 ### Fixed
-- Unity 5.5 compatibility. #70
+- Unity 5.5 compatibility. loicteixeira/gj-unity-api#70
   - *Thanks to Moire (hkid800) for reporting the issue*
-- Leaderboard window sometimes not showing scores. #47, #65
+- Leaderboard window sometimes not showing scores. loicteixeira/gj-unity-api#47, loicteixeira/gj-unity-api#65
   - Thanks to Derpybunneh, Nanapus and sebasrez for reporting the issue and helping diagnosing it*
 
 ## [2.1.1][v2_1_1] (2016-06-21)
 
 ### Fixed
-- Could not unlock trophies. #64
+- Could not unlock trophies. loicteixeira/gj-unity-api#64
   - *Thanks to RomejanicDev for reporting the issue.*
 
 ## [2.1.0][v2_1_0] (2016-06-19)
 
 ### Warning
 - The minimum version to use the API is now **Unity 5.0.1**.
-- License is now MIT (less restrictive). #62.
+- License is now MIT (less restrictive). loicteixeira/gj-unity-api#62.
 
 ### Fixed
-- ShowLeaderboards callback not being called. #51
+- ShowLeaderboards callback not being called. loicteixeira/gj-unity-api#51
   - *Thanks to @michidk for his contribution and @WizzardMaker for his help.*
-- Call signature could be invalid when using URL with forward slash. #59
+- Call signature could be invalid when using URL with forward slash. loicteixeira/gj-unity-api#59
   - *Thanks to DerpVulpes for his contribution.*
 
 ### Other
@@ -76,9 +76,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.0.2][v2_0_2] (2015-07-18)
 
 ### Fixed
-- AutoConnect for WebGL builds was broken. #46.
+- AutoConnect for WebGL builds was broken. loicteixeira/gj-unity-api#46.
   - *Thanks to David Florek for reporting the issue.*
-- The UI was not on the UI layer. #49.
+- The UI was not on the UI layer. loicteixeira/gj-unity-api#49.
   - *Thanks to Piotrek for reporting the issue.*
 
 ### Deprecated
