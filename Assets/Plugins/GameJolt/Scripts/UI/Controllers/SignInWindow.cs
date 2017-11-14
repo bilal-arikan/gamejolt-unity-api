@@ -82,5 +82,9 @@ namespace GameJolt.UI.Controllers
 			tokenField.contentType = show ? InputField.ContentType.Standard : InputField.ContentType.Password;
 			tokenField.ActivateInputField();
 		}
+
+		public void CreateAccount() {
+			Application.OpenURL("https://gamejolt.com/join");
+		}
 	}
 }

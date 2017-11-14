@@ -46,25 +46,6 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: .233333334
-        value: -335
-        inSlope: 1935.06165
-        outSlope: 1935.06165
-        tangentMode: 0
-      - time: .333333343
-        value: -185
-        inSlope: 28.9527531
-        outSlope: 28.9527531
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_AnchoredPosition.y
-    path: SignInPanel/CancelButton
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
       - time: 0
         value: -150
         inSlope: 2576.62939
@@ -160,25 +141,6 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: .233333334
-        value: 0
-        inSlope: 14.9999971
-        outSlope: 14.9999971
-        tangentMode: 10
-      - time: .300000012
-        value: 1
-        inSlope: 14.9999971
-        outSlope: 14.9999971
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Alpha
-    path: SignInPanel/CancelButton
-    classID: 225
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
       - time: .166666672
         value: 0
         inSlope: 12.000001
@@ -238,6 +200,49 @@ AnimationClip:
     path: SignInPanel/CheckBoxes
     classID: 224
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .233333334
+        value: -335
+        inSlope: 1499.99988
+        outSlope: 1499.99988
+        tangentMode: 0
+      - time: .333333343
+        value: -185
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: SignInPanel/Footer
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .233333334
+        value: 0
+        inSlope: 14.9999971
+        outSlope: 14.9999971
+        tangentMode: 10
+      - time: .300000012
+        value: 1
+        inSlope: 7.49999857
+        outSlope: 7.49999857
+        tangentMode: 10
+      - time: .333333343
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Alpha
+    path: SignInPanel/Footer
+    classID: 225
+    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -258,12 +263,6 @@ AnimationClip:
       classID: 1
       customType: 0
       isPPtrCurve: 0
-    - path: 2247484742
-      attribute: 538195251
-      script: {fileID: 0}
-      classID: 224
-      customType: 0
-      isPPtrCurve: 0
     - path: 2100002664
       attribute: 538195251
       script: {fileID: 0}
@@ -294,28 +293,34 @@ AnimationClip:
       classID: 225
       customType: 0
       isPPtrCurve: 0
-    - path: 2247484742
-      attribute: 1574349066
-      script: {fileID: 0}
-      classID: 225
-      customType: 0
-      isPPtrCurve: 0
     - path: 120734546
       attribute: 1574349066
       script: {fileID: 0}
       classID: 225
       customType: 0
       isPPtrCurve: 0
-    - path: 2017613386
+    - path: 762300180
       attribute: 1574349066
       script: {fileID: 0}
       classID: 225
       customType: 0
       isPPtrCurve: 0
-    - path: 2017613386
+    - path: 762300180
       attribute: 538195251
       script: {fileID: 0}
       classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3858408740
+      attribute: 538195251
+      script: {fileID: 0}
+      classID: 224
+      customType: 0
+      isPPtrCurve: 0
+    - path: 3858408740
+      attribute: 1574349066
+      script: {fileID: 0}
+      classID: 225
       customType: 0
       isPPtrCurve: 0
     pptrCurveMapping: []
@@ -368,25 +373,6 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: .233333334
-        value: -335
-        inSlope: 1935.06165
-        outSlope: 1935.06165
-        tangentMode: 0
-      - time: .333333343
-        value: -185
-        inSlope: 28.9527531
-        outSlope: 28.9527531
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_AnchoredPosition.y
-    path: SignInPanel/CancelButton
-    classID: 224
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
       - time: 0
         value: -150
         inSlope: 2576.62939
@@ -482,25 +468,6 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - time: .233333334
-        value: 0
-        inSlope: 14.9999971
-        outSlope: 14.9999971
-        tangentMode: 10
-      - time: .300000012
-        value: 1
-        inSlope: 14.9999971
-        outSlope: 14.9999971
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    attribute: m_Alpha
-    path: SignInPanel/CancelButton
-    classID: 225
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
       - time: .166666672
         value: 0
         inSlope: 12.000001
@@ -559,6 +526,49 @@ AnimationClip:
     attribute: m_AnchoredPosition.y
     path: SignInPanel/CheckBoxes
     classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .233333334
+        value: -335
+        inSlope: 1499.99988
+        outSlope: 1499.99988
+        tangentMode: 0
+      - time: .333333343
+        value: -185
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_AnchoredPosition.y
+    path: SignInPanel/Footer
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: .233333334
+        value: 0
+        inSlope: 14.9999971
+        outSlope: 14.9999971
+        tangentMode: 10
+      - time: .300000012
+        value: 1
+        inSlope: 7.49999857
+        outSlope: 7.49999857
+        tangentMode: 10
+      - time: .333333343
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_Alpha
+    path: SignInPanel/Footer
+    classID: 225
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
