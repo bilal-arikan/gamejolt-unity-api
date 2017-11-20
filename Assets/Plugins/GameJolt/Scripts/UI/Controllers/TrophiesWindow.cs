@@ -19,16 +19,11 @@ namespace GameJolt.UI.Controllers
 			API.Trophies.Get(trophies => {
 				if (trophies != null)
 				{
-					// Create children if there are none.
-					if (container.childCount == 0)
-					{
-						Transform tr;
-						for (int i = 0; i < trophies.Length; ++i)
-						{
-							tr = Instantiate(trophyItem).transform;
-							tr.SetParent(container);
-							tr.SetAsLastSibling();
-						}
+					// Create children if there are not enough
+					while(container.childCount < trophies.Length) {
+						var tr = Instantiate(trophyItem).transform;
+						tr.SetParent(container);
+						tr.SetAsLastSibling();
 					}
 
 					// Update children's text.
