@@ -71,6 +71,8 @@ namespace GameJolt.API
 
 		private string EncryptionKey { get; set; }
 
+		private HashSet<int> secretTrophies;
+
 
 		private User currentUser;
 		/// <summary>
@@ -170,6 +172,7 @@ namespace GameJolt.API
 				AutoPing = settings.autoPing;
 				UseCaching = settings.useCaching;
 				EncryptionKey = settings.encryptionKey;
+				secretTrophies = new HashSet<int>(settings.secretTrophies ?? new int[0]);
 				
 				if (GameID == 0)
 				{
@@ -451,6 +454,15 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			if(string.IsNullOrEmpty(UserCredentialsPreferences)) return;
 			PlayerPrefs.DeleteKey(UserCredentialsPreferences);
 			PlayerPrefs.Save();
+		}
+
+		/// <summary>
+		/// Returns true if the <see cref="Settings.secretTrophies"/> setting contains the provided trophy id.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public bool IsSecretTrophy(int id) {
+			return secretTrophies.Contains(id);
 		}
 		#endregion
 	}

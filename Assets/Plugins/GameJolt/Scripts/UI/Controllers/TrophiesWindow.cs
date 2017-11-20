@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 
 namespace GameJolt.UI.Controllers
 {
@@ -19,6 +20,7 @@ namespace GameJolt.UI.Controllers
 			API.Trophies.Get(trophies => {
 				if (trophies != null)
 				{
+					trophies = trophies.Where(x => !x.IsSecret || x.Unlocked).ToArray();
 					// Create children if there are not enough
 					while(container.childCount < trophies.Length) {
 						var tr = Instantiate(trophyItem).transform;

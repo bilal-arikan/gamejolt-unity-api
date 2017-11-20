@@ -22,6 +22,8 @@ namespace GameJolt.API
 		public bool useCaching = true;
 		[Tooltip("The key used to encrypt the user credentials.")]
 		public string encryptionKey = "";
+		[Tooltip("List of trophies which are only shown if the user has achieved them.")]
+		public int[] secretTrophies;
 
 		[Header("Debug")]
 		[Tooltip("AutoConnect in the Editor as if the game was hosted on GameJolt.")]

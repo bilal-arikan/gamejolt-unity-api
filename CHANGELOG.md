@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added `Show Token` toggle to the sign in window.
 - New `GameJolt.API.Manager.ShowLeaderboards(Action<bool> callback, int? activeTable, params int[] visibleTables)` method, which shows only the provided tables and also opens the table given by the activeTable parameter.
 - Added `Create Account` button to sign in window, which opens the gamejolt sign up page in the webbrowser
+- Added `GameJolt.API.Settings.secretTrophies` setting, which defines which trophies are secret.
+- Added `GameJolt.API.Manager.IsSecretTrophy` method, which returns whether the provided trophy id is secret or not.
+- New `GameJolt.API.Objects.Trophy.IsSecret` property (GameJolt does not yet return whether a trophy is secret or not, therefore this property is filled from the settings.)
 
 ## [2.3.0][v2_3_0] (2017-11-08)
 
