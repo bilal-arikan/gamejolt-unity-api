@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+## [2.3.1][v2_3_1] (2018-03-03)
+
 ### Add
 - New `GameJolt.API.Manager.HasUser` property, which returns true if there is a current user (which is not necessarily signed in).
 - New `GameJolt.API.Manager.HasSignedInUser` property, which returns true if there is an authenticated user.
@@ -102,7 +104,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.3.1...HEAD
+[v2_3_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.3.1
 [v2_3_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.3.0
 [v2_2_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.2.0
 [v2_1_3]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.1.3
