@@ -3,7 +3,7 @@ Asset Setup
 2. Edit the settings in your inspector window, you MUST enter your "Game ID" and "Private Key" (these can be obtained from your game's Game Jolt site under: Settings -> Game API -> API Settings).
 3. Try out an example scene in order to see if everything works correctly.
 
-For more detailed instructions, have a look at the documentation: http://InfectedBytes.github.io/gj-unity-api/tutorial.html
+For more detailed instructions, have a look at the documentation: https://infectedbytes.github.io/gj-unity-api/
 
 
 Other settings

@@ -59,6 +59,19 @@ namespace GameJolt.API
 		public bool AutoPing { get; private set; }
 
 		/// <summary>
+		/// Gets a value indicating whether a message should automatically popup if the user has successfully signed in or out.
+		/// </summary>
+		public bool AutoSignInOutMessage { get; private set; }
+		/// <summary>
+		/// If AutoSignInOutMessage is set to true, this message will be shown if a user has signed in.
+		/// </summary>
+		public string SignInMessage { get; private set; }
+		/// <summary>
+		/// If AutoSignInOutMessage is set to true, this message will be shown if a user has signed out.
+		/// </summary>
+		public string SignOutMessage { get; private set; }
+
+		/// <summary>
 		/// Gets a value indicating whether High Score Tables and Trophies information should be cached for faster display.
 		/// </summary>
 		/// <value><c>true</c> to use caching; otherwise, <c>false</c>.</value>
@@ -170,6 +183,9 @@ namespace GameJolt.API
 				PrivateKey = settings.privateKey;
 				Timeout = settings.timeout;
 				AutoPing = settings.autoPing;
+				AutoSignInOutMessage = settings.autoSignInOutMessage;
+				SignInMessage = settings.signInMessage;
+				SignOutMessage = settings.signOutMessage;
 				UseCaching = settings.useCaching;
 				EncryptionKey = settings.encryptionKey;
 				secretTrophies = new HashSet<int>(settings.secretTrophies ?? new int[0]);

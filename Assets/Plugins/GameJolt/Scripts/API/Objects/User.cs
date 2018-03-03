@@ -223,8 +223,9 @@ namespace GameJolt.API.Objects
 			Core.Request.Get(Constants.API_USERS_AUTH, parameters, response => {
 				IsAuthenticated = response.success;
 
-				if (response.success)
-				{
+				if (response.success) {
+					if(Manager.Instance.AutoSignInOutMessage)
+						UI.Manager.Instance.QueueNotification(string.Format(Manager.Instance.SignInMessage, Name));
 					Manager.Instance.CurrentUser = this;
 
 					if(rememberMe) {
@@ -264,6 +265,8 @@ namespace GameJolt.API.Objects
 		{
 			if (Manager.Instance.CurrentUser == this)
 			{
+				if(Manager.Instance.AutoSignInOutMessage)
+					UI.Manager.Instance.QueueNotification(string.Format(Manager.Instance.SignOutMessage, Name));
 				Manager.Instance.CurrentUser = null;
 				Manager.Instance.ClearUserCredentials();
 			}

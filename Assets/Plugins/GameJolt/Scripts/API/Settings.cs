@@ -18,6 +18,12 @@ namespace GameJolt.API
 		public float timeout = 10f;
 		[Tooltip("Automatically create and ping sessions once a user has been authentified.")]
 		public bool autoPing = true;
+		[Tooltip("Automatically show a message if a user has successfully signed in our out")]
+		public bool autoSignInOutMessage;
+		[Tooltip("If AutoSignInOutMessage is set to true, this message will be shown if a user has signed in.")]
+		public string signInMessage = "Signed in as '{0}'";
+		[Tooltip("If AutoSignInOutMessage is set to true, this message will be shown if a user has signed out.")]
+		public string signOutMessage = "Signed out";
 		[Tooltip("Cache High Score Tables and Trophies information for faster display.")]
 		public bool useCaching = true;
 		[Tooltip("The key used to encrypt the user credentials.")]

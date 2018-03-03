@@ -12,7 +12,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added `Create Account` button to sign in window, which opens the gamejolt sign up page in the webbrowser
 - Added `GameJolt.API.Settings.secretTrophies` setting, which defines which trophies are secret.
 - Added `GameJolt.API.Manager.IsSecretTrophy` method, which returns whether the provided trophy id is secret or not.
-- New `GameJolt.API.Objects.Trophy.IsSecret` property (GameJolt does not yet return whether a trophy is secret or not, therefore this property is filled from the settings.)
+- Added `GameJolt.API.Objects.Trophy.IsSecret` property (GameJolt does not yet return whether a trophy is secret or not, therefore this property is filled from the settings.)
+- Added support for automatic sign in and out messages. If `GameJolt.API.Settings.autoSignInOutMessage` is set to true, the message defined by `GameJolt.API.Settings.signInMessage` and `GameJolt.API.Settings.signOutMessage` will be shown if the user signs in/out.
 
 ## [2.3.0][v2_3_0] (2017-11-08)
 
