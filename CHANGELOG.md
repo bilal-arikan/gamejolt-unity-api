@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added `GameJolt.API.Settings.secretTrophies` setting, which defines which trophies are secret.
 - Added `GameJolt.API.Manager.IsSecretTrophy` method, which returns whether the provided trophy id is secret or not.
 - Added `GameJolt.API.Objects.Trophy.IsSecret` property (GameJolt does not yet return whether a trophy is secret or not, therefore this property is filled from the settings.)
-- Added support for automatic sign in and out messages. If `GameJolt.API.Settings.autoSignInOutMessage` is set to true, the message defined by `GameJolt.API.Settings.signInMessage` and `GameJolt.API.Settings.signOutMessage` will be shown if the user signs in/out.
+- Added support for automatic sign in and out messages. If `GameJolt.API.Settings.autoSignInOutMessage` is set to true, the message defined by `GameJolt.API.Settings.signInMessage` and `GameJolt.API.Settings.signOutMessage` will be shown if the user signs in/out. (fixes [#17](https://github.com/InfectedBytes/gj-unity-api/issues/17))
 
 ## [2.3.0][v2_3_0] (2017-11-08)
 
