@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.3.0</span>
+   &#160;<span id="projectnumber">v2.3.1</span>
    </div>
   </td>
  </tr>
@@ -82,6 +82,9 @@ IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><b>PostRequest</b
 <tr class="memitem:a68dbe4529fbd25bb49e3b34ac66351e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a68dbe4529fbd25bb49e3b34ac66351e5">ClearUserCredentials</a> ()</td></tr>
 <tr class="memdesc:a68dbe4529fbd25bb49e3b34ac66351e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the stored credentials.  <a href="#a68dbe4529fbd25bb49e3b34ac66351e5">More...</a><br /></td></tr>
 <tr class="separator:a68dbe4529fbd25bb49e3b34ac66351e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62dd852c39532fe1c0a2082768cfd960"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a62dd852c39532fe1c0a2082768cfd960">IsSecretTrophy</a> (int id)</td></tr>
+<tr class="memdesc:a62dd852c39532fe1c0a2082768cfd960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the Settings.secretTrophies setting contains the provided trophy id.  <a href="#a62dd852c39532fe1c0a2082768cfd960">More...</a><br /></td></tr>
+<tr class="separator:a62dd852c39532fe1c0a2082768cfd960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -103,12 +106,27 @@ Properties</h2></td></tr>
 <tr class="memitem:a8f15fdce3f645d7c838919691e2de05b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a8f15fdce3f645d7c838919691e2de05b">AutoPing</a><code> [get]</code></td></tr>
 <tr class="memdesc:a8f15fdce3f645d7c838919691e2de05b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value indicating whether it should sutomatically create and ping sessions once a user has been authentified.  <a href="#a8f15fdce3f645d7c838919691e2de05b">More...</a><br /></td></tr>
 <tr class="separator:a8f15fdce3f645d7c838919691e2de05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0d15a596027864325723b1b0cc44e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a7b0d15a596027864325723b1b0cc44e5">AutoSignInOutMessage</a><code> [get]</code></td></tr>
+<tr class="memdesc:a7b0d15a596027864325723b1b0cc44e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value indicating whether a message should automatically popup if the user has successfully signed in or out.  <a href="#a7b0d15a596027864325723b1b0cc44e5">More...</a><br /></td></tr>
+<tr class="separator:a7b0d15a596027864325723b1b0cc44e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ae14c1f57d6f022a492ac492fc93b11"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a7ae14c1f57d6f022a492ac492fc93b11">SignInMessage</a><code> [get]</code></td></tr>
+<tr class="memdesc:a7ae14c1f57d6f022a492ac492fc93b11"><td class="mdescLeft">&#160;</td><td class="mdescRight">If AutoSignInOutMessage is set to true, this message will be shown if a user has signed in.  <a href="#a7ae14c1f57d6f022a492ac492fc93b11">More...</a><br /></td></tr>
+<tr class="separator:a7ae14c1f57d6f022a492ac492fc93b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8c2fb19547311ae647f08f0dc4a6c4"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a4f8c2fb19547311ae647f08f0dc4a6c4">SignOutMessage</a><code> [get]</code></td></tr>
+<tr class="memdesc:a4f8c2fb19547311ae647f08f0dc4a6c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">If AutoSignInOutMessage is set to true, this message will be shown if a user has signed out.  <a href="#a4f8c2fb19547311ae647f08f0dc4a6c4">More...</a><br /></td></tr>
+<tr class="separator:a4f8c2fb19547311ae647f08f0dc4a6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a437627879fee3fa773adb011d01f9e30"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a437627879fee3fa773adb011d01f9e30">UseCaching</a><code> [get]</code></td></tr>
 <tr class="memdesc:a437627879fee3fa773adb011d01f9e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value indicating whether High Score Tables and <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_trophies.html" title="Trophies API methods ">Trophies</a> information should be cached for faster display.  <a href="#a437627879fee3fa773adb011d01f9e30">More...</a><br /></td></tr>
 <tr class="separator:a437627879fee3fa773adb011d01f9e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6bf167b83890e66c4a2043528383815"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html">User</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#af6bf167b83890e66c4a2043528383815">CurrentUser</a><code> [get, set]</code></td></tr>
 <tr class="memdesc:af6bf167b83890e66c4a2043528383815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the current user.  <a href="#af6bf167b83890e66c4a2043528383815">More...</a><br /></td></tr>
 <tr class="separator:af6bf167b83890e66c4a2043528383815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8b147859d2e63a61c6ff58ea9a4103e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#af8b147859d2e63a61c6ff58ea9a4103e">HasUser</a><code> [get]</code></td></tr>
+<tr class="memdesc:af8b147859d2e63a61c6ff58ea9a4103e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if there is a user (which must not necessarily be signed in)  <a href="#af8b147859d2e63a61c6ff58ea9a4103e">More...</a><br /></td></tr>
+<tr class="separator:af8b147859d2e63a61c6ff58ea9a4103e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c996091d55943fd2edbbfd46fd19e02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a7c996091d55943fd2edbbfd46fd19e02">HasSignedInUser</a><code> [get]</code></td></tr>
+<tr class="memdesc:a7c996091d55943fd2edbbfd46fd19e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is a current user and this user is already authenticated.  <a href="#a7c996091d55943fd2edbbfd46fd19e02">More...</a><br /></td></tr>
+<tr class="separator:a7c996091d55943fd2edbbfd46fd19e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton"><td colspan="2" onclick="javascript:toggleInherit('properties_class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton.html">GameJolt.API.Core.MonoSingleton&lt; Manager &gt;</a></td></tr>
 <tr class="memitem:affc87ede27bf59483b5e9ea633c55edd inherit properties_class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton"><td class="memItemLeft" align="right" valign="top"><a id="affc87ede27bf59483b5e9ea633c55edd"></a>
 static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code> [get]</code></td></tr>
@@ -226,6 +244,41 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 
 </div>
 </div>
+<a id="a62dd852c39532fe1c0a2082768cfd960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62dd852c39532fe1c0a2082768cfd960">&#9670;&nbsp;</a></span>IsSecretTrophy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameJolt.API.Manager.IsSecretTrophy </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the Settings.secretTrophies setting contains the provided trophy id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a id="aaffb72d64271f0d873286c779e73f1ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaffb72d64271f0d873286c779e73f1ae">&#9670;&nbsp;</a></span>RememberUserCredentials()</h2>
 
@@ -299,6 +352,30 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 
 </div>
 </div>
+<a id="a7b0d15a596027864325723b1b0cc44e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b0d15a596027864325723b1b0cc44e5">&#9670;&nbsp;</a></span>AutoSignInOutMessage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameJolt.API.Manager.AutoSignInOutMessage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a value indicating whether a message should automatically popup if the user has successfully signed in or out. </p>
+
+</div>
+</div>
 <a id="af6bf167b83890e66c4a2043528383815"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6bf167b83890e66c4a2043528383815">&#9670;&nbsp;</a></span>CurrentUser</h2>
 
@@ -350,6 +427,54 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 
 </div>
 </div>
+<a id="a7c996091d55943fd2edbbfd46fd19e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c996091d55943fd2edbbfd46fd19e02">&#9670;&nbsp;</a></span>HasSignedInUser</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameJolt.API.Manager.HasSignedInUser</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if there is a current user and this user is already authenticated. </p>
+
+</div>
+</div>
+<a id="af8b147859d2e63a61c6ff58ea9a4103e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8b147859d2e63a61c6ff58ea9a4103e">&#9670;&nbsp;</a></span>HasUser</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameJolt.API.Manager.HasUser</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if there is a user (which must not necessarily be signed in) </p>
+
+</div>
+</div>
 <a id="a89c19c023978365504629f2e48635f3c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a89c19c023978365504629f2e48635f3c">&#9670;&nbsp;</a></span>PrivateKey</h2>
 
@@ -373,6 +498,54 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 <p>Gets the game private key. </p>
 <p>The game private key.</p>
 <p>Set this in the <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a> settings (Edit &gt; Project <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_settings.html" title="API Settings Config Object. ">Settings</a> &gt; <a class="el" href="namespace_game_jolt.html">GameJolt</a> <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a>). </p>
+
+</div>
+</div>
+<a id="a7ae14c1f57d6f022a492ac492fc93b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ae14c1f57d6f022a492ac492fc93b11">&#9670;&nbsp;</a></span>SignInMessage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string GameJolt.API.Manager.SignInMessage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If AutoSignInOutMessage is set to true, this message will be shown if a user has signed in. </p>
+
+</div>
+</div>
+<a id="a4f8c2fb19547311ae647f08f0dc4a6c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f8c2fb19547311ae647f08f0dc4a6c4">&#9670;&nbsp;</a></span>SignOutMessage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string GameJolt.API.Manager.SignOutMessage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If AutoSignInOutMessage is set to true, this message will be shown if a user has signed out. </p>
 
 </div>
 </div>
@@ -429,7 +602,7 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Plugins/GameJolt/Scripts/API/Manager.cs</li>
+<li>D:/Dev/Unity/Projects/gj-unity-api/Assets/Plugins/GameJolt/Scripts/API/Manager.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.10-->
