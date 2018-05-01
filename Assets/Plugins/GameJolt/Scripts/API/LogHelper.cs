@@ -24,22 +24,22 @@ namespace GameJolt.API {
 
 		public static void Warning(object obj) {
 			if(Level > LogLevel.Warning) return;
-			Debug.Log(obj);
+			Debug.LogWarning(obj);
 		}
 
 		public static void Warning(string format, params object[] args) {
 			if(Level > LogLevel.Warning) return;
-			Debug.Log(string.Format(format, args));
+			Debug.LogWarning(string.Format(format, args));
 		}
 
 		public static void Error(object obj) {
 			if(Level > LogLevel.Error) return;
-			Debug.Log(obj);
+			Debug.LogError(obj);
 		}
 
 		public static void Error(string format, params object[] args) {
 			if(Level > LogLevel.Error) return;
-			Debug.Log(string.Format(format, args));
+			Debug.LogError(string.Format(format, args));
 		}
 
 		public enum LogLevel {
