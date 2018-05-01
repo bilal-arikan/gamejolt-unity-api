@@ -14,6 +14,10 @@ namespace GameJolt.API
 		#region Fields & Properties
 		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
 
+		public Sprite DefaultTrophy;
+		public Sprite DefaultAvatar;
+		public Sprite DefaultNotificationIcon;
+
 		/// <summary>
 		/// Gets the game ID.
 		/// </summary>

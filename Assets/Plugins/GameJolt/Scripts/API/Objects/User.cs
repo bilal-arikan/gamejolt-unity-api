@@ -301,15 +301,7 @@ namespace GameJolt.API.Objects
 			if (!string.IsNullOrEmpty(AvatarURL))
 			{
 				Misc.DownloadImage(AvatarURL, avatar => {
-					if (avatar != null)
-					{
-						Avatar = avatar;
-					}
-					else
-					{
-						var tex = Resources.Load<Texture2D>(Constants.DEFAULT_AVATAR_ASSET_PATH);
-						Avatar = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
-					}
+					Avatar = avatar ?? Manager.Instance.DefaultAvatar;
 
 					if (callback != null)
 					{

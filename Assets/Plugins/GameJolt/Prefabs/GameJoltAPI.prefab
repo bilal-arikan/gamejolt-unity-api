@@ -1442,6 +1442,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4afd56a8661bffe4d82b24c8f9941637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DefaultTrophy: {fileID: 21300000, guid: 812dd8a149f2bb64dacad4642f7cea11, type: 3}
+  DefaultAvatar: {fileID: 21300000, guid: 421ff404ed2890444a8a6e3815974032, type: 3}
+  DefaultNotificationIcon: {fileID: 21300000, guid: 0ff6ac854f4f074478f9a15e36c258ef,
+    type: 3}
 --- !u!114 &11422210
 MonoBehaviour:
   m_ObjectHideFlags: 1

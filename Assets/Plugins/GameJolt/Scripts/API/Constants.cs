@@ -41,14 +41,5 @@
 		public const string API_DATASTORE_KEYS_FETCH = "/data-store/get-keys";
 
 		public const string API_TIME_GET = "/get-time";
-
-		public const string IMAGE_RESOURCE_REL_PATH = "Images/";
-
-		public const string DEFAULT_AVATAR_ASSET_NAME = "GJAPIDefaultAvatar";
-		public const string DEFAULT_AVATAR_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_AVATAR_ASSET_NAME;
-		public const string DEFAULT_NOTIFICATION_ASSET_NAME = "GJAPIDefaultNotification";
-		public const string DEFAULT_NOTIFICATION_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_NOTIFICATION_ASSET_NAME;
-		public const string DEFAULT_TROPHY_ASSET_NAME = "GJAPIDefaultTrophy";
-		public const string DEFAULT_TROPHY_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_TROPHY_ASSET_NAME;
 	}
 }

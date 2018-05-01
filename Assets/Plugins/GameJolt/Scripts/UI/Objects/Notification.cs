@@ -12,13 +12,13 @@ namespace GameJolt.UI.Objects
 		/// Gets or sets the text.
 		/// </summary>
 		/// <value>The text.</value>
-		public string Text { get; set; }
+		public string Text { get; private set; }
 
 		/// <summary>
 		/// Gets or sets the image.
 		/// </summary>
 		/// <value>The image.</value>
-		public Sprite Image { get; set; }
+		public Sprite Image { get; private set; }
 		#endregion Fields & Properties
 		
 		#region Constructors
@@ -26,13 +26,7 @@ namespace GameJolt.UI.Objects
 		/// Initializes a new instance of the <see cref="Notification"/> class.
 		/// </summary>
 		/// <param name="text">The notification text.</param>
-		public Notification(string text)
-		{
-			Text = text;
-
-			var tex = Resources.Load<Texture2D>(API.Constants.DEFAULT_NOTIFICATION_ASSET_PATH);
-			Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
-		}
+		public Notification(string text) : this(text, API.Manager.Instance.DefaultNotificationIcon) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Notification"/> class.

@@ -1,23 +1,16 @@
-﻿using UnityEngine;
+﻿using GameJolt.API;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class RestrictedButton : MonoBehaviour
-{
-	void Start()
-	{
-		var button = GetComponent<Button>();
+public class RestrictedButton : MonoBehaviour {
+	public bool RequiresSignedInUser = true;
+	private Button button;
 
-#if UNITY_EDITOR
-		if (GameJolt.API.Manager.Instance.DebugAutoConnect)
-		{
-			button.interactable = true;
-		}
-		else
-		{
-			button.interactable = false;
-		}
-#else
-		button.interactable = true;
-#endif
+	private void Start() {
+		button = GetComponent<Button>();
+	}
+
+	private void Update() {
+		button.interactable = Manager.Instance.HasSignedInUser == RequiresSignedInUser;
 	}
 }

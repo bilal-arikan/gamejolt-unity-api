@@ -190,16 +190,8 @@ namespace GameJolt.API.Objects
 			if (!string.IsNullOrEmpty(ImageURL))
 			{
 				Misc.DownloadImage(ImageURL, image => {
-					if (image != null)
-					{
-						Image = image;
-					}
-					else
-					{
-						var tex = Resources.Load<Texture2D>(Constants.DEFAULT_TROPHY_ASSET_PATH);
-						Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
-					}
-					
+					Image = image ?? Manager.Instance.DefaultTrophy;
+
 					if (callback != null)
 					{
 						callback(image != null);

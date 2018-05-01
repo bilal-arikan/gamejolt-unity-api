@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using GameJolt.API;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class UITest : MonoBehaviour
-{
+public class UITest : MonoBehaviour {
+	public UserInfoBox UserInfo;
 	public Button showTrophiesButton;
 
 	int notificationQueued = 0;
@@ -31,6 +32,10 @@ public class UITest : MonoBehaviour
 			showTrophiesButton.interactable = false;
 			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
 		}
+	}
+
+	public void DownloadAvatar() {
+		Manager.Instance.CurrentUser.DownloadAvatar(success => Debug.LogFormat("Downloading avatar {0}", success ? "succeeded" : "failed"));
 	}
 
 	public void QueueNotification()
