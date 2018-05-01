@@ -189,14 +189,15 @@ namespace GameJolt.API
 				UseCaching = settings.useCaching;
 				EncryptionKey = settings.encryptionKey;
 				secretTrophies = new HashSet<int>(settings.secretTrophies ?? new int[0]);
+				LogHelper.Level = settings.LogLevel;
 				
 				if (GameID == 0)
 				{
-					Debug.LogWarning("Missing Game ID.");
+					LogHelper.Error("Missing Game ID.");
 				}
 				if (PrivateKey == string.Empty)
 				{
-					Debug.LogWarning("Missing Private Key.");
+					LogHelper.Error("Missing Private Key.");
 				}
 				
 #if UNITY_EDITOR
@@ -207,7 +208,7 @@ namespace GameJolt.API
 			}
 			else
 			{
-				Debug.LogWarning("Could not load settings.");
+				LogHelper.Error("Could not load settings.");
 			}
 		}
 		#endregion Init
@@ -274,21 +275,21 @@ namespace GameJolt.API
 			{
 				if (DebugUser != string.Empty && DebugToken != string.Empty)
 				{
-					var user = new Objects.User(DebugUser, DebugToken);
-					user.SignIn(success => { Debug.Log(string.Format("AutoConnect: " + success)); });
+					var user = new User(DebugUser, DebugToken);
+					user.SignIn(success => { LogHelper.Info("AutoConnect user '{0}': {1}", user.Name, success ? "success" : "failed"); });
 				}
 				else
 				{
-					Debug.LogWarning("Cannot simulate WebPlayer AutoConnect. Missing user and/or token in debug settings.");
+					LogHelper.Warning("Cannot simulate WebPlayer AutoConnect. Missing user and/or token in debug settings.");
 				}
 			}
-	#else
+#else
 			var uri = new Uri(Application.absoluteURL);
 			if (uri.Host.EndsWith("gamejolt.net") || uri.Host.EndsWith("gamejolt.com"))
 			{
-				#if UNITY_WEBPLAYER
+#if UNITY_WEBPLAYER
 				Application.ExternalCall("GJAPI_AuthUser", this.gameObject.name, "OnAutoConnectWebPlayer");
-				#elif UNITY_WEBGL
+#elif UNITY_WEBGL
 				Application.ExternalEval(string.Format(@"
 var qs = location.search;
 var params = {{}};
@@ -309,14 +310,14 @@ else {{
 
 SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		", this.gameObject.name));
-				#endif
+#endif
 			}
 			else
 			{
-				Debug.Log("Cannot AutoConnect, the game is not hosted on GameJolt.");
+				LogHelper.Warning("Cannot AutoConnect, the game is not hosted on GameJolt.");
 			}
-	#endif
-			
+#endif
+
 			#endregion
 #else
 			#region Autoconnect Non Web
@@ -344,7 +345,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				}
 				else
 				{
-					Debug.Log("Cannot AutoConnect.");
+					LogHelper.Info("Cannot AutoConnect.");
 				}
 			}
 			else
@@ -443,7 +444,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				token = XTEA.Decrypt(credentials[1], EncryptionKey);
 				return true;
 			} catch {
-				Debug.LogWarning("Failed to retrieve user credentials.");
+				LogHelper.Warning("Failed to retrieve user credentials.");
 				return false;
 			}
 		}

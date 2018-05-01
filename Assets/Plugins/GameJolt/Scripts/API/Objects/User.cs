@@ -205,7 +205,7 @@ namespace GameJolt.API.Objects
 		{
 			if (Manager.Instance.HasUser)
 			{
-				Debug.LogWarning("Another user is currently signed in. Sign it out first.");
+				LogHelper.Warning("Another user is currently signed in. Sign it out first.");
 
 				if (signedInCallback != null)
 				{

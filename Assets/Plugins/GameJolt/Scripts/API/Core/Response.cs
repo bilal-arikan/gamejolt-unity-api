@@ -68,7 +68,7 @@ namespace GameJolt.API.Core
 		/// <param name="errorMessage">Error message.</param>
 		public Response(string errorMessage) {
 			success = false;
-			Debug.LogWarning(errorMessage);
+			LogHelper.Warning(errorMessage);
 		}
 
 		/// <summary>
@@ -81,7 +81,7 @@ namespace GameJolt.API.Core
 			if (!string.IsNullOrEmpty(www.error))
 			{
 				success = false;
-				Debug.LogWarning(www.error);
+				LogHelper.Warning(www.error);
 				return;
 			}
 
@@ -99,7 +99,7 @@ namespace GameJolt.API.Core
 
 				if (!success)
 				{
-					Debug.LogWarning(dump);
+					LogHelper.Warning(dump);
 					dump = null;
 				}
 				break;
@@ -109,7 +109,7 @@ namespace GameJolt.API.Core
 				success = json["success"].AsBool;
 				if (!success)
 				{
-					Debug.LogWarning(json["message"]);
+					LogHelper.Warning(json["message"]);
 					json = null;
 				}
 				break;
@@ -126,7 +126,7 @@ namespace GameJolt.API.Core
 
 			default:
 				success = false;
-				Debug.LogWarning("Unknown format. Cannot process response.");
+				LogHelper.Warning("Unknown format. Cannot process response.");
 				break;
 			}
 		}

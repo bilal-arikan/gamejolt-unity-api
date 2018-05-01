@@ -28,6 +28,8 @@ namespace GameJolt.API
 		public bool useCaching = true;
 		[Tooltip("The key used to encrypt the user credentials.")]
 		public string encryptionKey = "";
+		[Tooltip("Set LogLevel for all GameJolt API log messages. Messages below this level will be discarded.")]
+		public LogHelper.LogLevel LogLevel = LogHelper.LogLevel.Warning;
 		[Tooltip("List of trophies which are only shown if the user has achieved them.")]
 		public int[] secretTrophies;
 
