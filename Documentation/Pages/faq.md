@@ -6,7 +6,7 @@
 You are probably missing the EventSystem in your scene. Manually add one to your scene (`GameObject > UI > EventSystem`) or make sure to use the API v2.0.1 or more so it is automatically added when you add the API to your scene (`GameObject > GameJolt API Manager`).
 
 # Sign in keeps failing even with the right username and password
-You should sign in with your game token, not your password (you password is only used to log into GameJolt). You can find your token on GameJolt by clicking on your user picture then selecting `Game Token`.
+You should sign in with your game token, not your password (your password is only used to log into GameJolt). You can find your token on GameJolt by clicking on your user picture then selecting `Game Token`.
 
 # The trophy notification keeps coming up
 You are probably unlocking the trophy in the `Update` loop, therefore triggering it on every frame. See this [issue](https://github.com/loicteixeira/gj-unity-api/issues/68) for more details.

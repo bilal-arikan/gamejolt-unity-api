@@ -23,18 +23,26 @@
 2. Right click in the *Project* tab.
 3. Select *Import Package > Custom Package...* and locate the *Unity Package*.
 
+*Note: You can also directly download and import ths asset via the [Unity Asset Store](http://u3d.as/ZUx)*
+
 ## Configure the API
 
 ### Settings
 
-1. Select *Edit > Project Settings > Game Jolt API*.
+1. Navigate to *Plugins/GameJolt* and the select the *GJAPISettings* file
 2. Fill the *Game ID* and *Private Key*.
 
 There's quite a few options here, let's get through them:
 
 - *Timeout:* The time in seconds before an API call should timeout and return failure.
 - *Auto Ping:* Automatically create and ping sessions once a user has been authentified. Turn it off to handle it yourself.
+- *Auto Sign In Out Message:* If true, the api will automatically show a notification when the user is signed in or out.
+  - *Sign In Message:* Format string which is shown if the user signed in. For e.g. `"Signed in as '{0}'"`, where `{0}` will be replaced with the user name.
+  - *Sign Out Message:* Same as above, but for the signed out event.
 - *Use Caching:* Cache High Score Tables and Trophies information for faster display.
+- *Encryption Key:* The key used to encrypt the user credentials when the user checks the *Remember Me* checkbox.
+- *Log Level:* Sets the LogLevel for all GameJolt API log messages. Messages below this level will be discarded.
+- *Secret Trophies*: List of trophies which are only shown if the user has achieved them. 
 - *Auto Connect:* AutoConnect in the Editor as if the game was hosted on GameJolt.
 - *User:* The username to use for AutoConnect.
 - *Token:* The token to use for AutoConnect. *Important Note: Passwords and Tokens are different things on GameJolt. You can find your token on GameJolt by clicking on your user picture then selecting `Game Token`.*
@@ -59,7 +67,7 @@ Authentication is the corner stone of the API. If you user isn't signed in, you 
 For *Web Player* or *WebGL* builds hosted on Game Jolt the player will  automatically be signed in. This is how you check if a player is currently signed in or not (Guest).
 
 ```
-bool isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
+bool isSignedIn = GameJolt.API.Manager.Instance.HasSignedInUser;
 ```
 
 ## Standalone Builds
