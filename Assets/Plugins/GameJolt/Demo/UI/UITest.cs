@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UITest : MonoBehaviour {
-	public UserInfoBox UserInfo;
 	public Button showTrophiesButton;
 
 	int notificationQueued = 0;

@@ -14,8 +14,13 @@ namespace GameJolt.API
 		#region Fields & Properties
 		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
 
+		[Tooltip("The GameJolt API settings.")]
+		public Settings Settings;
+		[Tooltip("The default trophy image which is used if downloading the image failed.")]
 		public Sprite DefaultTrophy;
+		[Tooltip("The default avatar image which is used if downloading the image failed.")]
 		public Sprite DefaultAvatar;
+		[Tooltip("The default notification icon which is used if you don't provide an image yourself.")]
 		public Sprite DefaultNotificationIcon;
 
 		/// <summary>
@@ -180,20 +185,19 @@ namespace GameJolt.API
 		/// </summary>
 		private void Configure()
 		{
-			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;
-			if (settings != null)
+			if (Settings != null)
 			{
-				GameID = settings.gameID;
-				PrivateKey = settings.privateKey;
-				Timeout = settings.timeout;
-				AutoPing = settings.autoPing;
-				AutoSignInOutMessage = settings.autoSignInOutMessage;
-				SignInMessage = settings.signInMessage;
-				SignOutMessage = settings.signOutMessage;
-				UseCaching = settings.useCaching;
-				EncryptionKey = settings.encryptionKey;
-				secretTrophies = new HashSet<int>(settings.secretTrophies ?? new int[0]);
-				LogHelper.Level = settings.LogLevel;
+				GameID = Settings.gameID;
+				PrivateKey = Settings.privateKey;
+				Timeout = Settings.timeout;
+				AutoPing = Settings.autoPing;
+				AutoSignInOutMessage = Settings.autoSignInOutMessage;
+				SignInMessage = Settings.signInMessage;
+				SignOutMessage = Settings.signOutMessage;
+				UseCaching = Settings.useCaching;
+				EncryptionKey = Settings.encryptionKey;
+				secretTrophies = new HashSet<int>(Settings.secretTrophies ?? new int[0]);
+				LogHelper.Level = Settings.LogLevel;
 				
 				if (GameID == 0)
 				{
@@ -205,9 +209,9 @@ namespace GameJolt.API
 				}
 				
 #if UNITY_EDITOR
-				DebugAutoConnect = settings.autoConnect;
-				DebugUser = settings.user;
-				DebugToken = settings.token;
+				DebugAutoConnect = Settings.autoConnect;
+				DebugUser = Settings.user;
+				DebugToken = Settings.token;
 #endif
 			}
 			else

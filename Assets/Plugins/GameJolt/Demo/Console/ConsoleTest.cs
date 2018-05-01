@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using GameJolt.API;
 using GameJolt.API.Objects;
 
 public class ConsoleTest : MonoBehaviour
@@ -349,7 +350,7 @@ public class ConsoleTest : MonoBehaviour
 	void Start()
 	{
 		// Do not try this at home! Seriously, you shouldn't.
-		var settings = Resources.Load(GameJolt.API.Constants.SETTINGS_ASSET_NAME) as GameJolt.API.Settings;
+		var settings = Manager.Instance.Settings;
 		if (settings != null)
 		{
 			userNameField.text = settings.user;

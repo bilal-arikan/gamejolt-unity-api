@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Reflection;
 using GameJolt.API;
 using UnityEditor;
+using UnityEngine;
+using Random = System.Random;
 
 namespace GameJolt.Editor {
 	[CustomEditor(typeof(Settings))]
@@ -11,6 +13,17 @@ namespace GameJolt.Editor {
 			if(string.IsNullOrEmpty(settings.encryptionKey))
 				settings.encryptionKey = GetRandomPassword();
 			base.OnInspectorGUI();
+			if(GUILayout.Button("Clear All Settings")) {
+				Undo.RecordObject(target, "Clear GameJolt API settings");
+				var empty = CreateInstance<Settings>();
+				foreach(var fieldInfo in typeof(Settings).GetFields(BindingFlags.Public | BindingFlags.Instance)) {
+					var value = fieldInfo.GetValue(empty);
+					fieldInfo.SetValue(settings, value);
+				}
+				DestroyImmediate(empty);
+				EditorUtility.SetDirty(target);
+				Selection.activeObject = null;
+			}
 		}
 
 		private static string GetRandomPassword() {

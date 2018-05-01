@@ -1,5 +1,5 @@
 Asset Setup
-1. Select "Edit > Project Settings > Game Jolt API" (this will create your GameJolt API settings object)
+1. Navigate to Plugins/GameJolt and select the GJAPISettings file
 2. Edit the settings in your inspector window, you MUST enter your "Game ID" and "Private Key" (these can be obtained from your game's Game Jolt site under: Settings -> Game API -> API Settings).
 3. Try out an example scene in order to see if everything works correctly.
 
