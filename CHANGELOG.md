@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
+### Add
+- Added LogHelper class and LogLevel setting. All log messages with a level below the provided one are discarded. (see issue [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
+
+### Fixed
+- Debug option for the API (fixes [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
+- Got rid of all `Resources.Load` calls. Instead those assets are now directly linked via the Manager prefab. (fixes [#19](https://github.com/InfectedBytes/gj-unity-api/issues/19)) 
 
 ## [2.3.1][v2_3_1] (2018-03-03)
 
