@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameJolt.API.Objects;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameJolt.UI.Controllers
@@ -20,7 +21,7 @@ namespace GameJolt.UI.Controllers
 			button = GetComponent<Button>();
 		}
 
-		public void Init(API.Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
+		public void Init(Table table, int index, LeaderboardsWindow controller, bool active = false)
 		{
 			title.text = table.Name;
 			tabIndex = index;

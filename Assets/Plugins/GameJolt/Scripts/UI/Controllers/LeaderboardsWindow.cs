@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using GameJolt.API;
 using GameJolt.API.Objects;
 
 namespace GameJolt.UI.Controllers
@@ -28,7 +29,7 @@ namespace GameJolt.UI.Controllers
 			animator.SetTrigger("ShowLoadingIndicator");
 			this.callback = callback;
 
-			API.Scores.GetTables(tables => {
+			Scores.GetTables(tables => {
 				// preprocess tables to match the visible tables provided by the user
 				if(tables != null && visibleTables != null && visibleTables.Length > 0) {
 					tables = tables.Where(x => visibleTables.Contains(x.ID)).ToArray();
@@ -94,7 +95,7 @@ namespace GameJolt.UI.Controllers
 
 		void SetScores(int tableID)
 		{
-			API.Scores.Get(scores => {
+			Scores.Get(scores => {
 				if (scores != null)
 				{
 					scoresScrollRect.verticalNormalizedPosition = 0;

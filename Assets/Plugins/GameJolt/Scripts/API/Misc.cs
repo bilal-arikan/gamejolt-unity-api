@@ -47,7 +47,7 @@ namespace GameJolt.API
 			} else {
 				// no open request -> initiate one
 				openRequests[url] = callback;
-				Manager.Instance.StartCoroutine(Manager.Instance.GetRequest(url, Core.ResponseFormat.Texture, response => {
+				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.GetRequest(url, Core.ResponseFormat.Texture, response => {
 					Sprite sprite = null;
 					if(response.success) {
 						sprite = Sprite.Create(

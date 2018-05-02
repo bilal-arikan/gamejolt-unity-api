@@ -32,7 +32,7 @@ namespace GameJolt.API.Core
 			else
 			{
 				var url = GetRequestURL(method, parameters);
-				Manager.Instance.StartCoroutine(Manager.Instance.GetRequest(url, format, callback));
+				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.GetRequest(url, format, callback));
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace GameJolt.API.Core
 			else
 			{
 				var url = GetRequestURL(method, parameters);
-				Manager.Instance.StartCoroutine(Manager.Instance.PostRequest(url, payload, format, callback));
+				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.PostRequest(url, payload, format, callback));
 			}
 		}
 
@@ -80,12 +80,12 @@ namespace GameJolt.API.Core
 			
 			if (requireVerified)
 			{
-				if (!Manager.Instance.HasSignedInUser)
+				if (!GameJoltAPI.Instance.HasSignedInUser)
 				{
 					return "Missing Authenticated User.";
 				}
-				parameters.Add("username", Manager.Instance.CurrentUser.Name.ToLower());
-				parameters.Add("user_token", Manager.Instance.CurrentUser.Token.ToLower());
+				parameters.Add("username", GameJoltAPI.Instance.CurrentUser.Name.ToLower());
+				parameters.Add("user_token", GameJoltAPI.Instance.CurrentUser.Token.ToLower());
 			}
 			
 			parameters.Add("format", format.ToString().ToLower());
@@ -105,7 +105,7 @@ namespace GameJolt.API.Core
 			url.Append(Constants.API_BASE_URL);
 			url.Append(method);
 			url.Append("?game_id=");
-			url.Append(Manager.Instance.GameID);
+			url.Append(GameJoltAPI.Instance.GameID);
 			
 			foreach (KeyValuePair<string,string> parameter in parameters)
 			{
@@ -129,7 +129,7 @@ namespace GameJolt.API.Core
 		/// <param name="input">The formatted request URL.</param>
 		static string GetSignature(string input)
 		{
-			return MD5(input + Manager.Instance.PrivateKey);
+			return MD5(input + GameJoltAPI.Instance.PrivateKey);
 		}
 
 		/// <summary>

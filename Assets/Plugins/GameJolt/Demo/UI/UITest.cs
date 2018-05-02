@@ -1,4 +1,5 @@
 ﻿using GameJolt.API;
+using GameJolt.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class UITest : MonoBehaviour {
 
 	public void SignInButtonClicked()
 	{
-		GameJolt.UI.Manager.Instance.ShowSignIn((bool signInSuccess) => {
+		GameJoltUI.Instance.ShowSignIn((bool signInSuccess) => {
 			if (signInSuccess)
 			{
 				showTrophiesButton.interactable = true;
@@ -26,25 +27,25 @@ public class UITest : MonoBehaviour {
 
 	public void SignOutButtonClicked()
 	{
-		if (GameJolt.API.Manager.Instance.HasUser)
+		if (GameJoltAPI.Instance.HasUser)
 		{
 			showTrophiesButton.interactable = false;
-			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
+			GameJoltAPI.Instance.CurrentUser.SignOut();
 		}
 	}
 
 	public void DownloadAvatar() {
-		Manager.Instance.CurrentUser.DownloadAvatar(success => Debug.LogFormat("Downloading avatar {0}", success ? "succeeded" : "failed"));
+		GameJoltAPI.Instance.CurrentUser.DownloadAvatar(success => Debug.LogFormat("Downloading avatar {0}", success ? "succeeded" : "failed"));
 	}
 
 	public void QueueNotification()
 	{
-		GameJolt.UI.Manager.Instance.QueueNotification(
+		GameJoltUI.Instance.QueueNotification(
 			string.Format("Notification <b>#{0}</b>", ++notificationQueued));
 	}
 
 	public void ShowLeaderboards() {
-		GameJolt.UI.Manager.Instance.ShowLeaderboards();
+		GameJoltUI.Instance.ShowLeaderboards();
 		// if you only want to show certain tables, you can provide them as additional arguments:
 		// GameJolt.UI.Manager.Instance.ShowLeaderboards(null, null, 123, 456, 789, ...);
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameJolt.API.Objects;
+using GameJolt.UI;
 
 namespace GameJolt.API
 {
@@ -104,7 +105,7 @@ namespace GameJolt.API
 		{
 			if (trophy.Unlocked)
 			{
-				UI.Manager.Instance.QueueNotification(
+				GameJoltUI.Instance.QueueNotification(
 					string.Format("Unlocked <b>#{0}</b>", trophy.Title),
 					trophy.Image);
 			}
@@ -186,7 +187,7 @@ namespace GameJolt.API
 
 				Get(parameters, trophies => {
 					
-					if (Manager.Instance.UseCaching && trophies != null)
+					if (GameJoltAPI.Instance.UseCaching && trophies != null)
 					{
 						cachedTrophies = trophies.ToDictionary(t => t.ID, t => t);
 					}

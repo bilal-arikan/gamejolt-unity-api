@@ -116,7 +116,7 @@ namespace GameJolt.API.Objects
 			Description = description;
 			Difficulty = difficulty;
 			Unlocked = unlocked;
-			IsSecret = Manager.Instance.IsSecretTrophy(ID);
+			IsSecret = GameJoltAPI.Instance.IsSecretTrophy(ID);
 		}
 
 		/// <summary>
@@ -141,7 +141,7 @@ namespace GameJolt.API.Objects
 			Description = data["description"].Value;
 			ImageURL = data["image_url"].Value;
 			Unlocked = data["achieved"].Value != "false";
-			IsSecret = Manager.Instance.IsSecretTrophy(ID);
+			IsSecret = GameJoltAPI.Instance.IsSecretTrophy(ID);
 
 			try
 			{
@@ -190,7 +190,7 @@ namespace GameJolt.API.Objects
 			if (!string.IsNullOrEmpty(ImageURL))
 			{
 				Misc.DownloadImage(ImageURL, image => {
-					Image = image ?? Manager.Instance.DefaultTrophy;
+					Image = image ?? GameJoltAPI.Instance.DefaultTrophy;
 
 					if (callback != null)
 					{

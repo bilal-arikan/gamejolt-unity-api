@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameJolt.UI.Objects;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameJolt.UI.Controllers
@@ -8,7 +9,7 @@ namespace GameJolt.UI.Controllers
 		public Image image;
 		public Text text;
 
-		public void Init(Objects.Notification notification)
+		public void Init(Notification notification)
 		{
 			text.text = notification.Text;
 

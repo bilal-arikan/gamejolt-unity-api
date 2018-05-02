@@ -11,6 +11,6 @@ public class RestrictedButton : MonoBehaviour {
 	}
 
 	private void Update() {
-		button.interactable = Manager.Instance.HasSignedInUser == RequiresSignedInUser;
+		button.interactable = GameJoltAPI.Instance.HasSignedInUser == RequiresSignedInUser;
 	}
 }

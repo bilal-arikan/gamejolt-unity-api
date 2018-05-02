@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using GameJolt.External.SimpleJSON;
+using GameJolt.UI;
 
 namespace GameJolt.API.Objects
 {
@@ -203,7 +204,7 @@ namespace GameJolt.API.Objects
 		/// <param name="rememberMe">Whether the user's credentials should be stored in the player prefs.</param>
 		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null, bool rememberMe = false)
 		{
-			if (Manager.Instance.HasUser)
+			if (GameJoltAPI.Instance.HasUser)
 			{
 				LogHelper.Warning("Another user is currently signed in. Sign it out first.");
 
@@ -224,12 +225,12 @@ namespace GameJolt.API.Objects
 				IsAuthenticated = response.success;
 
 				if (response.success) {
-					if(Manager.Instance.AutoSignInOutMessage)
-						UI.Manager.Instance.QueueNotification(string.Format(Manager.Instance.SignInMessage, Name));
-					Manager.Instance.CurrentUser = this;
+					if(GameJoltAPI.Instance.AutoSignInOutMessage)
+						GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.SignInMessage, Name));
+					GameJoltAPI.Instance.CurrentUser = this;
 
 					if(rememberMe) {
-						Manager.Instance.RememberUserCredentials(Name, Token);
+						GameJoltAPI.Instance.RememberUserCredentials(Name, Token);
 					}
 
 					if (signedInCallback != null)
@@ -263,12 +264,12 @@ namespace GameJolt.API.Objects
 		/// </summary>
 		public void SignOut()
 		{
-			if (Manager.Instance.CurrentUser == this)
+			if (GameJoltAPI.Instance.CurrentUser == this)
 			{
-				if(Manager.Instance.AutoSignInOutMessage)
-					UI.Manager.Instance.QueueNotification(string.Format(Manager.Instance.SignOutMessage, Name));
-				Manager.Instance.CurrentUser = null;
-				Manager.Instance.ClearUserCredentials();
+				if(GameJoltAPI.Instance.AutoSignInOutMessage)
+					GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.SignOutMessage, Name));
+				GameJoltAPI.Instance.CurrentUser = null;
+				GameJoltAPI.Instance.ClearUserCredentials();
 			}
 		}
 
@@ -301,7 +302,7 @@ namespace GameJolt.API.Objects
 			if (!string.IsNullOrEmpty(AvatarURL))
 			{
 				Misc.DownloadImage(AvatarURL, avatar => {
-					Avatar = avatar ?? Manager.Instance.DefaultAvatar;
+					Avatar = avatar ?? GameJoltAPI.Instance.DefaultAvatar;
 
 					if (callback != null)
 					{

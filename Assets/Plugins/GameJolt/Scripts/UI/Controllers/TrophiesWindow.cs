@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Linq;
+using GameJolt.API;
 
 namespace GameJolt.UI.Controllers
 {
@@ -17,7 +18,7 @@ namespace GameJolt.UI.Controllers
 			animator.SetTrigger("ShowLoadingIndicator");
 			this.callback = callback;
 
-			API.Trophies.Get(trophies => {
+			Trophies.Get(trophies => {
 				if (trophies != null)
 				{
 					trophies = trophies.Where(x => !x.IsSecret || x.Unlocked).ToArray();

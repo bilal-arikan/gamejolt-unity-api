@@ -26,7 +26,7 @@ namespace GameJolt.UI.Controllers
 			this.signedInCallback = signedInCallback;
 			this.userFetchedCallback = userFetchedCallback;
 			string username, token;
-			rememberMeToggle.isOn = API.Manager.Instance.GetStoredUserCredentials(out username, out token);
+			rememberMeToggle.isOn = API.GameJoltAPI.Instance.GetStoredUserCredentials(out username, out token);
 			usernameField.text = username;
 			tokenField.text = token;
 			showTokenToggle.isOn = false;

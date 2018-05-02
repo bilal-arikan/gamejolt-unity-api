@@ -8,7 +8,7 @@ namespace GameJolt.API {
 	public static class LogHelper {
 		/// <summary>
 		/// All messages below this level are discarded.
-		/// This value is automatically set by the <see cref="Manager"/> class.
+		/// This value is automatically set by the <see cref="GameJoltAPI"/> class.
 		/// </summary>
 		public static LogLevel Level = LogLevel.Warning;
 		

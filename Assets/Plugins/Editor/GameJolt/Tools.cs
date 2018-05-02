@@ -28,7 +28,7 @@ namespace GameJolt.Editor
 		[MenuItem("GameObject/Game Jolt API Manager")]
 		public static void Manager()
 		{
-			var manager = FindObjectOfType<Manager>();
+			var manager = FindObjectOfType<GameJoltAPI>();
 			if (manager != null)
 			{
 				Selection.activeObject = manager;

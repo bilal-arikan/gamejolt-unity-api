@@ -8,7 +8,7 @@ namespace GameJolt.UI
 	/// The UI API Manager.
 	/// </summary>
 	[RequireComponent(typeof(Animator))]
-	public class Manager : API.Core.MonoSingleton<Manager>
+	public class GameJoltUI : API.Core.MonoSingleton<GameJoltUI>
 	{
 		#region Init
 		SignInWindow signinWindow;

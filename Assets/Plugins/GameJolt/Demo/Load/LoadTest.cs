@@ -1,37 +1,39 @@
 ﻿using UnityEngine;
+using GameJolt.API;
+using GameJolt.UI;
 
 public class LoadTest : MonoBehaviour
 {
 	public void SignInButtonClicked()
 	{
-		GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
+		GameJoltUI.Instance.ShowSignIn((bool success) => {
 			if (success)
 			{
-				GameJolt.UI.Manager.Instance.QueueNotification("Welcome");
+				GameJoltUI.Instance.QueueNotification("Welcome");
 			}
 			else
 			{
-				GameJolt.UI.Manager.Instance.QueueNotification("Closed the window :(");
+				GameJoltUI.Instance.QueueNotification("Closed the window :(");
 			}
 		});
 	}
 
 	public void SignOutButtonClicked() {
-		if(!GameJolt.API.Manager.Instance.HasUser) {
-			GameJolt.UI.Manager.Instance.QueueNotification("You're not signed in");
+		if(!GameJoltAPI.Instance.HasUser) {
+			GameJoltUI.Instance.QueueNotification("You're not signed in");
 		} else {
-			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
-			GameJolt.UI.Manager.Instance.QueueNotification("Signed out :(");
+			GameJoltAPI.Instance.CurrentUser.SignOut();
+			GameJoltUI.Instance.QueueNotification("Signed out :(");
 		}
 	}
 
 	public void IsSignedInButtonClicked() {
-		if (GameJolt.API.Manager.Instance.HasUser) {
-			GameJolt.UI.Manager.Instance.QueueNotification(
-				"Signed in as " + GameJolt.API.Manager.Instance.CurrentUser.Name);
+		if (GameJoltAPI.Instance.HasUser) {
+			GameJoltUI.Instance.QueueNotification(
+				"Signed in as " + GameJoltAPI.Instance.CurrentUser.Name);
 		}
 		else {
-			GameJolt.UI.Manager.Instance.QueueNotification("Not Signed In :(");
+			GameJoltUI.Instance.QueueNotification("Not Signed In :(");
 		}
 	}
 

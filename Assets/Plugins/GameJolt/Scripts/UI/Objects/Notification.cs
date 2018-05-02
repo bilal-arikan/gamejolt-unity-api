@@ -26,7 +26,7 @@ namespace GameJolt.UI.Objects
 		/// Initializes a new instance of the <see cref="Notification"/> class.
 		/// </summary>
 		/// <param name="text">The notification text.</param>
-		public Notification(string text) : this(text, API.Manager.Instance.DefaultNotificationIcon) { }
+		public Notification(string text) : this(text, API.GameJoltAPI.Instance.DefaultNotificationIcon) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Notification"/> class.

@@ -22,7 +22,7 @@ public class UserInfoBox : MonoBehaviour {
 	}
 
 	private void UpdateInfos() {
-		var user = Manager.Instance.CurrentUser;
+		var user = GameJoltAPI.Instance.CurrentUser;
 		Avatar.sprite = user != null ? user.Avatar : null;
 		Name.text = user != null ? user.Name : "<UserName>";
 		Id.text = user != null ? user.ID.ToString() : "<ID>";

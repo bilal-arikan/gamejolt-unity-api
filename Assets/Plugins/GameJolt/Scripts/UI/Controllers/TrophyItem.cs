@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameJolt.API.Objects;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameJolt.UI.Controllers
@@ -10,7 +11,7 @@ namespace GameJolt.UI.Controllers
 		public Text title;
 		public Text description;
 
-		public void Init(API.Objects.Trophy trophy)
+		public void Init(Trophy trophy)
 		{
 			group.alpha = trophy.Unlocked ? 1f : .6f;
 			title.text = trophy.Title;

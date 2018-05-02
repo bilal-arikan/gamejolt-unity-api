@@ -10,7 +10,7 @@ namespace GameJolt.API
 	/// <summary>
 	/// The Core API Manager.
 	/// </summary>
-	public class Manager : Core.MonoSingleton<Manager> {
+	public class GameJoltAPI : Core.MonoSingleton<GameJoltAPI> {
 		#region Fields & Properties
 		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
 
