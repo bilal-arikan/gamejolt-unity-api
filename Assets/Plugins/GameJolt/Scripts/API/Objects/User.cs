@@ -225,8 +225,8 @@ namespace GameJolt.API.Objects
 				IsAuthenticated = response.success;
 
 				if (response.success) {
-					if(GameJoltAPI.Instance.AutoSignInOutMessage)
-						GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.SignInMessage, Name));
+					if(GameJoltAPI.Instance.Settings.AutoSignInOutMessage)
+						GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.Settings.SignInMessage, Name));
 					GameJoltAPI.Instance.CurrentUser = this;
 
 					if(rememberMe) {
@@ -266,8 +266,8 @@ namespace GameJolt.API.Objects
 		{
 			if (GameJoltAPI.Instance.CurrentUser == this)
 			{
-				if(GameJoltAPI.Instance.AutoSignInOutMessage)
-					GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.SignOutMessage, Name));
+				if(GameJoltAPI.Instance.Settings.AutoSignInOutMessage)
+					GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.Settings.SignOutMessage, Name));
 				GameJoltAPI.Instance.CurrentUser = null;
 				GameJoltAPI.Instance.ClearUserCredentials();
 			}

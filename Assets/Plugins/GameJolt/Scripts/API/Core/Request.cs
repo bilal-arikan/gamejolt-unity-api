@@ -105,7 +105,7 @@ namespace GameJolt.API.Core
 			url.Append(Constants.API_BASE_URL);
 			url.Append(method);
 			url.Append("?game_id=");
-			url.Append(GameJoltAPI.Instance.GameID);
+			url.Append(GameJoltAPI.Instance.Settings.GameId);
 			
 			foreach (KeyValuePair<string,string> parameter in parameters)
 			{
@@ -129,7 +129,7 @@ namespace GameJolt.API.Core
 		/// <param name="input">The formatted request URL.</param>
 		static string GetSignature(string input)
 		{
-			return MD5(input + GameJoltAPI.Instance.PrivateKey);
+			return MD5(input + GameJoltAPI.Instance.Settings.PrivateKey);
 		}
 
 		/// <summary>

@@ -175,7 +175,7 @@ namespace GameJolt.API
 						tables = null;
 					}
 
-					if (GameJoltAPI.Instance.UseCaching)
+					if (GameJoltAPI.Instance.Settings.UseCaching)
 					{
 						cachedTables = tables;
 					}

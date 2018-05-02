@@ -187,7 +187,7 @@ namespace GameJolt.API
 
 				Get(parameters, trophies => {
 					
-					if (GameJoltAPI.Instance.UseCaching && trophies != null)
+					if (GameJoltAPI.Instance.Settings.UseCaching && trophies != null)
 					{
 						cachedTrophies = trophies.ToDictionary(t => t.ID, t => t);
 					}

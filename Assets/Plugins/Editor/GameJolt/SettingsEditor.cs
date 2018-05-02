@@ -10,13 +10,13 @@ namespace GameJolt.Editor {
 		public override void OnInspectorGUI() {
 			var settings = target as Settings;
 			if(settings == null) return;
-			if(string.IsNullOrEmpty(settings.encryptionKey))
-				settings.encryptionKey = GetRandomPassword();
+			if(string.IsNullOrEmpty(settings.EncryptionKey))
+				settings.EncryptionKey = GetRandomPassword();
 			base.OnInspectorGUI();
 			if(GUILayout.Button("Clear All Settings")) {
 				Undo.RecordObject(target, "Clear GameJolt API settings");
 				var empty = CreateInstance<Settings>();
-				foreach(var fieldInfo in typeof(Settings).GetFields(BindingFlags.Public | BindingFlags.Instance)) {
+				foreach(var fieldInfo in typeof(Settings).GetFields(BindingFlags.NonPublic | BindingFlags.Instance)) {
 					var value = fieldInfo.GetValue(empty);
 					fieldInfo.SetValue(settings, value);
 				}

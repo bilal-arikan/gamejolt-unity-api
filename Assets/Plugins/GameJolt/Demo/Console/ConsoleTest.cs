@@ -353,8 +353,8 @@ public class ConsoleTest : MonoBehaviour
 		var settings = GameJoltAPI.Instance.Settings;
 		if (settings != null)
 		{
-			userNameField.text = settings.user;
-			userTokenField.text = settings.token;
+			userNameField.text = settings.DebugUser;
+			userTokenField.text = settings.DebugToken;
 		}
 		userIdsField.onValidateInput += ValidateIdList;
 		trophyIDsField.onValidateInput += ValidateIdList;

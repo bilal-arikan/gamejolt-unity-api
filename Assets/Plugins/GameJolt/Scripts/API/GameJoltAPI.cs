@@ -23,78 +23,7 @@ namespace GameJolt.API
 		[Tooltip("The default notification icon which is used if you don't provide an image yourself.")]
 		public Sprite DefaultNotificationIcon;
 
-		/// <summary>
-		/// Gets the game ID.
-		/// </summary>
-		/// <value>The game ID.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public int GameID { get; private set; }
-
-		/// <summary>
-		/// Gets the game private key.
-		/// </summary>
-		/// <value>The game private key.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public string PrivateKey { get; private set; }
-
-		/// <summary>
-		/// Gets or sets the time in seconds before an API call should timeout and return failure.
-		/// </summary>
-		/// <value>The timeout.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public float Timeout { get; set; }
-
-		/// <summary>
-		/// Gets a value indicating whether it should sutomatically create and ping sessions once a user has been authentified.
-		/// </summary>
-		/// <value><c>true</c> to auto ping; otherwise, <c>false</c>.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public bool AutoPing { get; private set; }
-
-		/// <summary>
-		/// Gets a value indicating whether a message should automatically popup if the user has successfully signed in or out.
-		/// </summary>
-		public bool AutoSignInOutMessage { get; private set; }
-		/// <summary>
-		/// If AutoSignInOutMessage is set to true, this message will be shown if a user has signed in.
-		/// </summary>
-		public string SignInMessage { get; private set; }
-		/// <summary>
-		/// If AutoSignInOutMessage is set to true, this message will be shown if a user has signed out.
-		/// </summary>
-		public string SignOutMessage { get; private set; }
-
-		/// <summary>
-		/// Gets a value indicating whether High Score Tables and Trophies information should be cached for faster display.
-		/// </summary>
-		/// <value><c>true</c> to use caching; otherwise, <c>false</c>.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public bool UseCaching { get; private set; }
-
-		private string EncryptionKey { get; set; }
-
 		private HashSet<int> secretTrophies;
-
 
 		private User currentUser;
 		/// <summary>
@@ -132,41 +61,6 @@ namespace GameJolt.API
 		/// Returns true if there is a current user and this user is already authenticated.
 		/// </summary>
 		public bool HasSignedInUser { get { return HasUser && currentUser.IsAuthenticated; } }
-
-#if UNITY_EDITOR
-		/// <summary>
-		/// Emulate auto connect in the editor, the same way it would happen with a WebGL build.
-		/// </summary>
-		/// <value><c>true</c> to auto connect in the editor; otherwise, <c>false</c>.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public bool DebugAutoConnect { get; private set; }
-
-		/// <summary>
-		/// Gets the debug user name.
-		/// </summary>
-		/// <value>The debug user name to use for `DebugAutoConnect`.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public string DebugUser { get; private set; }
-
-		/// <summary>
-		/// Gets the debug user token.
-		/// </summary>
-		/// <value>The debug user token to use for `DebugAutoConnect`.</value>
-		/// <remarks>
-		/// <para>
-		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
-		/// </para>
-		/// </remarks>
-		public string DebugToken { get; private set; }
-#endif
 		#endregion Fields & Properties
 
 		#region Init
@@ -185,51 +79,29 @@ namespace GameJolt.API
 		/// </summary>
 		private void Configure()
 		{
-			if (Settings != null)
-			{
-				GameID = Settings.gameID;
-				PrivateKey = Settings.privateKey;
-				Timeout = Settings.timeout;
-				AutoPing = Settings.autoPing;
-				AutoSignInOutMessage = Settings.autoSignInOutMessage;
-				SignInMessage = Settings.signInMessage;
-				SignOutMessage = Settings.signOutMessage;
-				UseCaching = Settings.useCaching;
-				EncryptionKey = Settings.encryptionKey;
-				secretTrophies = new HashSet<int>(Settings.secretTrophies ?? new int[0]);
+			if(Settings == null) {
+				LogHelper.Error("Missing settings reference! Fallback to empty default settings.");
+				Settings = ScriptableObject.CreateInstance<Settings>();
+			} else {
 				LogHelper.Level = Settings.LogLevel;
-				
-				if (GameID == 0)
-				{
+				if(Settings.GameId == 0)
 					LogHelper.Error("Missing Game ID.");
-				}
-				if (PrivateKey == string.Empty)
-				{
+				if(Settings.PrivateKey == string.Empty)
 					LogHelper.Error("Missing Private Key.");
-				}
-				
-#if UNITY_EDITOR
-				DebugAutoConnect = Settings.autoConnect;
-				DebugUser = Settings.user;
-				DebugToken = Settings.token;
-#endif
 			}
-			else
-			{
-				LogHelper.Error("Could not load settings.");
-			}
+			secretTrophies = new HashSet<int>(Settings.SecretTrophies ?? new int[0]);
 		}
 		#endregion Init
 
 		#region Requests
 		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback)
 		{
-			if (GameID == 0 || PrivateKey == null) {
+			if (Settings.GameId == 0 || Settings.PrivateKey == null) {
 				callback(new Core.Response("Bad Credentials"));
 				yield break;
 			}
 
-			float timeout = Time.time + Timeout;
+			float timeout = Time.time + Settings.Timeout;
 			var www = new WWW(url);
 			while (!www.isDone)
 			{
@@ -245,7 +117,7 @@ namespace GameJolt.API
 
 		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, Core.ResponseFormat format, Action<Core.Response> callback)
 		{
-			if (GameID == 0 || PrivateKey == null) {
+			if (Settings.GameId == 0 || Settings.PrivateKey == null) {
 				callback(new Core.Response("Bad Credentials"));
 				yield break;
 			}
@@ -256,7 +128,7 @@ namespace GameJolt.API
 				form.AddField(field.Key, field.Value);
 			}
 
-			float timeout = Time.time + Timeout;
+			float timeout = Time.time + Settings.Timeout;
 
 			var www = new WWW (url, form);
 			while (!www.isDone)
@@ -279,11 +151,11 @@ namespace GameJolt.API
 #if UNITY_WEBPLAYER || UNITY_WEBGL
 			#region Autoconnect Web
 	#if UNITY_EDITOR
-			if (DebugAutoConnect)
+			if (Settings.DebugAutoConnect)
 			{
-				if (DebugUser != string.Empty && DebugToken != string.Empty)
+				if (Settings.DebugUser != string.Empty && Settings.DebugToken != string.Empty)
 				{
-					var user = new User(DebugUser, DebugToken);
+					var user = new User(Settings.DebugUser, Settings.DebugToken);
 					user.SignIn(success => { LogHelper.Info("AutoConnect user '{0}': {1}", user.Name, success ? "success" : "failed"); });
 				}
 				else
@@ -366,7 +238,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 
 		private void StartAutoPing()
 		{
-			if (!AutoPing)
+			if (!Settings.AutoPing)
 			{
 				return;
 			}
@@ -402,7 +274,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 
 		private void StopAutoPing()
 		{
-			if (AutoPing)
+			if (Settings.AutoPing)
 			{
 				CancelInvoke("StartAutoPing");
 				CancelInvoke("Ping");
@@ -411,7 +283,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 
 		private void CacheTables()
 		{
-			if (UseCaching)
+			if (Settings.UseCaching)
 			{
 				Scores.GetTables(null);
 			}
@@ -419,7 +291,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 
 		private void CacheTrophies()
 		{
-			if (UseCaching)
+			if (Settings.UseCaching)
 			{
 				Trophies.Get(trophies => {
 					if (trophies != null)
@@ -443,13 +315,13 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		/// <returns>Whether retrieval was successfull or not.</returns>
 		public bool GetStoredUserCredentials(out string username, out string token) {
 			username = token = "";
-			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(EncryptionKey) ||
+			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(Settings.EncryptionKey) ||
 			   !PlayerPrefs.HasKey(UserCredentialsPreferences)) return false;
 			var credentials = PlayerPrefs.GetString(UserCredentialsPreferences).Split('#');
 			if(credentials.Length != 2) return false;
 			try {
-				username = XTEA.Decrypt(credentials[0], EncryptionKey);
-				token = XTEA.Decrypt(credentials[1], EncryptionKey);
+				username = XTEA.Decrypt(credentials[0], Settings.EncryptionKey);
+				token = XTEA.Decrypt(credentials[1], Settings.EncryptionKey);
 				return true;
 			} catch {
 				LogHelper.Warning("Failed to retrieve user credentials.");
@@ -464,9 +336,9 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		/// <param name="token">The token to store.</param>
 		/// <returns>Whether the operations was successfull.</returns>
 		public bool RememberUserCredentials(string username, string token) {
-			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(EncryptionKey) ||
+			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(Settings.EncryptionKey) ||
 			   string.IsNullOrEmpty(username) || string.IsNullOrEmpty(token)) return false;
-			var credentials = XTEA.Encrypt(username, EncryptionKey) + "#" + XTEA.Encrypt(token, EncryptionKey);
+			var credentials = XTEA.Encrypt(username, Settings.EncryptionKey) + "#" + XTEA.Encrypt(token, Settings.EncryptionKey);
 			PlayerPrefs.SetString(UserCredentialsPreferences, credentials);
 			PlayerPrefs.Save();
 			return true;
@@ -482,7 +354,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		}
 
 		/// <summary>
-		/// Returns true if the <see cref="Settings.secretTrophies"/> setting contains the provided trophy id.
+		/// Returns true if the Settings.SecretTrophies setting contains the provided trophy id.
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
