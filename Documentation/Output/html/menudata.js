@@ -1,6 +1,7 @@
 var menudata={children:[
 {text:"Home",url:"index.html"},
 {text:"Getting Started",url:"tutorial.html"},
+{text:"Update",url:"update.html"},
 {text:"FAQ",url:"faq.html"},
 {text:"Documentation",url:"annotated.html"},
 {text:"Downloads",url:"downloads.html"},

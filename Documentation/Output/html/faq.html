@@ -46,7 +46,7 @@ $(function() {
 <div class="textblock"><h1>I can't click the UI</h1>
 <p>You are probably missing the EventSystem in your scene. Manually add one to your scene (<code>GameObject &gt; UI &gt; EventSystem</code>) or make sure to use the API v2.0.1 or more so it is automatically added when you add the API to your scene (<code>GameObject &gt; <a class="el" href="namespace_game_jolt.html">GameJolt</a> API Manager</code>).</p>
 <h1>Sign in keeps failing even with the right username and password</h1>
-<p>You should sign in with your game token, not your password (you password is only used to log into <a class="el" href="namespace_game_jolt.html">GameJolt</a>). You can find your token on <a class="el" href="namespace_game_jolt.html">GameJolt</a> by clicking on your user picture then selecting <code>Game Token</code>.</p>
+<p>You should sign in with your game token, not your password (your password is only used to log into <a class="el" href="namespace_game_jolt.html">GameJolt</a>). You can find your token on <a class="el" href="namespace_game_jolt.html">GameJolt</a> by clicking on your user picture then selecting <code>Game Token</code>.</p>
 <h1>The trophy notification keeps coming up</h1>
 <p>You are probably unlocking the trophy in the <code>Update</code> loop, therefore triggering it on every frame. See this <a href="https://github.com/loicteixeira/gj-unity-api/issues/68">issue</a> for more details.</p>
 <h1>AutoConnect doesn't work with WebGL</h1>

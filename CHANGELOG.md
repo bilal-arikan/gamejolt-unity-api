@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Add
 - Added LogHelper class and LogLevel setting. All log messages with a level below the provided one are discarded. (see issue [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
 
+### Changed
+- Renamed Manager classes to `GameJoltAPI` and `GameJoltUI`.
+  - :warning: This is a breaking change! If you're migrating from an older version, please have a look at the migration page.
+
 ### Fixed
 - Debug option for the API (fixes [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
 - Got rid of all `Resources.Load` calls. Instead those assets are now directly linked via the Manager prefab. (fixes [#19](https://github.com/InfectedBytes/gj-unity-api/issues/19)) 

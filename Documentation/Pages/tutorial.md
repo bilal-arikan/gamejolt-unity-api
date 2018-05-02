@@ -23,7 +23,7 @@
 2. Right click in the *Project* tab.
 3. Select *Import Package > Custom Package...* and locate the *Unity Package*.
 
-*Note: You can also directly download and import ths asset via the [Unity Asset Store](http://u3d.as/ZUx)*
+*Note: You can also directly download and import this asset via the [Unity Asset Store](http://u3d.as/ZUx)*
 
 ## Configure the API
 
@@ -67,7 +67,7 @@ Authentication is the corner stone of the API. If you user isn't signed in, you 
 For *Web Player* or *WebGL* builds hosted on Game Jolt the player will  automatically be signed in. This is how you check if a player is currently signed in or not (Guest).
 
 ```
-bool isSignedIn = GameJolt.API.Manager.Instance.HasSignedInUser;
+bool isSignedIn = GameJoltAPI.Instance.HasSignedInUser;
 ```
 
 ## Standalone Builds
@@ -76,13 +76,13 @@ bool isSignedIn = GameJolt.API.Manager.Instance.HasSignedInUser;
 For standalone builds, you have to sign the player yourself in. The easiest way is to display the default sign in form.
 
 ```
-GameJolt.UI.Manager.Instance.ShowSignIn();
+GameJoltUI.Instance.ShowSignIn();
 ```
 
 You can also pass a callback to get notified whether the player has signed in or not.
 
 ```
-GameJolt.UI.Manager.Instance.ShowSignIn(
+GameJoltUI.Instance.ShowSignIn(
   (bool signInSuccess) => {
     Debug.Log(string.Format("Sign-in {0}", signInSuccess ? "successful" : "failed or user's dismissed the window"));
   },
@@ -96,10 +96,10 @@ As you can see, there are 2 callbacks. The first one returns as soon as the user
 
 ```
 // Get the callback as soon as the user is signed-in.
-GameJolt.UI.Manager.Instance.ShowSignIn((bool signInSuccess) => { /* Do Something */ });
+GameJoltUI.Instance.ShowSignIn((bool signInSuccess) => { /* Do Something */ });
 
 // Get the callback once all the user's information have been fetched.
-GameJolt.UI.Manager.Instance.ShowSignIn(null, (bool userFetchedSuccess) => { /* Do Something */ });
+GameJoltUI.Instance.ShowSignIn(null, (bool userFetchedSuccess) => { /* Do Something */ });
 ```
 
 **Tip:** If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a *Sign In with Game Jolt* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowSignIn ()* from the dropdown. However you cannot subscribe to callback this way.
@@ -134,10 +134,10 @@ user.SignIn(null, (bool userFetchedSuccess) => { /* Do Something */ });
 # Sign Out
 
 ```
-var isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
+var isSignedIn = GameJoltAPI.Instance.CurrentUser != null;
 if (isSignedIn)
 {
-	GameJolt.API.Manager.Instance.CurrentUser.SignOut();
+	GameJoltAPI.Instance.CurrentUser.SignOut();
 }
 ```
 
@@ -167,7 +167,7 @@ GameJolt.API.Trophies.Unlock(trophyID, (bool success) => {
 It's as simple as a single line!
 
 ```
-GameJolt.UI.Manager.Instance.ShowTrophies();
+GameJoltUI.Instance.ShowTrophies();
 ```
 
 **Tip:** If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a *Trophies Collection* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowTrophies ()* from the dropdown.
@@ -264,7 +264,7 @@ GameJolt.API.Scores.GetRank(scoreValue, tableID, (int rank) => {
 Show all the highscore tables with a single line of code.
 
 ```
-GameJolt.UI.Manager.Instance.ShowLeaderboards();
+GameJoltUI.Instance.ShowLeaderboards();
 ```
 
 **Tip:** If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a *Leaderboards* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowLeaderboards ()* from the dropdown.
@@ -326,10 +326,10 @@ You can use the *Unity API* notification system to display custom notifications.
 
 ```
 // Text only
-GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!");
+GameJoltUI.Instance.QueueNotification("GameJolt is awesome!");
 
 // Text & Image (UnityEngine.Sprite)
-GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!", image);
+GameJoltUI.Instance.QueueNotification("GameJolt is awesome!", image);
 ```
 
 # Time

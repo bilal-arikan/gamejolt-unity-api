@@ -64,17 +64,26 @@ $(function() {
 <li>Right click in the <em>Project</em> tab.</li>
 <li>Select <em>Import Package &gt; Custom Package...</em> and locate the <em>Unity Package</em>.</li>
 </ol>
+<p><em>Note: You can also directly download and import this asset via the <a href="http://u3d.as/ZUx">Unity Asset Store</a></em></p>
 <h2>Configure the API</h2>
 <h3>Settings</h3>
 <ol type="1">
-<li>Select <em>Edit &gt; Project Settings &gt; Game Jolt API</em>.</li>
+<li>Navigate to <em>Plugins/GameJolt</em> and the select the <em>GJAPISettings</em> file</li>
 <li>Fill the <em>Game ID</em> and <em>Private Key</em>.</li>
 </ol>
 <p>There's quite a few options here, let's get through them:</p>
 <ul>
 <li><em>Timeout:</em> The time in seconds before an API call should timeout and return failure.</li>
 <li><em>Auto Ping:</em> Automatically create and ping sessions once a user has been authentified. Turn it off to handle it yourself.</li>
+<li><em>Auto Sign In Out Message:</em> If true, the api will automatically show a notification when the user is signed in or out.<ul>
+<li><em>Sign In Message:</em> Format string which is shown if the user signed in. For e.g. `"Signed in as '{0}'"<code>, where</code>{0}` will be replaced with the user name.</li>
+<li><em>Sign Out Message:</em> Same as above, but for the signed out event.</li>
+</ul>
+</li>
 <li><em>Use Caching:</em> Cache High Score Tables and Trophies information for faster display.</li>
+<li><em>Encryption Key:</em> The key used to encrypt the user credentials when the user checks the <em>Remember Me</em> checkbox.</li>
+<li><em>Log Level:</em> Sets the LogLevel for all <a class="el" href="namespace_game_jolt.html">GameJolt</a> API log messages. Messages below this level will be discarded.</li>
+<li><em>Secret Trophies</em>: List of trophies which are only shown if the user has achieved them.</li>
 <li><em>Auto Connect:</em> AutoConnect in the Editor as if the game was hosted on <a class="el" href="namespace_game_jolt.html">GameJolt</a>.</li>
 <li><em>User:</em> The username to use for AutoConnect.</li>
 <li><em>Token:</em> The token to use for AutoConnect. <em>Important Note: Passwords and Tokens are different things on <a class="el" href="namespace_game_jolt.html">GameJolt</a>. You can find your token on <a class="el" href="namespace_game_jolt.html">GameJolt</a> by clicking on your user picture then selecting <code>Game Token</code>.</em></li>
@@ -91,17 +100,17 @@ $(function() {
 <p>Authentication is the corner stone of the API. If you user isn't signed in, you won't have access to trophies and sessions. All you can do is post scores as guest. Let's fix that!</p>
 <h2>Web Player and WebGL builds</h2>
 <p>For <em>Web Player</em> or <em>WebGL</em> builds hosted on Game Jolt the player will automatically be signed in. This is how you check if a player is currently signed in or not (Guest).</p>
-<div class="fragment"><div class="line">bool isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;</div></div><!-- fragment --><h2>Standalone Builds</h2>
+<div class="fragment"><div class="line">bool isSignedIn = GameJoltAPI.Instance.HasSignedInUser;</div></div><!-- fragment --><h2>Standalone Builds</h2>
 <h3>Default UI</h3>
 <p>For standalone builds, you have to sign the player yourself in. The easiest way is to display the default sign in form.</p>
-<div class="fragment"><div class="line">GameJolt.UI.Manager.Instance.ShowSignIn();</div></div><!-- fragment --><p>You can also pass a callback to get notified whether the player has signed in or not.</p>
-<div class="fragment"><div class="line">GameJolt.UI.Manager.Instance.ShowSignIn(</div><div class="line">  (bool signInSuccess) =&gt; {</div><div class="line">    Debug.Log(string.Format(&quot;Sign-in {0}&quot;, signInSuccess ? &quot;successful&quot; : &quot;failed or user&#39;s dismissed the window&quot;));</div><div class="line">  },</div><div class="line">  (bool userFetchedSuccess) =&gt; {</div><div class="line">    Debug.Log(string.Format(&quot;User details fetched {0}&quot;, signInSuccess ? &quot;successfully&quot; : &quot;failed&quot;));</div><div class="line">  }</div><div class="line">});</div></div><!-- fragment --><p>As you can see, there are 2 callbacks. The first one returns as soon as the user is logged in, however some attributes (e.g. <code>user.AvatarURL</code>) will not be populated yet (this is also when the window is dismissed). The second one returns once all the users attributes have been populated (minus <code>user.Avatar</code> for which you have to manually call <code>user.DownloadAvatar()</code>). Depending on what you are the most interested, you will probably only subscribe to one callback like so:</p>
-<div class="fragment"><div class="line">// Get the callback as soon as the user is signed-in.</div><div class="line">GameJolt.UI.Manager.Instance.ShowSignIn((bool signInSuccess) =&gt; { /* Do Something */ });</div><div class="line"></div><div class="line">// Get the callback once all the user&#39;s information have been fetched.</div><div class="line">GameJolt.UI.Manager.Instance.ShowSignIn(null, (bool userFetchedSuccess) =&gt; { /* Do Something */ });</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a <em>Sign In with Game Jolt</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowSignIn ()</em> from the dropdown. However you cannot subscribe to callback this way.</p>
+<div class="fragment"><div class="line">GameJoltUI.Instance.ShowSignIn();</div></div><!-- fragment --><p>You can also pass a callback to get notified whether the player has signed in or not.</p>
+<div class="fragment"><div class="line">GameJoltUI.Instance.ShowSignIn(</div><div class="line">  (bool signInSuccess) =&gt; {</div><div class="line">    Debug.Log(string.Format(&quot;Sign-in {0}&quot;, signInSuccess ? &quot;successful&quot; : &quot;failed or user&#39;s dismissed the window&quot;));</div><div class="line">  },</div><div class="line">  (bool userFetchedSuccess) =&gt; {</div><div class="line">    Debug.Log(string.Format(&quot;User details fetched {0}&quot;, signInSuccess ? &quot;successfully&quot; : &quot;failed&quot;));</div><div class="line">  }</div><div class="line">});</div></div><!-- fragment --><p>As you can see, there are 2 callbacks. The first one returns as soon as the user is logged in, however some attributes (e.g. <code>user.AvatarURL</code>) will not be populated yet (this is also when the window is dismissed). The second one returns once all the users attributes have been populated (minus <code>user.Avatar</code> for which you have to manually call <code>user.DownloadAvatar()</code>). Depending on what you are the most interested, you will probably only subscribe to one callback like so:</p>
+<div class="fragment"><div class="line">// Get the callback as soon as the user is signed-in.</div><div class="line">GameJoltUI.Instance.ShowSignIn((bool signInSuccess) =&gt; { /* Do Something */ });</div><div class="line"></div><div class="line">// Get the callback once all the user&#39;s information have been fetched.</div><div class="line">GameJoltUI.Instance.ShowSignIn(null, (bool userFetchedSuccess) =&gt; { /* Do Something */ });</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a <em>Sign In with Game Jolt</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowSignIn ()</em> from the dropdown. However you cannot subscribe to callback this way.</p>
 <h3>Custom UI</h3>
 <p>If you don't like the default UI and use some custom UI that better fit your game that's fine too! Once you've got the user name and token sign him in manually.</p>
 <div class="fragment"><div class="line">var user = new GameJolt.API.Objects.User(userName, userToken);</div><div class="line">user.SignIn(</div><div class="line">    (bool signInSuccess) =&gt; {</div><div class="line">        Debug.Log(string.Format(&quot;Sign-in {0}&quot;, signInSuccess ? &quot;successful&quot; : &quot;failed&quot;));</div><div class="line">    },</div><div class="line">    (bool userFetchedSuccess) =&gt; {</div><div class="line">        Debug.Log(string.Format(&quot;User details fetched {0}&quot;, signInSuccess ? &quot;successfully&quot; : &quot;failed&quot;));</div><div class="line">    }</div><div class="line">});</div></div><!-- fragment --><p>As you can see, there are 2 callbacks. The first one returns as soon as the user is logged in, however some attributes (e.g. <code>user.AvatarURL</code>) will not be populated yet. The second one returns once all the users attributes have been populated (minus <code>user.Avatar</code> for which you have to manually call <code>user.DownloadAvatar()</code>). Depending on what you are the most interested, you will probably only subscribe to one callback like so:</p>
 <div class="fragment"><div class="line">var user = new GameJolt.API.Objects.User(userName, userToken);</div><div class="line"></div><div class="line">// Get the callback as soon as the user is signed-in.</div><div class="line">user.SignIn((bool signInSuccess) =&gt; { /* Do Something */ });</div><div class="line"></div><div class="line">// Get the callback once all the user&#39;s information have been fetched.</div><div class="line">user.SignIn(null, (bool userFetchedSuccess) =&gt; { /* Do Something */ });</div></div><!-- fragment --><h1>Sign Out</h1>
-<div class="fragment"><div class="line">var isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;</div><div class="line">if (isSignedIn)</div><div class="line">{</div><div class="line">    GameJolt.API.Manager.Instance.CurrentUser.SignOut();</div><div class="line">}</div></div><!-- fragment --><h1>Trophies</h1>
+<div class="fragment"><div class="line">var isSignedIn = GameJoltAPI.Instance.CurrentUser != null;</div><div class="line">if (isSignedIn)</div><div class="line">{</div><div class="line">    GameJoltAPI.Instance.CurrentUser.SignOut();</div><div class="line">}</div></div><!-- fragment --><h1>Trophies</h1>
 <p>Trophies need a signed in user.</p>
 <p><b>Tip:</b> Trophies can benefit a lot from caching. Don't forget to enable <em>Use Caching</em> in the API settings.</p>
 <h2>Unlock</h2>
@@ -109,7 +118,7 @@ $(function() {
 <div class="fragment"><div class="line">GameJolt.API.Trophies.Unlock(trophyID, (bool success) =&gt; {</div><div class="line">    if (success)</div><div class="line">    {</div><div class="line">        Debug.Log(&quot;Success!&quot;);</div><div class="line">    }</div><div class="line">    else</div><div class="line">    {</div><div class="line">        Debug.Log(&quot;Something went wrong&quot;);</div><div class="line">    }</div><div class="line">});</div></div><!-- fragment --><h2>Show</h2>
 <h3>Default UI</h3>
 <p>It's as simple as a single line!</p>
-<div class="fragment"><div class="line">GameJolt.UI.Manager.Instance.ShowTrophies();</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Trophies Collection</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowTrophies ()</em> from the dropdown.</p>
+<div class="fragment"><div class="line">GameJoltUI.Instance.ShowTrophies();</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Trophies Collection</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowTrophies ()</em> from the dropdown.</p>
 <h3>Custom UI</h3>
 <p>You can query one or more trophy and display it/them yourself.</p>
 <p>Get one specific trophy.</p>
@@ -126,7 +135,7 @@ $(function() {
 <div class="fragment"><div class="line">int scoreValue = 10;</div><div class="line">int tableID = 0;</div><div class="line"></div><div class="line">GameJolt.API.Scores.GetRank(scoreValue, tableID, (int rank) =&gt; {</div><div class="line">    Debug.Log(string.Format(&quot;Rank {0}&quot;, rank));</div><div class="line">});</div></div><!-- fragment --><h2>Show</h2>
 <h3>Default UI</h3>
 <p>Show all the highscore tables with a single line of code.</p>
-<div class="fragment"><div class="line">GameJolt.UI.Manager.Instance.ShowLeaderboards();</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Leaderboards</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowLeaderboards ()</em> from the dropdown.</p>
+<div class="fragment"><div class="line">GameJoltUI.Instance.ShowLeaderboards();</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Leaderboards</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowLeaderboards ()</em> from the dropdown.</p>
 <h3>Custom UI</h3>
 <p>Have a look at the documentation to see how to query <em>highscore tables</em> and <em>scores</em> to display them yourself.</p>
 <h1>Sessions</h1>
@@ -148,7 +157,7 @@ $(function() {
 </ul>
 <h1>Notifications</h1>
 <p>You can use the <em>Unity API</em> notification system to display custom notifications.</p>
-<div class="fragment"><div class="line">// Text only</div><div class="line">GameJolt.UI.Manager.Instance.QueueNotification(&quot;GameJolt is awesome!&quot;);</div><div class="line"></div><div class="line">// Text &amp; Image (UnityEngine.Sprite)</div><div class="line">GameJolt.UI.Manager.Instance.QueueNotification(&quot;GameJolt is awesome!&quot;, image);</div></div><!-- fragment --><h1>Time</h1>
+<div class="fragment"><div class="line">// Text only</div><div class="line">GameJoltUI.Instance.QueueNotification(&quot;GameJolt is awesome!&quot;);</div><div class="line"></div><div class="line">// Text &amp; Image (UnityEngine.Sprite)</div><div class="line">GameJoltUI.Instance.QueueNotification(&quot;GameJolt is awesome!&quot;, image);</div></div><!-- fragment --><h1>Time</h1>
 <p>If your game uses timers (e.g. free gift every 24h), you might not be able to use the computer clock because the user might manipulate it. Instead, you want to fetch the server's time.</p>
 <div class="fragment"><div class="line">GameJolt.API.Misc.GetTime((System.DateTime serverTime) =&gt; {</div><div class="line">    Debug.Log(string.Format(&quot;Server Time: {0}&quot;, time));</div><div class="line">});</div></div><!-- fragment --><h1>What else?</h1>
 <p>It really just is a getting started tutorial. Have a look at the documentation to see what else you can do.</p>
