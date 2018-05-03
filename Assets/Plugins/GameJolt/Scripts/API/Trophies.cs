@@ -4,13 +4,11 @@ using System.Linq;
 using GameJolt.API.Objects;
 using GameJolt.UI;
 
-namespace GameJolt.API
-{
+namespace GameJolt.API {
 	/// <summary>
 	/// Trophies API methods
 	/// </summary>
-	public static class Trophies
-	{
+	public static class Trophies {
 		/// <summary>
 		/// The cached trophies.
 		/// </summary>
@@ -26,7 +24,7 @@ namespace GameJolt.API
 		/// this script would need to access the current user on the manager and everything would be too tangled.
 		/// </para>
 		/// </remarks>
-		static Dictionary<int, Trophy> cachedTrophies;
+		private static Dictionary<int, Trophy> cachedTrophies;
 
 		#region Unlock
 		/// <summary>
@@ -34,8 +32,7 @@ namespace GameJolt.API
 		/// </summary>
 		/// <param name="trophy">The <see cref="Trophy"/> to unlock.</param>
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
-		public static void Unlock(Trophy trophy, Action<bool> callback = null)
-		{
+		public static void Unlock(Trophy trophy, Action<bool> callback = null) {
 			Unlock(trophy.ID, callback);
 		}
 
@@ -44,23 +41,20 @@ namespace GameJolt.API
 		/// </summary>
 		/// <param name="id">The <see cref="Trophy"/> ID.</param>
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
-		public static void Unlock(int id, Action<bool> callback = null)
-		{
+		public static void Unlock(int id, Action<bool> callback = null) {
 			var parameters = new Dictionary<string, string> {{"trophy_id", id.ToString()}};
 
-			Core.Request.Get(Constants.API_TROPHIES_ADD, parameters, response => {
+			Core.Request.Get(Constants.ApiTrophiesAdd, parameters, response => {
 				// Update the cache.
-				if (cachedTrophies != null && cachedTrophies.ContainsKey(id) && !cachedTrophies[id].Unlocked)
-				{
-					cachedTrophies[id].Unlocked = response.success;
+				if(cachedTrophies != null && cachedTrophies.ContainsKey(id) && !cachedTrophies[id].Unlocked) {
+					cachedTrophies[id].Unlocked = response.Success;
 				}
 
 				// Show the notification
 				PrepareNotification(id);
 
-				if (callback != null)
-				{
-					callback(response.success);
+				if(callback != null) {
+					callback(response.Success);
 				}
 			});
 		}
@@ -69,26 +63,18 @@ namespace GameJolt.API
 		/// Get the <see cref="Trophy"/> image from cache or download it before displaying a notification.
 		/// </summary>
 		/// <param name="id">The <see cref="Trophy"/> `id`.</param>
-		static void PrepareNotification(int id)
-		{
-			if (cachedTrophies != null && cachedTrophies.ContainsKey(id))
-			{
-				if (cachedTrophies[id].Image != null)
-				{
+		private static void PrepareNotification(int id) {
+			if(cachedTrophies != null && cachedTrophies.ContainsKey(id)) {
+				if(cachedTrophies[id].Image != null) {
 					ShowNotification(cachedTrophies[id]);
-				}
-				else
-				{
+				} else {
 					cachedTrophies[id].DownloadImage(success => {
 						ShowNotification(cachedTrophies[id]);
 					});
 				}
-			}
-			else
-			{
-				Get (id, trophy => {
-					if (trophy != null)
-					{
+			} else {
+				Get(id, trophy => {
+					if(trophy != null) {
 						trophy.DownloadImage(success => {
 							ShowNotification(trophy);
 						});
@@ -101,10 +87,8 @@ namespace GameJolt.API
 		/// Shows a <see cref="Trophy"/> unlock notification.
 		/// </summary>
 		/// <param name="trophy">The <see cref="Trophy"/> to display in the notification.</param>
-		static void ShowNotification(Trophy trophy)
-		{
-			if (trophy.Unlocked)
-			{
+		private static void ShowNotification(Trophy trophy) {
+			if(trophy.Unlocked) {
 				GameJoltUI.Instance.QueueNotification(
 					string.Format("Unlocked <b>#{0}</b>", trophy.Title),
 					trophy.Image);
@@ -118,24 +102,18 @@ namespace GameJolt.API
 		/// </summary>
 		/// <param name="id">The <see cref="Trophy"/> `id`.</param>
 		/// <param name="callback">A callback function accepting a single parameter, a <see cref="Trophy"/>.</param>
-		public static void Get(int id, Action<Trophy> callback)
-		{
-			if (cachedTrophies != null)
-			{
-				if (callback != null)
-				{
+		public static void Get(int id, Action<Trophy> callback) {
+			if(cachedTrophies != null) {
+				if(callback != null) {
 					callback(cachedTrophies.Values.FirstOrDefault(t => t.ID == id));
 				}
-			}
-			else
-			{
+			} else {
 				var parameters = new Dictionary<string, string> {{"trophy_id", id.ToString()}};
 
-				Core.Request.Get(Constants.API_TROPHIES_FETCH, parameters, response => {
-					var trophy = response.success ? new Trophy(response.json["trophies"][0].AsObject) : null;
+				Core.Request.Get(Constants.ApiTrophiesFetch, parameters, response => {
+					var trophy = response.Success ? new Trophy(response.Json["trophies"][0].AsObject) : null;
 
-					if (callback != null)
-					{
+					if(callback != null) {
 						callback(trophy);
 					}
 				});
@@ -147,19 +125,15 @@ namespace GameJolt.API
 		/// </summary>
 		/// <param name="ids">An array of <see cref="Trophy"/>s IDs</param>
 		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Trophy"/>s.</param>
-		public static void Get(int[] ids, Action<Trophy[]> callback)
-		{
-			if (cachedTrophies != null)
-			{
-				if (callback != null)
-				{
+		public static void Get(int[] ids, Action<Trophy[]> callback) {
+			if(cachedTrophies != null) {
+				if(callback != null) {
 					var trophies = cachedTrophies.Values.Where(t => ids.Contains(t.ID)).ToArray();
 					callback(trophies.Length != 0 ? trophies : null);
 				}
-			}
-			else
-			{
-				var parameters = new Dictionary<string, string> {{"trophy_id", string.Join(",", ids.Select(id => id.ToString()).ToArray())}};
+			} else {
+				var parameters =
+					new Dictionary<string, string> {{"trophy_id", string.Join(",", ids.Select(id => id.ToString()).ToArray())}};
 
 				Get(parameters, callback);
 			}
@@ -169,31 +143,24 @@ namespace GameJolt.API
 		/// Get the <see cref="Trophy"/>s information.
 		/// </summary>
 		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Trophy"/>s.</param>
-		public static void Get(Action<Trophy[]> callback)
-		{
-			if (cachedTrophies != null)
-			{
-				if (callback != null)
-				{
+		public static void Get(Action<Trophy[]> callback) {
+			if(cachedTrophies != null) {
+				if(callback != null) {
 					callback(cachedTrophies.Values.ToArray());
 				}
-			}
-			else
-			{
+			} else {
 				// There are no parameters but it cannot be left null
 				// because the call to Get(Dictionary<string, string> parameters, Action<Objects.Trophy[]> callback)
 				// would be ambiguous with  Get(int[] ids, Action<Objects.Trophy[]> callback)
 				var parameters = new Dictionary<string, string>();
 
 				Get(parameters, trophies => {
-					
-					if (GameJoltAPI.Instance.Settings.UseCaching && trophies != null)
-					{
+
+					if(GameJoltAPI.Instance.Settings.UseCaching && trophies != null) {
 						cachedTrophies = trophies.ToDictionary(t => t.ID, t => t);
 					}
-					
-					if (callback != null)
-					{
+
+					if(callback != null) {
 						callback(trophies);
 					}
 				});
@@ -205,18 +172,13 @@ namespace GameJolt.API
 		/// </summary>
 		/// <param name="unlocked">A boolean indicating whether to retrieve unlocked (<c>true</c>) or locked (<c>false</c>) <see cref="Trophy"/>s.</param>
 		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Trophy"/>s.</param>
-		public static void Get(bool unlocked, Action<Trophy[]> callback)
-		{
-			if (cachedTrophies != null)
-			{
-				if (callback != null)
-				{
+		public static void Get(bool unlocked, Action<Trophy[]> callback) {
+			if(cachedTrophies != null) {
+				if(callback != null) {
 					var trophies = cachedTrophies.Values.Where(t => t.Unlocked == unlocked).ToArray();
 					callback(trophies.Length != 0 ? trophies : null);
 				}
-			}
-			else
-			{
+			} else {
 				var parameters = new Dictionary<string, string> {{"achieved", unlocked.ToString().ToLower()}};
 
 				Get(parameters, callback);
@@ -228,27 +190,21 @@ namespace GameJolt.API
 		/// </summary>
 		/// <param name="parameters">The API call parameters.</param>
 		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Trophy"/>s.</param>
-		static void Get(Dictionary<string, string> parameters, Action<Trophy[]> callback)
-		{
-			Core.Request.Get(Constants.API_TROPHIES_FETCH, parameters, response => {
+		private static void Get(Dictionary<string, string> parameters, Action<Trophy[]> callback) {
+			Core.Request.Get(Constants.ApiTrophiesFetch, parameters, response => {
 				Trophy[] trophies;
-				if (response.success)
-				{
-					int count = response.json["trophies"].AsArray.Count;
+				if(response.Success) {
+					int count = response.Json["trophies"].AsArray.Count;
 					trophies = new Trophy[count];
-					
-					for(int i = 0; i < count; ++i)
-					{
-						trophies[i] = new Trophy(response.json["trophies"][i].AsObject);
+
+					for(int i = 0; i < count; ++i) {
+						trophies[i] = new Trophy(response.Json["trophies"][i].AsObject);
 					}
-				}
-				else
-				{
+				} else {
 					trophies = null;
 				}
-				
-				if (callback != null)
-				{
+
+				if(callback != null) {
 					callback(trophies);
 				}
 			});

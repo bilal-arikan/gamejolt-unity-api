@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 
-namespace GameJolt.UI.Objects
-{
+namespace GameJolt.UI.Objects {
 	/// <summary>
 	/// A UI Notification.
 	/// </summary>
-	public class Notification
-	{
+	public class Notification {
 		#region Fields & Properties
 		/// <summary>
 		/// Gets or sets the text.
@@ -20,7 +18,7 @@ namespace GameJolt.UI.Objects
 		/// <value>The image.</value>
 		public Sprite Image { get; private set; }
 		#endregion Fields & Properties
-		
+
 		#region Constructors
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Notification"/> class.
@@ -33,8 +31,7 @@ namespace GameJolt.UI.Objects
 		/// </summary>
 		/// <param name="text">The notification text.</param>
 		/// <param name="image">The notification image.</param>
-		public Notification(string text, Sprite image)
-		{
+		public Notification(string text, Sprite image) {
 			Text = text;
 			Image = image;
 		}

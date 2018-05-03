@@ -2,15 +2,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RestrictedButton : MonoBehaviour {
-	public bool RequiresSignedInUser = true;
-	private Button button;
+namespace GameJolt.Demo.UI {
+	public class RestrictedButton : MonoBehaviour {
+		public bool RequiresSignedInUser = true;
+		private Button button;
 
-	private void Start() {
-		button = GetComponent<Button>();
-	}
+		private void Start() {
+			button = GetComponent<Button>();
+		}
 
-	private void Update() {
-		button.interactable = GameJoltAPI.Instance.HasSignedInUser == RequiresSignedInUser;
+		private void Update() {
+			button.interactable = GameJoltAPI.Instance.HasSignedInUser == RequiresSignedInUser;
+		}
 	}
 }

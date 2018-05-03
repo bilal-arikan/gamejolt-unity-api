@@ -90,10 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc42eac5b105ea541a2db36720325c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: {fileID: 11477424}
-  value: {fileID: 11435500}
-  defaultColour: {r: 1, g: 1, b: 1, a: 1}
-  highlightColour: {r: .800000072, g: 1, b: 0, a: 1}
+  Username: {fileID: 11477424}
+  Value: {fileID: 11435500}
+  DefaultColour: {r: 1, g: 1, b: 1, a: 1}
+  HighlightColour: {r: .800000072, g: 1, b: 0, a: 1}
 --- !u!114 &11461712
 MonoBehaviour:
   m_ObjectHideFlags: 1

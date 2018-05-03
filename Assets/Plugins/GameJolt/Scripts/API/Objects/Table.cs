@@ -1,12 +1,10 @@
 ﻿using GameJolt.External.SimpleJSON;
 
-namespace GameJolt.API.Objects
-{
+namespace GameJolt.API.Objects {
 	/// <summary>
 	/// Table object.
 	/// </summary>
-	public sealed class Table : Base
-	{
+	public sealed class Table : Base {
 		#region Fields & Properties
 		/// <summary>
 		/// Gets or sets the ID.
@@ -60,8 +58,7 @@ namespace GameJolt.API.Objects
 		/// <param name="id">The <see cref="Table"/> ID.</param>
 		/// <param name="name">The <see cref="Table"/> name.</param>
 		/// <param name="description">The <see cref="Table"/> description.</param>
-		public Table(int id, string name, string description = "")
-		{
+		public Table(int id, string name, string description = "") {
 			ID = id;
 			Name = name;
 			Description = description;
@@ -72,8 +69,7 @@ namespace GameJolt.API.Objects
 		/// Initializes a new instance of the <see cref="Table"/> class.
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
-		public Table(JSONClass data)
-		{
+		public Table(JSONClass data) {
 			PopulateFromJSON(data);
 		}
 		#endregion Constructors
@@ -83,8 +79,7 @@ namespace GameJolt.API.Objects
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data)
-		{
+		protected override void PopulateFromJSON(JSONClass data) {
 			ID = data["id"].AsInt;
 			Name = data["name"].Value;
 			Description = data["description"].Value;
@@ -96,8 +91,7 @@ namespace GameJolt.API.Objects
 		/// Returns a <see cref="string"/> that represents the current <see cref="Table"/>.
 		/// </summary>
 		/// <returns>A <see cref="string"/> that represents the current <see cref="Table"/>.</returns>
-		public override string ToString()
-		{
+		public override string ToString() {
 			return string.Format("GameJolt.API.Objects.Table: {0} - {1}", Name, ID);
 		}
 	}

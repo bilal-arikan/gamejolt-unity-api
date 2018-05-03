@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace GameJolt.API
-{
+namespace GameJolt.API {
 	/// <summary>
 	/// Misc API methods.
 	/// </summary>
-	public static class Misc
-	{
+	public static class Misc {
 		private static readonly Dictionary<string, Sprite> spriteCache = new Dictionary<string, Sprite>();
 		private static readonly Dictionary<string, Action<Sprite>> openRequests = new Dictionary<string, Action<Sprite>>();
 
@@ -31,7 +29,8 @@ namespace GameJolt.API
 			// check if the sprite is already cached
 			Sprite cachedSprite;
 			if(spriteCache.TryGetValue(url, out cachedSprite)) {
-				if(cachedSprite) { // check if sprite is not destroyed
+				if(cachedSprite) {
+					// check if sprite is not destroyed
 					if(callback != null) callback(cachedSprite);
 					return;
 				}
@@ -49,12 +48,12 @@ namespace GameJolt.API
 				openRequests[url] = callback;
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.GetRequest(url, Core.ResponseFormat.Texture, response => {
 					Sprite sprite = null;
-					if(response.success) {
+					if(response.Success) {
 						sprite = Sprite.Create(
-							response.texture,
-							new Rect(0, 0, response.texture.width, response.texture.height),
+							response.Texture,
+							new Rect(0, 0, response.Texture.width, response.Texture.height),
 							new Vector2(.5f, .5f),
-							response.texture.width);
+							response.Texture.width);
 						spriteCache[url] = sprite;
 					}
 
@@ -71,12 +70,10 @@ namespace GameJolt.API
 		/// Get the server time.
 		/// </summary>
 		/// <param name="callback">A callback function accepting a single parameter, a System.DateTime.</param>
-		public static void GetTime(Action<DateTime> callback)
-		{
-			Core.Request.Get(Constants.API_TIME_GET, null, response => {
-				if (callback != null)
-				{
-					double timestamp = response.json["timestamp"].AsDouble;
+		public static void GetTime(Action<DateTime> callback) {
+			Core.Request.Get(Constants.ApiTimeGet, null, response => {
+				if(callback != null) {
+					double timestamp = response.Json["timestamp"].AsDouble;
 					DateTime serverTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified);
 					serverTime = serverTime.AddSeconds(timestamp);
 					callback(serverTime);

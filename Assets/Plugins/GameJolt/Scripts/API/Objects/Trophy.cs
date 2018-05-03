@@ -2,18 +2,22 @@
 using System;
 using GameJolt.External.SimpleJSON;
 
-namespace GameJolt.API.Objects
-{
+namespace GameJolt.API.Objects {
 	/// <summary>
 	/// Trophy difficulties.
 	/// </summary>
-	public enum TrophyDifficulty { Undefined, Bronze, Silver, Gold, Platinum }
+	public enum TrophyDifficulty {
+		Undefined,
+		Bronze,
+		Silver,
+		Gold,
+		Platinum
+	}
 
 	/// <summary>
 	/// Trophy object.
 	/// </summary>
-	public sealed class Trophy : Base
-	{
+	public sealed class Trophy : Base {
 		#region Fields & Properties
 		/// <summary>
 		/// Gets or sets the ID.
@@ -99,7 +103,7 @@ namespace GameJolt.API.Objects
 		/// </summary>
 		public bool IsSecret { get; set; }
 		#endregion Fields & Properties
-		
+
 		#region Constructors
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Trophy"/> class.
@@ -109,8 +113,7 @@ namespace GameJolt.API.Objects
 		/// <param name="description">The <see cref="Trophy"/> description.</param>
 		/// <param name="difficulty">The <see cref="Trophy"/> difficulty.</param>
 		/// <param name="unlocked">If set to <c>true</c> unlocked.</param>
-		public Trophy(int id, string title, string description, TrophyDifficulty difficulty, bool unlocked)
-		{
+		public Trophy(int id, string title, string description, TrophyDifficulty difficulty, bool unlocked) {
 			ID = id;
 			Title = title;
 			Description = description;
@@ -123,19 +126,17 @@ namespace GameJolt.API.Objects
 		/// Initializes a new instance of the <see cref="Trophy"/> class.
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
-		public Trophy(JSONClass data)
-		{
+		public Trophy(JSONClass data) {
 			PopulateFromJSON(data);
 		}
 		#endregion Constructors
-		
+
 		#region Update Attributes
 		/// <summary>
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data)
-		{
+		protected override void PopulateFromJSON(JSONClass data) {
 			ID = data["id"].AsInt;
 			Title = data["title"].Value;
 			Description = data["description"].Value;
@@ -143,12 +144,9 @@ namespace GameJolt.API.Objects
 			Unlocked = data["achieved"].Value != "false";
 			IsSecret = GameJoltAPI.Instance.IsSecretTrophy(ID);
 
-			try
-			{
+			try {
 				Difficulty = (TrophyDifficulty)Enum.Parse(typeof(TrophyDifficulty), data["difficulty"].Value);
-			}
-			catch
-			{
+			} catch {
 				Difficulty = TrophyDifficulty.Undefined;
 			}
 		}
@@ -164,13 +162,11 @@ namespace GameJolt.API.Objects
 		/// Shortcut for <c>GameJolt.API.Trophies.Unlock(this);</c>
 		/// </para>
 		/// </remarks>
-		public void Unlock(Action<bool> callback = null)
-		{
+		public void Unlock(Action<bool> callback = null) {
 			Trophies.Unlock(this, success => {
 				Unlocked = success;
 
-				if (callback != null)
-				{
+				if(callback != null) {
 					callback(success);
 				}
 			});
@@ -185,23 +181,17 @@ namespace GameJolt.API.Objects
 		/// Will set the `Image` field on the trophy. 
 		/// </para>
 		/// </remarks>
-		public void DownloadImage(Action<bool> callback = null)
-		{
-			if (!string.IsNullOrEmpty(ImageURL))
-			{
+		public void DownloadImage(Action<bool> callback = null) {
+			if(!string.IsNullOrEmpty(ImageURL)) {
 				Misc.DownloadImage(ImageURL, image => {
 					Image = image ?? GameJoltAPI.Instance.DefaultTrophy;
 
-					if (callback != null)
-					{
+					if(callback != null) {
 						callback(image != null);
 					}
 				});
-			}
-			else
-			{
-				if (callback != null)
-				{
+			} else {
+				if(callback != null) {
 					callback(false);
 				}
 			}
@@ -212,9 +202,9 @@ namespace GameJolt.API.Objects
 		/// Returns a <see cref="string"/> that represents the current <see cref="Trophy"/>.
 		/// </summary>
 		/// <returns>A <see cref="string"/> that represents the current <see cref="Trophy"/>.</returns>
-		public override string ToString()
-		{
-			return string.Format("GameJolt.API.Objects.Trophy: {0} - {1} - {2} - {3}Unlocked", Title, ID, Difficulty, Unlocked ? "" : "Not ");
+		public override string ToString() {
+			return string.Format("GameJolt.API.Objects.Trophy: {0} - {1} - {2} - {3}Unlocked", Title, ID, Difficulty,
+				Unlocked ? "" : "Not ");
 		}
 	}
 }

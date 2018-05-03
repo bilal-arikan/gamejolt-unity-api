@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using GameJolt.API.Objects;
 using GameJolt.External;
 
-namespace GameJolt.API
-{
+namespace GameJolt.API {
 	/// <summary>
 	/// The Core API Manager.
 	/// </summary>
@@ -14,12 +13,9 @@ namespace GameJolt.API
 		#region Fields & Properties
 		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
 
-		[Tooltip("The GameJolt API settings.")]
-		public Settings Settings;
-		[Tooltip("The default trophy image which is used if downloading the image failed.")]
-		public Sprite DefaultTrophy;
-		[Tooltip("The default avatar image which is used if downloading the image failed.")]
-		public Sprite DefaultAvatar;
+		[Tooltip("The GameJolt API settings.")] public Settings Settings;
+		[Tooltip("The default trophy image which is used if downloading the image failed.")] public Sprite DefaultTrophy;
+		[Tooltip("The default avatar image which is used if downloading the image failed.")] public Sprite DefaultAvatar;
 		[Tooltip("The default notification icon which is used if you don't provide an image yourself.")]
 		public Sprite DefaultNotificationIcon;
 
@@ -30,23 +26,17 @@ namespace GameJolt.API
 		/// Gets or sets the current user.
 		/// </summary>
 		/// <value>The current user.</value>
-		public User CurrentUser
-		{
+		public User CurrentUser {
 			get { return currentUser; }
-			set
-			{
+			set {
 				currentUser = value;
 
-				if (currentUser != null)
-				{
-					if (currentUser.IsAuthenticated)
-					{
+				if(currentUser != null) {
+					if(currentUser.IsAuthenticated) {
 						StartAutoPing();
 						CacheTrophies();
 					}
-				}
-				else
-				{
+				} else {
 					StopAutoPing();
 				}
 			}
@@ -67,8 +57,7 @@ namespace GameJolt.API
 		/// <summary>
 		/// Init this instance.
 		/// </summary>
-		protected override void Init()
-		{
+		protected override void Init() {
 			Configure();
 			AutoConnect();
 			CacheTables();
@@ -77,8 +66,7 @@ namespace GameJolt.API
 		/// <summary>
 		/// Configure this instance.
 		/// </summary>
-		private void Configure()
-		{
+		private void Configure() {
 			if(Settings == null) {
 				LogHelper.Error("Missing settings reference! Fallback to empty default settings.");
 				Settings = ScriptableObject.CreateInstance<Settings>();
@@ -94,19 +82,16 @@ namespace GameJolt.API
 		#endregion Init
 
 		#region Requests
-		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback)
-		{
-			if (Settings.GameId == 0 || Settings.PrivateKey == null) {
+		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback) {
+			if(Settings.GameId == 0 || Settings.PrivateKey == null) {
 				callback(new Core.Response("Bad Credentials"));
 				yield break;
 			}
 
 			float timeout = Time.time + Settings.Timeout;
 			var www = new WWW(url);
-			while (!www.isDone)
-			{
-				if (Time.time > timeout)
-				{
+			while(!www.isDone) {
+				if(Time.time > timeout) {
 					callback(new Core.Response("Timeout for " + url));
 					yield break;
 				}
@@ -115,26 +100,23 @@ namespace GameJolt.API
 			callback(new Core.Response(www, format));
 		}
 
-		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, Core.ResponseFormat format, Action<Core.Response> callback)
-		{
-			if (Settings.GameId == 0 || Settings.PrivateKey == null) {
+		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, Core.ResponseFormat format,
+			Action<Core.Response> callback) {
+			if(Settings.GameId == 0 || Settings.PrivateKey == null) {
 				callback(new Core.Response("Bad Credentials"));
 				yield break;
 			}
 
 			var form = new WWWForm();
-			foreach (KeyValuePair<string,string> field in payload)
-			{
+			foreach(KeyValuePair<string, string> field in payload) {
 				form.AddField(field.Key, field.Value);
 			}
 
 			float timeout = Time.time + Settings.Timeout;
 
-			var www = new WWW (url, form);
-			while (!www.isDone)
-			{
-				if (Time.time > timeout)
-				{
+			var www = new WWW(url, form);
+			while(!www.isDone) {
+				if(Time.time > timeout) {
 					callback(new Core.Response("Timeout for " + url));
 					yield break;
 				}
@@ -146,20 +128,17 @@ namespace GameJolt.API
 		#endregion Requests
 
 		#region Actions
-		private void AutoConnect()
-		{
+		private void AutoConnect() {
 #if UNITY_WEBPLAYER || UNITY_WEBGL
 			#region Autoconnect Web
-	#if UNITY_EDITOR
-			if (Settings.DebugAutoConnect)
-			{
-				if (Settings.DebugUser != string.Empty && Settings.DebugToken != string.Empty)
-				{
+#if UNITY_EDITOR
+			if(Settings.DebugAutoConnect) {
+				if(Settings.DebugUser != string.Empty && Settings.DebugToken != string.Empty) {
 					var user = new User(Settings.DebugUser, Settings.DebugToken);
-					user.SignIn(success => { LogHelper.Info("AutoConnect user '{0}': {1}", user.Name, success ? "success" : "failed"); });
-				}
-				else
-				{
+					user.SignIn(success => {
+						LogHelper.Info("AutoConnect user '{0}': {1}", user.Name, success ? "success" : "failed");
+					});
+				} else {
 					LogHelper.Warning("Cannot simulate WebPlayer AutoConnect. Missing user and/or token in debug settings.");
 				}
 			}
@@ -191,15 +170,14 @@ else {{
 SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		", this.gameObject.name));
 #endif
-			}
-			else
-			{
+			} else {
 				LogHelper.Warning("Cannot AutoConnect, the game is not hosted on GameJolt.");
 			}
 #endif
 
 			#endregion
 #else
+
 			#region Autoconnect Non Web
 			string username, token;
 			if(GetStoredUserCredentials(out username, out token)) {
@@ -212,99 +190,77 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		}
 
 #if UNITY_WEBPLAYER || UNITY_WEBGL
-		public void OnAutoConnectWebPlayer(string response)
-		{
-			if (response != string.Empty)
-			{
+		public void OnAutoConnectWebPlayer(string response) {
+			if(response != string.Empty) {
 				var credentials = response.Split(new[] {':'}, 2);
-				if (credentials.Length == 2)
-				{
+				if(credentials.Length == 2) {
 					var user = new Objects.User(credentials[0], credentials[1]);
 					user.SignIn();
 					// TODO: Prompt "Welcome Back <username>!"
-				}
-				else
-				{
+				} else {
 					LogHelper.Info("Cannot AutoConnect.");
 				}
-			}
-			else
-			{
+			} else {
 				// This is a Guest.
 				// TODO: Prompt "Hello Guest!" and encourage to signup/signin?
 			}
 		}
 #endif
 
-		private void StartAutoPing()
-		{
-			if (!Settings.AutoPing)
-			{
+		private void StartAutoPing() {
+			if(!Settings.AutoPing) {
 				return;
 			}
 
 			Sessions.Open(success => {
 				// What should we do if it fails? Retry later?
 				// Without smart handling, it will probably just fail again...
-				if (success)
-				{
+				if(success) {
 					Invoke("Ping", 30f);
 				}
 			});
 		}
 
-		private void Ping()
-		{
+		private void Ping() {
 			Sessions.Ping(SessionStatus.Active, success => {
 				// Sessions are automatically closed after 120 seconds
 				// which will happen if the application has been in the background for too long.
 				// It would be nice to Ping an Idle state when the app is in the background,
 				// but because Unity apps don't run in the background by default, this is doomed to failure.
 				// Let it error out and reconnect.
-				if (!success)
-				{
+				if(!success) {
 					Invoke("StartAutoPing", 1f); // Try reconnecting.
-				}
-				else
-				{
+				} else {
 					Invoke("Ping", 30f); // Ping again.
 				}
 			});
 		}
 
-		private void StopAutoPing()
-		{
-			if (Settings.AutoPing)
-			{
+		private void StopAutoPing() {
+			if(Settings.AutoPing) {
 				CancelInvoke("StartAutoPing");
 				CancelInvoke("Ping");
 			}
 		}
 
-		private void CacheTables()
-		{
-			if (Settings.UseCaching)
-			{
+		private void CacheTables() {
+			if(Settings.UseCaching) {
 				Scores.GetTables(null);
 			}
 		}
 
-		private void CacheTrophies()
-		{
-			if (Settings.UseCaching)
-			{
+		private void CacheTrophies() {
+			if(Settings.UseCaching) {
 				Trophies.Get(trophies => {
-					if (trophies != null)
-					{
-						foreach(Trophy trophy in trophies)
-						{
+					if(trophies != null) {
+						foreach(Trophy trophy in trophies) {
 							trophy.DownloadImage();
 						}
 					}
 				});
 			}
 		}
-#endregion Actions
+		#endregion Actions
 
 		#region Helper
 		/// <summary>

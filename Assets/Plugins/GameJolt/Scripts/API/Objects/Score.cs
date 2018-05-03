@@ -1,13 +1,11 @@
 ﻿using System;
 using GameJolt.External.SimpleJSON;
 
-namespace GameJolt.API.Objects
-{
+namespace GameJolt.API.Objects {
 	/// <summary>
 	/// Score object.
 	/// </summary>
-	public sealed class Score : Base
-	{
+	public sealed class Score : Base {
 		#region Fields & Properties
 		/// <summary>
 		/// Gets or sets the value.
@@ -55,7 +53,9 @@ namespace GameJolt.API.Objects
 		/// Gets the name of the player (username or guest name as appropriate).
 		/// </summary>
 		/// <value>The name of the player.</value>
-		public string PlayerName { get { return !string.IsNullOrEmpty(UserName) ? UserName : GuestName; } }
+		public string PlayerName {
+			get { return !string.IsNullOrEmpty(UserName) ? UserName : GuestName; }
+		}
 		#endregion Fields & Properties
 
 		#region Constructors
@@ -66,8 +66,7 @@ namespace GameJolt.API.Objects
 		/// <param name="text">The <see cref="Score"/> text.</param>
 		/// <param name="guestName">The <see cref="Score"/> guest name.</param>
 		/// <param name="extra">The <see cref="Score"/> extra.</param>
-		public Score(int value, string text, string guestName = "", string extra = "")
-		{
+		public Score(int value, string text, string guestName = "", string extra = "") {
 			Value = value;
 			Text = text;
 			GuestName = guestName;
@@ -78,19 +77,17 @@ namespace GameJolt.API.Objects
 		/// Initializes a new instance of the <see cref="Score"/> class.
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
-		public Score(JSONClass data)
-		{
+		public Score(JSONClass data) {
 			PopulateFromJSON(data);
 		}
 		#endregion Constructors
-		
+
 		#region Update Attributes
 		/// <summary>
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data)
-		{
+		protected override void PopulateFromJSON(JSONClass data) {
 			Value = data["sort"].AsInt;
 			Text = data["score"].Value;
 			Extra = data["extra_data"].Value;
@@ -113,8 +110,7 @@ namespace GameJolt.API.Objects
 		/// Shortcut for <c>GameJolt.API.Scores.Add(this);</c>
 		/// </para>
 		/// </remarks>
-		public void Add(int table = 0, Action<bool> callback = null)
-		{
+		public void Add(int table = 0, Action<bool> callback = null) {
 			Scores.Add(this, table, callback);
 		}
 		#endregion Interface
@@ -123,8 +119,7 @@ namespace GameJolt.API.Objects
 		/// Returns a <see cref="string"/> that represents the current <see cref="Score"/>.
 		/// </summary>
 		/// <returns>A <see cref="string"/> that represents the current <see cref="Score"/>.</returns>
-		public override string ToString()
-		{
+		public override string ToString() {
 			return string.Format("GameJolt.API.Objects.Score: {0} - {1}", PlayerName, Value);
 		}
 	}

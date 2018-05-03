@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d8ad42dedba74ca6bcb036b913ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnValue: 1
+  ReturnValue: 1
 --- !u!114 &11423440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99075a5c98f57084c97e00404e8b0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstFieldPath: SignInPanel/UsernameField
-  submitButtonPath: SignInPanel/SignInButton
+  FirstFieldPath: SignInPanel/UsernameField
+  SubmitButtonPath: SignInPanel/SignInButton
 --- !u!114 &11441444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d8ad42dedba74ca6bcb036b913ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnValue: 1
+  ReturnValue: 1
 --- !u!114 &11449648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8d8ad42dedba74ca6bcb036b913ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnValue: 0
+  ReturnValue: 0
 --- !u!114 &11463656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49b53b118d0c9b4397679b9c5ed01d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notificationPanelPath: NotificationPanel
+  NotificationPanelPath: NotificationPanel
 --- !u!114 &11464758
 MonoBehaviour:
   m_ObjectHideFlags: 1

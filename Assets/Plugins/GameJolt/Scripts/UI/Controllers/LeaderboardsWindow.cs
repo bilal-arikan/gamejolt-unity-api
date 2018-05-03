@@ -5,21 +5,19 @@ using System.Linq;
 using GameJolt.API;
 using GameJolt.API.Objects;
 
-namespace GameJolt.UI.Controllers
-{
-	public class LeaderboardsWindow: BaseWindow
-	{
-		public RectTransform tabsContainer;
-		public GameObject tableButton;
+namespace GameJolt.UI.Controllers {
+	public class LeaderboardsWindow : BaseWindow {
+		public RectTransform TabsContainer;
+		public GameObject TableButton;
 
-		public ScrollRect scoresScrollRect;
-		public GameObject scoreItem;
-		
-		Action<bool> callback;
+		public ScrollRect ScoresScrollRect;
+		public GameObject ScoreItem;
 
-		int[] tableIDs;
-		int currentTab;
-		
+		private Action<bool> callback;
+
+		private int[] tableIDs;
+		private int currentTab;
+
 		public override void Show(Action<bool> callback) {
 			Show(callback, null, null);
 		}
@@ -36,13 +34,13 @@ namespace GameJolt.UI.Controllers
 				}
 				if(tables != null && tables.Length > 0) {
 					// Create the right number of children.
-					Populate(tabsContainer, tableButton, tables.Length);
+					Populate(TabsContainer, TableButton, tables.Length);
 					int activeId = GetActiveTableId(tables, activeTable);
 
 					// Update children's text. 
 					tableIDs = new int[tables.Length];
 					for(int i = 0; i < tables.Length; ++i) {
-						tabsContainer.GetChild(i).GetComponent<TableButton>().Init(tables[i], i, this, tables[i].ID == activeId);
+						TabsContainer.GetChild(i).GetComponent<TableButton>().Init(tables[i], i, this, tables[i].ID == activeId);
 
 						// Keep IDs information and current tab for use when switching tabs.
 						tableIDs[i] = tables[i].ID;
@@ -70,20 +68,17 @@ namespace GameJolt.UI.Controllers
 			return tables[0].ID;
 		}
 
-		public override void Dismiss(bool success)
-		{
+		public override void Dismiss(bool success) {
 			animator.SetTrigger("Dismiss");
-			if (callback != null)
-			{
+			if(callback != null) {
 				callback(success);
 				callback = null;
 			}
 		}
 
-		public void ShowTab(int index)
-		{
+		public void ShowTab(int index) {
 			// There is no need to set the new tab button active, it has been done internally when the button has been clicked.
-			tabsContainer.GetChild(currentTab).GetComponent<TableButton>().SetActive(false);
+			TabsContainer.GetChild(currentTab).GetComponent<TableButton>().SetActive(false);
 			currentTab = index;
 
 			animator.SetTrigger("Lock");
@@ -93,32 +88,27 @@ namespace GameJolt.UI.Controllers
 			SetScores(tableIDs[currentTab]);
 		}
 
-		void SetScores(int tableID)
-		{
+		private void SetScores(int tableId) {
 			Scores.Get(scores => {
-				if (scores != null)
-				{
-					scoresScrollRect.verticalNormalizedPosition = 0;
+				if(scores != null) {
+					ScoresScrollRect.verticalNormalizedPosition = 0;
 
 					// Create the right number of children.
-					Populate(scoresScrollRect.content, scoreItem, scores.Length);
-					
+					Populate(ScoresScrollRect.content, ScoreItem, scores.Length);
+
 					// Update children's text.
-					for (int i = 0; i < scores.Length; ++i)
-					{
-						scoresScrollRect.content.GetChild(i).GetComponent<ScoreItem>().Init(scores[i]);
+					for(int i = 0; i < scores.Length; ++i) {
+						ScoresScrollRect.content.GetChild(i).GetComponent<ScoreItem>().Init(scores[i]);
 					}
-					
+
 					animator.SetTrigger("HideLoadingIndicator");
 					animator.SetTrigger("Unlock");
-				}
-				else
-				{
+				} else {
 					// TODO: Show error notification
 					animator.SetTrigger("HideLoadingIndicator");
 					Dismiss(false);
 				}
-			}, tableID, 50);
+			}, tableId, 50);
 		}
 	}
 }

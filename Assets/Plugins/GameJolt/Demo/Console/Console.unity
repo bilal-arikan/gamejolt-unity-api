@@ -5478,26 +5478,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4549baf5abb527a44beff34449a89657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consoleTransform: {fileID: 124311061}
-  linePrefab: {fileID: 109592, guid: 9e6c55c6b22700145a3ad929a57a91e3, type: 2}
-  userNameField: {fileID: 767811386}
-  userTokenField: {fileID: 1924487056}
-  userIdsField: {fileID: 1548903042}
-  scoreValueField: {fileID: 1372777118}
-  scoreTextField: {fileID: 1585506532}
-  guestScoreToggle: {fileID: 1684194230}
-  guestNameField: {fileID: 215000329}
-  tableField: {fileID: 627183054}
-  limitField: {fileID: 436847463}
-  userScoresToggle: {fileID: 61360768}
-  trophyIDField: {fileID: 1846181071}
-  trophyIDsField: {fileID: 1325357568}
-  unlockedTrophiesOnlyToggle: {fileID: 412729057}
-  keyField: {fileID: 557210979}
-  valueField: {fileID: 54404756}
-  modeField: {fileID: 421554522}
-  patternField: {fileID: 2118502030}
-  globalToggle: {fileID: 1964322408}
+  ConsoleTransform: {fileID: 124311061}
+  LinePrefab: {fileID: 109592, guid: 9e6c55c6b22700145a3ad929a57a91e3, type: 2}
+  UserNameField: {fileID: 767811386}
+  UserTokenField: {fileID: 1924487056}
+  UserIdsField: {fileID: 1548903042}
+  ScoreValueField: {fileID: 1372777118}
+  ScoreTextField: {fileID: 1585506532}
+  GuestScoreToggle: {fileID: 1684194230}
+  GuestNameField: {fileID: 215000329}
+  TableField: {fileID: 627183054}
+  LimitField: {fileID: 436847463}
+  UserScoresToggle: {fileID: 61360768}
+  TrophyIdField: {fileID: 1846181071}
+  TrophyIdsField: {fileID: 1325357568}
+  UnlockedTrophiesOnlyToggle: {fileID: 412729057}
+  KeyField: {fileID: 557210979}
+  ValueField: {fileID: 54404756}
+  ModeField: {fileID: 421554522}
+  PatternField: {fileID: 2118502030}
+  GlobalToggle: {fileID: 1964322408}
 --- !u!1 &996462222
 GameObject:
   m_ObjectHideFlags: 0

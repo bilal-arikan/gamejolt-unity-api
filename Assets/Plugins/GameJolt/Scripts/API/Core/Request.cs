@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameJolt.API.Core
-{
+namespace GameJolt.API.Core {
 	/// <summary>
 	/// Request object to send API calls.
 	/// </summary>
-	public static class Request
-	{
+	public static class Request {
 		/// <summary>
 		/// Make a GET request
 		/// </summary>
@@ -19,18 +17,14 @@ namespace GameJolt.API.Core
 		/// <param name="format">The <see cref="ResponseFormat"/> to receive the <see cref="Response"/> in.</param>
 		public static void Get(
 			string method,
-		    Dictionary<string,string> parameters,
+			Dictionary<string, string> parameters,
 			Action<Response> callback,
-			bool requireVerified=true,
-			ResponseFormat format = ResponseFormat.Json)
-		{
+			bool requireVerified = true,
+			ResponseFormat format = ResponseFormat.Json) {
 			var error = Prepare(ref parameters, requireVerified, format);
-			if (error != null)
-			{
+			if(error != null) {
 				callback(new Response(error));
-			}
-			else
-			{
+			} else {
 				var url = GetRequestURL(method, parameters);
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.GetRequest(url, format, callback));
 			}
@@ -47,19 +41,15 @@ namespace GameJolt.API.Core
 		/// <param name="format">The <see cref="ResponseFormat"/> to receive the <see cref="Response"/> in.</param>
 		public static void Post(
 			string method,
-			Dictionary<string,string> parameters,
-			Dictionary<string,string> payload,
+			Dictionary<string, string> parameters,
+			Dictionary<string, string> payload,
 			Action<Response> callback,
-			bool requireVerified=true,
-			ResponseFormat format = ResponseFormat.Json)
-		{
+			bool requireVerified = true,
+			ResponseFormat format = ResponseFormat.Json) {
 			var error = Prepare(ref parameters, requireVerified, format);
-			if (error != null)
-			{
+			if(error != null) {
 				callback(new Response(error));
-			}
-			else
-			{
+			} else {
 				var url = GetRequestURL(method, parameters);
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.PostRequest(url, payload, format, callback));
 			}
@@ -71,23 +61,19 @@ namespace GameJolt.API.Core
 		/// <param name="parameters">The API parameters.</param>
 		/// <param name="requireVerified">Whether a signed in user is required <c>true</c> or not <c>false</c>.</param>
 		/// <param name="format">The <see cref="ResponseFormat"/> to receive the <see cref="Response"/> in.</param>
-		static string Prepare(ref Dictionary<string, string> parameters, bool requireVerified, ResponseFormat format)
-		{
-			if (parameters == null)
-			{
+		private static string Prepare(ref Dictionary<string, string> parameters, bool requireVerified, ResponseFormat format) {
+			if(parameters == null) {
 				parameters = new Dictionary<string, string>();
 			}
-			
-			if (requireVerified)
-			{
-				if (!GameJoltAPI.Instance.HasSignedInUser)
-				{
+
+			if(requireVerified) {
+				if(!GameJoltAPI.Instance.HasSignedInUser) {
 					return "Missing Authenticated User.";
 				}
 				parameters.Add("username", GameJoltAPI.Instance.CurrentUser.Name.ToLower());
 				parameters.Add("user_token", GameJoltAPI.Instance.CurrentUser.Token.ToLower());
 			}
-			
+
 			parameters.Add("format", format.ToString().ToLower());
 
 			return null;
@@ -99,26 +85,24 @@ namespace GameJolt.API.Core
 		/// <returns>The formatted request UR.</returns>
 		/// <param name="method">The API endpoint.</param>
 		/// <param name="parameters">The parameters.</param>
-		static string GetRequestURL(string method, Dictionary<string,string> parameters)
-		{
-			StringBuilder url = new StringBuilder ();
-			url.Append(Constants.API_BASE_URL);
+		private static string GetRequestURL(string method, Dictionary<string, string> parameters) {
+			StringBuilder url = new StringBuilder();
+			url.Append(Constants.ApiBaseUrl);
 			url.Append(method);
 			url.Append("?game_id=");
 			url.Append(GameJoltAPI.Instance.Settings.GameId);
-			
-			foreach (KeyValuePair<string,string> parameter in parameters)
-			{
+
+			foreach(KeyValuePair<string, string> parameter in parameters) {
 				url.Append("&");
 				url.Append(parameter.Key);
 				url.Append("=");
 				url.Append(parameter.Value.Replace(" ", "%20"));
 			}
-			
+
 			string signature = GetSignature(url.ToString());
 			url.Append("&signature=");
 			url.Append(signature);
-			
+
 			return url.ToString();
 		}
 
@@ -127,8 +111,7 @@ namespace GameJolt.API.Core
 		/// </summary>
 		/// <returns>The API call signature.</returns>
 		/// <param name="input">The formatted request URL.</param>
-		static string GetSignature(string input)
-		{
+		private static string GetSignature(string input) {
 			return MD5(input + GameJoltAPI.Instance.Settings.PrivateKey);
 		}
 
@@ -137,8 +120,7 @@ namespace GameJolt.API.Core
 		/// </summary>
 		/// <returns>The MD5 Hash.</returns>
 		/// <param name="input">Input.</param>
-		static string MD5(string input)
-		{
+		private static string MD5(string input) {
 			var bytes = Encoding.UTF8.GetBytes(input);
 
 #if UNITY_WINRT

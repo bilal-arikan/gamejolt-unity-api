@@ -2,28 +2,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameJolt.UI.Controllers
-{
-	public class TableButton : MonoBehaviour
-	{
-		public Text title;
-		public Image backgroundImage;
-		public Color defaultBackgroundColour = Color.grey;
-		public Color activeBackgroundColour = Color.green;
+namespace GameJolt.UI.Controllers {
+	public class TableButton : MonoBehaviour {
+		public Text Title;
+		public Image BackgroundImage;
+		public Color DefaultBackgroundColour = Color.grey;
+		public Color ActiveBackgroundColour = Color.green;
 
-		Button button;
-		int tabIndex;
-		LeaderboardsWindow windowController;
-		bool active;
+		private Button button;
+		private int tabIndex;
+		private LeaderboardsWindow windowController;
+		private bool active;
 
-		public void Awake()
-		{
+		public void Awake() {
 			button = GetComponent<Button>();
 		}
 
-		public void Init(Table table, int index, LeaderboardsWindow controller, bool active = false)
-		{
-			title.text = table.Name;
+		public void Init(Table table, int index, LeaderboardsWindow controller, bool active = false) {
+			Title.text = table.Name;
 			tabIndex = index;
 			windowController = controller;
 			SetActive(active);
@@ -33,16 +29,13 @@ namespace GameJolt.UI.Controllers
 			button.onClick.AddListener(Clicked);
 		}
 
-		public void SetActive(bool active)
-		{
+		public void SetActive(bool active) {
 			this.active = active;
-			backgroundImage.color = active ? activeBackgroundColour : defaultBackgroundColour;
+			BackgroundImage.color = active ? ActiveBackgroundColour : DefaultBackgroundColour;
 		}
 
-		public void Clicked()
-		{
-			if (!active)
-			{
+		public void Clicked() {
+			if(!active) {
 				SetActive(!active);
 				windowController.ShowTab(tabIndex);
 			}

@@ -1788,8 +1788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe9f8c0980cd1348831ee5f313e1c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 11422224}
-  text: {fileID: 11440656}
+  Image: {fileID: 11422224}
+  Text: {fileID: 11440656}
 --- !u!114 &11440656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2296,11 +2296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e781d9447692a479e8c89de70aced1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usernameField: {fileID: 11483796}
-  tokenField: {fileID: 11461632}
-  errorMessage: {fileID: 11427618}
-  rememberMeToggle: {fileID: 11447398}
-  showTokenToggle: {fileID: 11478376}
+  UsernameField: {fileID: 11483796}
+  TokenField: {fileID: 11461632}
+  ErrorMessage: {fileID: 11427618}
+  RememberMeToggle: {fileID: 11447398}
+  ShowTokenToggle: {fileID: 11478376}
 --- !u!114 &11472542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2623,10 +2623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf7601e9cc9ac14a8dc9cd4d8e15d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabsContainer: {fileID: 22437872}
-  tableButton: {fileID: 130644, guid: 9e52985d8cf62ae4daad0318fe9f396d, type: 2}
-  scoresScrollRect: {fileID: 11401016}
-  scoreItem: {fileID: 130188, guid: 9ea8f958f1717d94aaeea61adc37626f, type: 2}
+  TabsContainer: {fileID: 22437872}
+  TableButton: {fileID: 130644, guid: 9e52985d8cf62ae4daad0318fe9f396d, type: 2}
+  ScoresScrollRect: {fileID: 11401016}
+  ScoreItem: {fileID: 130188, guid: 9ea8f958f1717d94aaeea61adc37626f, type: 2}
 --- !u!114 &11480748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2868,8 +2868,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ca77b89c6419b488fa7a1b94c0a301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 22419696}
-  trophyItem: {fileID: 121378, guid: a1002e393f8eddc479a1c827340a5748, type: 2}
+  Container: {fileID: 22419696}
+  TrophyItem: {fileID: 121378, guid: a1002e393f8eddc479a1c827340a5748, type: 2}
 --- !u!114 &11493066
 MonoBehaviour:
   m_ObjectHideFlags: 1

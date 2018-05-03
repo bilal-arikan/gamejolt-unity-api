@@ -2,68 +2,59 @@
 using System;
 using UnityEngine;
 
-namespace GameJolt.UI.Controllers
-{
-	public class SignInWindow: BaseWindow
-	{
-		public InputField usernameField;
-		public InputField tokenField;
-		public Text errorMessage;
-		public Toggle rememberMeToggle;
-		public Toggle showTokenToggle;
+namespace GameJolt.UI.Controllers {
+	public class SignInWindow : BaseWindow {
+		public InputField UsernameField;
+		public InputField TokenField;
+		public Text ErrorMessage;
+		public Toggle RememberMeToggle;
+		public Toggle ShowTokenToggle;
 
-		Action<bool> signedInCallback;
-		Action<bool> userFetchedCallback;
+		private Action<bool> signedInCallback;
+		private Action<bool> userFetchedCallback;
 
-		public override void Show(Action<bool> callback)
-		{
+		public override void Show(Action<bool> callback) {
 			Show(callback, null);
 		}
 
 		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback) {
-			errorMessage.enabled = false;
+			ErrorMessage.enabled = false;
 			animator.SetTrigger("SignIn");
 			this.signedInCallback = signedInCallback;
 			this.userFetchedCallback = userFetchedCallback;
 			string username, token;
-			rememberMeToggle.isOn = API.GameJoltAPI.Instance.GetStoredUserCredentials(out username, out token);
-			usernameField.text = username;
-			tokenField.text = token;
-			showTokenToggle.isOn = false;
+			RememberMeToggle.isOn = API.GameJoltAPI.Instance.GetStoredUserCredentials(out username, out token);
+			UsernameField.text = username;
+			TokenField.text = token;
+			ShowTokenToggle.isOn = false;
 		}
 
-		public override void Dismiss(bool success)
-		{
+		public override void Dismiss(bool success) {
 			animator.SetTrigger("Dismiss");
-			if (signedInCallback != null)
-			{
+			if(signedInCallback != null) {
 				signedInCallback(success);
 				signedInCallback = null;
 			}
 		}
 
-		public void Submit()
-		{
-			errorMessage.enabled = false;
+		public void Submit() {
+			ErrorMessage.enabled = false;
 
-			if (usernameField.text.Trim() == string.Empty || tokenField.text.Trim() == string.Empty)
-			{
-				errorMessage.text = "Empty username and/or token.";
-				errorMessage.enabled = true;
-			}
-			else
-			{
+			if(UsernameField.text.Trim() == string.Empty || TokenField.text.Trim() == string.Empty) {
+				ErrorMessage.text = "Empty username and/or token.";
+				ErrorMessage.enabled = true;
+			} else {
 				animator.SetTrigger("Lock");
 				animator.SetTrigger("ShowLoadingIndicator");
 
-				var user = new API.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
+				var user = new API.Objects.User(UsernameField.text.Trim(), TokenField.text.Trim());
 				user.SignIn(signInSuccess => {
 					if(signInSuccess) {
 						Dismiss(true);
 					} else {
 						// Technically this could be because of another user being already signed in.
-						errorMessage.text = "Wrong username and/or token.";
-						errorMessage.enabled = true;
+						ErrorMessage.text = "Wrong username and/or token.";
+						ErrorMessage.enabled = true;
 					}
 
 					animator.SetTrigger("HideLoadingIndicator");
@@ -74,13 +65,13 @@ namespace GameJolt.UI.Controllers
 						userFetchedCallback(userFetchedSuccess);
 						userFetchedCallback = null;
 					}
-				}, rememberMeToggle.isOn);
+				}, RememberMeToggle.isOn);
 			}
 		}
 
 		public void ShowToken(bool show) {
-			tokenField.contentType = show ? InputField.ContentType.Standard : InputField.ContentType.Password;
-			tokenField.ActivateInputField();
+			TokenField.contentType = show ? InputField.ContentType.Standard : InputField.ContentType.Password;
+			TokenField.ActivateInputField();
 		}
 
 		public void CreateAccount() {

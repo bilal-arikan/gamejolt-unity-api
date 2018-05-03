@@ -4,25 +4,33 @@ using System.Collections.Generic;
 using GameJolt.External.SimpleJSON;
 using GameJolt.UI;
 
-namespace GameJolt.API.Objects
-{
+namespace GameJolt.API.Objects {
 	/// <summary>
 	/// User types.
 	/// </summary>
-	public enum UserType { Undefined, User, Developer, Moderator, Admin };
+	public enum UserType {
+		Undefined,
+		User,
+		Developer,
+		Moderator,
+		Admin
+	};
 
 	/// <summary>
 	/// User statuses.
 	/// </summary>
-	public enum UserStatus { Undefined, Active, Banned };
+	public enum UserStatus {
+		Undefined,
+		Active,
+		Banned
+	};
 
 	/// <summary>
 	/// User objects.
 	/// </summary>
-	public sealed class User : Base
-	{
+	public sealed class User : Base {
 		#region Fields & Properties
-		string name = "";
+		private string name = "";
 		/// <summary>
 		/// Gets or sets the name.
 		/// </summary>
@@ -36,20 +44,17 @@ namespace GameJolt.API.Objects
 		/// Settings this will only affect your game and won't be saved to GameJolt.
 		/// </para>
 		/// </remarks>
-		public string Name
-		{ 
+		public string Name {
 			get { return name; }
-			set
-			{
-				if (name.ToLower() != value.ToLower())
-				{
+			set {
+				if(name.ToLower() != value.ToLower()) {
 					IsAuthenticated = false;
 				}
 				name = value;
 			}
 		}
 
-		string token = "";
+		private string token = "";
 		/// <summary>
 		/// Gets or sets the token.
 		/// </summary>
@@ -63,13 +68,10 @@ namespace GameJolt.API.Objects
 		/// Settings this will only affect your game and won't be saved to GameJolt.
 		/// </para>
 		/// </remarks>
-		public string Token
-		{ 
+		public string Token {
 			get { return token; }
-			set
-			{
-				if (token.ToLower() != value.ToLower())
-				{
+			set {
+				if(token.ToLower() != value.ToLower()) {
 					IsAuthenticated = false;
 				}
 				token = value;
@@ -133,8 +135,7 @@ namespace GameJolt.API.Objects
 		/// Initializes a new instance of the <see cref="User"/> class.
 		/// </summary>
 		/// <param name="id">The <see cref="User"/> ID.</param>
-		public User(int id)
-		{
+		public User(int id) {
 			IsAuthenticated = false;
 
 			ID = id;
@@ -145,8 +146,7 @@ namespace GameJolt.API.Objects
 		/// </summary>
 		/// <param name="name">The <see cref="User"/> name.</param>
 		/// <param name="token">The <see cref="User"/> token.</param>
-		public User(string name, string token)
-		{
+		public User(string name, string token) {
 			IsAuthenticated = false;
 
 			Name = name;
@@ -157,8 +157,7 @@ namespace GameJolt.API.Objects
 		/// Initializes a new instance of the <see cref="User"/> class.
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
-		public User(JSONClass data)
-		{
+		public User(JSONClass data) {
 			IsAuthenticated = false;
 			PopulateFromJSON(data);
 		}
@@ -169,27 +168,20 @@ namespace GameJolt.API.Objects
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data)
-		{
+		protected override void PopulateFromJSON(JSONClass data) {
 			Name = data["username"].Value;
 			ID = data["id"].AsInt;
 			AvatarURL = data["avatar_url"].Value;
-			
-			try
-			{
+
+			try {
 				Type = (UserType)Enum.Parse(typeof(UserType), data["type"].Value);
-			}
-			catch
-			{
+			} catch {
 				Type = UserType.Undefined;
 			}
 
-			try
-			{
+			try {
 				Status = (UserStatus)Enum.Parse(typeof(UserStatus), data["status"].Value);
-			}
-			catch
-			{
+			} catch {
 				Status = UserStatus.Undefined;
 			}
 		}
@@ -202,18 +194,15 @@ namespace GameJolt.API.Objects
 		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
 		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>
 		/// <param name="rememberMe">Whether the user's credentials should be stored in the player prefs.</param>
-		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null, bool rememberMe = false)
-		{
-			if (GameJoltAPI.Instance.HasUser)
-			{
+		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null,
+			bool rememberMe = false) {
+			if(GameJoltAPI.Instance.HasUser) {
 				LogHelper.Warning("Another user is currently signed in. Sign it out first.");
 
-				if (signedInCallback != null)
-				{
+				if(signedInCallback != null) {
 					signedInCallback(false);
 				}
-				if (userFetchedCallback != null)
-				{
+				if(userFetchedCallback != null) {
 					userFetchedCallback(false);
 				}
 
@@ -221,10 +210,10 @@ namespace GameJolt.API.Objects
 			}
 
 			var parameters = new Dictionary<string, string> {{"username", Name.ToLower()}, {"user_token", Token.ToLower()}};
-			Core.Request.Get(Constants.API_USERS_AUTH, parameters, response => {
-				IsAuthenticated = response.success;
+			Core.Request.Get(Constants.ApiUsersAuth, parameters, response => {
+				IsAuthenticated = response.Success;
 
-				if (response.success) {
+				if(response.Success) {
 					if(GameJoltAPI.Instance.Settings.AutoSignInOutMessage)
 						GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.Settings.SignInMessage, Name));
 					GameJoltAPI.Instance.CurrentUser = this;
@@ -233,26 +222,20 @@ namespace GameJolt.API.Objects
 						GameJoltAPI.Instance.RememberUserCredentials(Name, Token);
 					}
 
-					if (signedInCallback != null)
-					{
+					if(signedInCallback != null) {
 						signedInCallback(true);
 					}
 
 					Get((user) => {
-						if (userFetchedCallback != null)
-						{
+						if(userFetchedCallback != null) {
 							userFetchedCallback(user != null);
 						}
 					});
-				}
-				else
-				{
-					if (signedInCallback != null)
-					{
+				} else {
+					if(signedInCallback != null) {
 						signedInCallback(false);
 					}
-					if (userFetchedCallback != null)
-					{
+					if(userFetchedCallback != null) {
 						userFetchedCallback(false);
 					}
 				}
@@ -262,10 +245,8 @@ namespace GameJolt.API.Objects
 		/// <summary>
 		/// Signs out the user.
 		/// </summary>
-		public void SignOut()
-		{
-			if (GameJoltAPI.Instance.CurrentUser == this)
-			{
+		public void SignOut() {
+			if(GameJoltAPI.Instance.CurrentUser == this) {
 				if(GameJoltAPI.Instance.Settings.AutoSignInOutMessage)
 					GameJoltUI.Instance.QueueNotification(string.Format(GameJoltAPI.Instance.Settings.SignOutMessage, Name));
 				GameJoltAPI.Instance.CurrentUser = null;
@@ -282,8 +263,7 @@ namespace GameJolt.API.Objects
 		/// Shortcut for <c>GameJolt.API.Users.Get(this);</c>
 		/// </para>
 		/// </remarks>
-		public void Get(Action<User> callback = null)
-		{
+		public void Get(Action<User> callback = null) {
 			var me = this;
 			Users.Get(me, callback);
 		}
@@ -297,23 +277,17 @@ namespace GameJolt.API.Objects
 		/// Will set the `Avatar` field on the user. 
 		/// </para>
 		/// </remarks>
-		public void DownloadAvatar(Action<bool> callback = null)
-		{
-			if (!string.IsNullOrEmpty(AvatarURL))
-			{
+		public void DownloadAvatar(Action<bool> callback = null) {
+			if(!string.IsNullOrEmpty(AvatarURL)) {
 				Misc.DownloadImage(AvatarURL, avatar => {
 					Avatar = avatar ?? GameJoltAPI.Instance.DefaultAvatar;
 
-					if (callback != null)
-					{
+					if(callback != null) {
 						callback(avatar != null);
 					}
 				});
-			}
-			else
-			{
-				if (callback != null)
-				{
+			} else {
+				if(callback != null) {
 					callback(false);
 				}
 			}
@@ -324,9 +298,9 @@ namespace GameJolt.API.Objects
 		/// Returns a <see cref="string"/> that represents the current <see cref="User"/>.
 		/// </summary>
 		/// <returns>A <see cref="string"/> that represents the current <see cref="User"/>.</returns>
-		public override string ToString()
-		{
-			return string.Format("GameJolt.API.Objects.User: {0} - {1} - Authenticated: {2} - Status: {3}", Name, ID, IsAuthenticated, Status);
+		public override string ToString() {
+			return string.Format("GameJolt.API.Objects.User: {0} - {1} - Authenticated: {2} - Status: {3}", Name, ID,
+				IsAuthenticated, Status);
 		}
 	}
 }

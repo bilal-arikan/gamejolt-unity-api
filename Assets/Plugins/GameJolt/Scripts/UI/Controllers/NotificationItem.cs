@@ -2,25 +2,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameJolt.UI.Controllers
-{
-	public class NotificationItem : MonoBehaviour
-	{
-		public Image image;
-		public Text text;
+namespace GameJolt.UI.Controllers {
+	public class NotificationItem : MonoBehaviour {
+		public Image Image;
+		public Text Text;
 
-		public void Init(Notification notification)
-		{
-			text.text = notification.Text;
+		public void Init(Notification notification) {
+			Text.text = notification.Text;
 
-			if (notification.Image != null)
-			{
-				image.sprite = notification.Image;
-				image.enabled = true;
-			}
-			else
-			{
-				image.enabled = false;
+			if(notification.Image != null) {
+				Image.sprite = notification.Image;
+				Image.enabled = true;
+			} else {
+				Image.enabled = false;
 			}
 		}
 	}

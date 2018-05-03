@@ -7,12 +7,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added LogHelper class and LogLevel setting. All log messages with a level below the provided one are discarded. (see issue [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
 
 ### Changed
-- Renamed Manager classes to `GameJoltAPI` and `GameJoltUI`.
+- Renamed Manager classes to `GameJoltAPI` and `GameJoltUI` (see issue [#21](https://github.com/InfectedBytes/gj-unity-api/issues/21))
   - :warning: This is a breaking change! If you're migrating from an older version, please have a look at the migration page.
+- *"Mega Refactoring"* - refactored nearly all files (see issue [#20](https://github.com/InfectedBytes/gj-unity-api/issues/20))
+  - applied consistent style (code formatting)
+  - corrected namespaces
+  - fixed naming scheme (now consistently using C# CamelCase)
+  - used explicit visibility modifiers
+  - adjusted visibility
+  - :warning: This is possibly a breaking change, because it changes the naming scheme
 
 ### Fixed
-- Debug option for the API (fixes [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
-- Got rid of all `Resources.Load` calls. Instead those assets are now directly linked via the Manager prefab. (fixes [#19](https://github.com/InfectedBytes/gj-unity-api/issues/19)) 
+- issue [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2): Debug option for the API
+- issue [#19](https://github.com/InfectedBytes/gj-unity-api/issues/19): Got rid of all `Resources.Load` calls. Instead those assets are now directly linked via the Manager prefab.
+- issue [#20](https://github.com/InfectedBytes/gj-unity-api/issues/20): huge refactoring
+- issue [#21](https://github.com/InfectedBytes/gj-unity-api/issues/21): renamed `Manager` classes
 
 ## [2.3.1][v2_3_1] (2018-03-03)
 

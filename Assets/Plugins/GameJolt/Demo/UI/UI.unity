@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744bd44e753dde54d86496a63a3dadde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTrophiesButton: {fileID: 1418659122}
+  ShowTrophiesButton: {fileID: 1418659122}
 --- !u!1 &196864351
 GameObject:
   m_ObjectHideFlags: 0

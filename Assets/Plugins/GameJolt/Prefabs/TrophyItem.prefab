@@ -173,10 +173,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd4d72112892bf4aa1512dabb3e30fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 22512130}
-  image: {fileID: 11485432}
-  title: {fileID: 11416574}
-  description: {fileID: 11473200}
+  Group: {fileID: 22512130}
+  Image: {fileID: 11485432}
+  Title: {fileID: 11416574}
+  Description: {fileID: 11473200}
 --- !u!114 &11497498
 MonoBehaviour:
   m_ObjectHideFlags: 1

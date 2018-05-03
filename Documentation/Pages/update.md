@@ -23,6 +23,7 @@ parameter, but it might also be a renamed class or a larger change in the underl
 Please always have a look at the changelog before you update to a new version.
 
 ### API version 2.4.0
+#### Manager classes
 This version has renamed the two most fundamental classes.
 Before this version there were two classes called `Manager`. One inside the `GameJolt.API` namespace and the other one 
 in the `GameJolt.UI` namespace. This lead to some confusion and therefore I decided to rename these files from `Manager`
@@ -45,3 +46,13 @@ which no longer exist under that name. So your development environment will show
 To fix these issues, you just have to change all occurrences of the old identifier with the new one.
 If you were always using the fully qualified name, you can just do a 'search&replace' within your development environment.
 For example you could just search for `GameJolt.API.Manager` and replace it with `GameJolt.API.GameJoltAPI`.
+
+#### Naming scheme
+In this version I've refactored nearly all files. For most of the files it was just a matter of code formatting, 
+but for some files I had to fix their naming scheme. Now the package is using a clean C# naming scheme (CamelCase).
+The provided prefabs are already adjusted accordingly, but if you have created new GameJolt UI prefabs or if you 
+broke the prefab link to the original prefabs, you may have to adjust those settings in the inspector.
+
+If you're just using the provided prefabs without changes, you probably don't have to do anything, 
+but if you have changed those prefabs, you may have to check if everything works accordingly. 
+If not, you should check out the inspector of all GamJolt UI scripts you have changed.
