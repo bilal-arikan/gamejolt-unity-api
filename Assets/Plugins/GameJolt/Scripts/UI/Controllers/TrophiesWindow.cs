@@ -11,8 +11,8 @@ namespace GameJolt.UI.Controllers {
 		private Action<bool> callback;
 
 		public override void Show(Action<bool> callback) {
-			animator.SetTrigger("Trophies");
-			animator.SetTrigger("ShowLoadingIndicator");
+			Animator.SetTrigger("Trophies");
+			Animator.SetTrigger("ShowLoadingIndicator");
 			this.callback = callback;
 
 			Trophies.Get(trophies => {
@@ -30,18 +30,18 @@ namespace GameJolt.UI.Controllers {
 						Container.GetChild(i).GetComponent<TrophyItem>().Init(trophies[i]);
 					}
 
-					animator.SetTrigger("HideLoadingIndicator");
-					animator.SetTrigger("Unlock");
+					Animator.SetTrigger("HideLoadingIndicator");
+					Animator.SetTrigger("Unlock");
 				} else {
 					// TODO: Show error notification
-					animator.SetTrigger("HideLoadingIndicator");
+					Animator.SetTrigger("HideLoadingIndicator");
 					Dismiss(false);
 				}
 			});
 		}
 
 		public override void Dismiss(bool success) {
-			animator.SetTrigger("Dismiss");
+			Animator.SetTrigger("Dismiss");
 			if(callback != null) {
 				callback(success);
 				callback = null;

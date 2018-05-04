@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
 
+// ReSharper disable once CheckNamespace
 namespace GameJolt.Editor {
 	[CustomEditor(typeof(Settings))]
 	public class SettingsEditor : UnityEditor.Editor {

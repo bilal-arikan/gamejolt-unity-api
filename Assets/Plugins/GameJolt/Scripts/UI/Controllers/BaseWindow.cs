@@ -3,10 +3,10 @@ using System;
 
 namespace GameJolt.UI.Controllers {
 	public abstract class BaseWindow : MonoBehaviour {
-		protected Animator animator;
+		protected Animator Animator;
 
 		public void Init(Animator animator) {
-			this.animator = animator;
+			Animator = animator;
 		}
 
 		public abstract void Show(Action<bool> callback);

@@ -23,8 +23,8 @@ namespace GameJolt.UI.Controllers {
 		}
 
 		public void Show(Action<bool> callback, int? activeTable, int[] visibleTables) {
-			animator.SetTrigger("Leaderboards");
-			animator.SetTrigger("ShowLoadingIndicator");
+			Animator.SetTrigger("Leaderboards");
+			Animator.SetTrigger("ShowLoadingIndicator");
 			this.callback = callback;
 
 			Scores.GetTables(tables => {
@@ -52,7 +52,7 @@ namespace GameJolt.UI.Controllers {
 					SetScores(activeId);
 				} else {
 					// TODO: Show error notification
-					animator.SetTrigger("HideLoadingIndicator");
+					Animator.SetTrigger("HideLoadingIndicator");
 					Dismiss(false);
 				}
 			});
@@ -69,7 +69,7 @@ namespace GameJolt.UI.Controllers {
 		}
 
 		public override void Dismiss(bool success) {
-			animator.SetTrigger("Dismiss");
+			Animator.SetTrigger("Dismiss");
 			if(callback != null) {
 				callback(success);
 				callback = null;
@@ -81,8 +81,8 @@ namespace GameJolt.UI.Controllers {
 			TabsContainer.GetChild(currentTab).GetComponent<TableButton>().SetActive(false);
 			currentTab = index;
 
-			animator.SetTrigger("Lock");
-			animator.SetTrigger("ShowLoadingIndicator");
+			Animator.SetTrigger("Lock");
+			Animator.SetTrigger("ShowLoadingIndicator");
 
 			// Request new scores.
 			SetScores(tableIDs[currentTab]);
@@ -101,11 +101,11 @@ namespace GameJolt.UI.Controllers {
 						ScoresScrollRect.content.GetChild(i).GetComponent<ScoreItem>().Init(scores[i]);
 					}
 
-					animator.SetTrigger("HideLoadingIndicator");
-					animator.SetTrigger("Unlock");
+					Animator.SetTrigger("HideLoadingIndicator");
+					Animator.SetTrigger("Unlock");
 				} else {
 					// TODO: Show error notification
-					animator.SetTrigger("HideLoadingIndicator");
+					Animator.SetTrigger("HideLoadingIndicator");
 					Dismiss(false);
 				}
 			}, tableId, 50);

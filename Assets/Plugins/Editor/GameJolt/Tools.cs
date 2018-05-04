@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEditor;
 using GameJolt.API;
 
+// ReSharper disable once CheckNamespace
 namespace GameJolt.Editor {
 	public class Tools : MonoBehaviour {
 		private const string DefaultSettingsPath = "Assets/Plugins/GameJolt/GJAPISettings.asset";
@@ -38,6 +39,7 @@ namespace GameJolt.Editor {
 					Selection.activeObject = clone;
 
 					if(FindObjectOfType<EventSystem>() == null) {
+						// ReSharper disable once ObjectCreationAsStatement
 						new GameObject(
 							"EventSystem",
 							typeof(EventSystem),

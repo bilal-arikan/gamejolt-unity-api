@@ -19,7 +19,7 @@ namespace GameJolt.UI.Controllers {
 
 		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback) {
 			ErrorMessage.enabled = false;
-			animator.SetTrigger("SignIn");
+			Animator.SetTrigger("SignIn");
 			this.signedInCallback = signedInCallback;
 			this.userFetchedCallback = userFetchedCallback;
 			string username, token;
@@ -30,7 +30,7 @@ namespace GameJolt.UI.Controllers {
 		}
 
 		public override void Dismiss(bool success) {
-			animator.SetTrigger("Dismiss");
+			Animator.SetTrigger("Dismiss");
 			if(signedInCallback != null) {
 				signedInCallback(success);
 				signedInCallback = null;
@@ -44,8 +44,8 @@ namespace GameJolt.UI.Controllers {
 				ErrorMessage.text = "Empty username and/or token.";
 				ErrorMessage.enabled = true;
 			} else {
-				animator.SetTrigger("Lock");
-				animator.SetTrigger("ShowLoadingIndicator");
+				Animator.SetTrigger("Lock");
+				Animator.SetTrigger("ShowLoadingIndicator");
 
 				var user = new API.Objects.User(UsernameField.text.Trim(), TokenField.text.Trim());
 				user.SignIn(signInSuccess => {
@@ -57,8 +57,8 @@ namespace GameJolt.UI.Controllers {
 						ErrorMessage.enabled = true;
 					}
 
-					animator.SetTrigger("HideLoadingIndicator");
-					animator.SetTrigger("Unlock");
+					Animator.SetTrigger("HideLoadingIndicator");
+					Animator.SetTrigger("Unlock");
 				}, userFetchedSuccess => {
 					if(userFetchedCallback != null) {
 						// This will potentially be called after a user dismissed the window..
