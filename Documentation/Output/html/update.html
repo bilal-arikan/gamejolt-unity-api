@@ -59,6 +59,7 @@ $(function() {
 <h2>Migration</h2>
 <p>While we try to be backwards compatible, it is sometimes inevitable to introduce breaking changes. Such incompatible changes may vary in their complexity, it might be just a renamed method or and additional parameter, but it might also be a renamed class or a larger change in the underlying architecture. Please always have a look at the changelog before you update to a new version.</p>
 <h3>API version 2.4.0</h3>
+<h4>Manager classes</h4>
 <p>This version has renamed the two most fundamental classes. Before this version there were two classes called <code>Manager</code>. One inside the <code><a class="el" href="namespace_game_jolt_1_1_a_p_i.html">GameJolt.API</a></code> namespace and the other one in the <code><a class="el" href="namespace_game_jolt_1_1_u_i.html">GameJolt.UI</a></code> namespace. This lead to some confusion and therefore I decided to rename these files from <code>Manager</code> to <code>GameJoltAPI</code> and <code>GameJoltUI</code>. The namespaces are still the same, so the fully qualified name looks a bit strange and redundant (<code><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_game_jolt_a_p_i.html" title="The Core API Manager. ">GameJolt.API.GameJoltAPI</a></code>), but since most of the time you're just using the <code>using</code> directive, this doesn't really matter.</p>
 <p>This change has also the benefit that you can now use both classes from within the same file without having to use the fully qualified name.</p>
 <p>Because of this change you're code will probably no longer work, because you are still referencing the <code>Manager</code> classes, which no longer exist under that name. So your development environment will show several errors like this:</p><ul>
@@ -68,7 +69,10 @@ $(function() {
 <li>'Manager' does not contain a definition for '...' and no extension method '...' accepting a first argument of type 'Manager' could be found (are you missing a using directive or an assembly reference?)</li>
 <li>...</li>
 </ul>
-<p>To fix these issues, you just have to change all occurrences of the old identifier with the new one. If you were always using the fully qualified name, you can just do a 'search&amp;replace' within your development environment. For example you could just search for <code>GameJolt.API.Manager</code> and replace it with <code><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_game_jolt_a_p_i.html" title="The Core API Manager. ">GameJolt.API.GameJoltAPI</a></code>. </p>
+<p>To fix these issues, you just have to change all occurrences of the old identifier with the new one. If you were always using the fully qualified name, you can just do a 'search&amp;replace' within your development environment. For example you could just search for <code>GameJolt.API.Manager</code> and replace it with <code><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_game_jolt_a_p_i.html" title="The Core API Manager. ">GameJolt.API.GameJoltAPI</a></code>.</p>
+<h4>Naming scheme</h4>
+<p>In this version I've refactored nearly all files. For most of the files it was just a matter of code formatting, but for some files I had to fix their naming scheme. Now the package is using a clean C# naming scheme (CamelCase). The provided prefabs are already adjusted accordingly, but if you have created new <a class="el" href="namespace_game_jolt.html">GameJolt</a> UI prefabs or if you broke the prefab link to the original prefabs, you may have to adjust those settings in the inspector.</p>
+<p>If you're just using the provided prefabs without changes, you probably don't have to do anything, but if you have changed those prefabs, you may have to check if everything works accordingly. If not, you should check out the inspector of all GamJolt UI scripts you have changed. </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.10-->
 <!-- start footer part -->
