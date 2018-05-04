@@ -2,7 +2,7 @@
 {
 	public static class Constants
 	{
-		public const string Version = "2.3.1";
+		public const string Version = "2.4.0";
 
 		public const string ApiProtocol = "https://";
 		public const string ApiRoot = "gamejolt.com/api/game/";

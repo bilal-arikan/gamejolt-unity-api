@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
+
+## [2.4.0][v2_4_0] (2018-05-04)
+#### :warning: "BigRefactor"-Update, contains breaking changes
+
 ### Add
 - Added LogHelper class and LogLevel setting. All log messages with a level below the provided one are discarded. (see issue [#2](https://github.com/InfectedBytes/gj-unity-api/issues/2))
 
@@ -123,7 +127,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.3.1...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.4.0...HEAD
+[v2_4_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.4.0
 [v2_3_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.3.1
 [v2_3_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.3.0
 [v2_2_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.2.0
