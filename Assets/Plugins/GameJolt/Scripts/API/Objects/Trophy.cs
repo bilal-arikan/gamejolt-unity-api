@@ -173,6 +173,17 @@ namespace GameJolt.API.Objects {
 		}
 
 		/// <summary>
+		/// Locks the <see cref="Trophy"/> again.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
+		public void Remove(Action<bool> callback = null) {
+			Trophies.Remove(this, success => {
+				if(success) Unlocked = false;
+				if(callback != null) callback(success);
+			});
+		}
+
+		/// <summary>
 		/// Downloads the <see cref="Trophy"/> image.
 		/// </summary>
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>

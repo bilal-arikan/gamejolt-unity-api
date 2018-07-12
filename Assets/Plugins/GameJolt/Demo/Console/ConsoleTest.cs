@@ -38,7 +38,7 @@ namespace GameJolt.Demo.Console {
 		public Toggle GlobalToggle;
 		#endregion Inspector Fields
 
-		#region Click Actions
+		#region User
 		public void SignIn() {
 			Debug.Log("Sign In. Click to see source.");
 
@@ -78,7 +78,9 @@ namespace GameJolt.Demo.Console {
 				}
 			});
 		}
+		#endregion
 
+		#region Session
 		public void SessionOpen() {
 			Debug.Log("Session Open. Click to see source.");
 
@@ -110,7 +112,9 @@ namespace GameJolt.Demo.Console {
 				AddConsoleLine("Session Close {0}.", success ? "Successful" : "Failed");
 			});
 		}
+		#endregion
 
+		#region Scores
 		public void GetTables() {
 			Debug.Log("Get Tables. Click to see source.");
 
@@ -171,13 +175,24 @@ namespace GameJolt.Demo.Console {
 				AddConsoleLine("Rank {0}", rank);
 			});
 		}
+		#endregion
 
+		#region Trophies
 		public void UnlockTrophy() {
 			Debug.Log("Unlock Trophy. Click to see source.");
 
 			var trophyId = TrophyIdField.text != string.Empty ? int.Parse(TrophyIdField.text) : 0;
 			Trophies.Unlock(trophyId, success => {
 				AddConsoleLine("Unlock Trophy {0}.", success ? "Successful" : "Failed");
+			});
+		}
+
+		public void RemoveTrophy() {
+			Debug.Log("Remove Trophy. Click to see source.");
+
+			var trophyId = TrophyIdField.text != string.Empty ? int.Parse(TrophyIdField.text) : 0;
+			Trophies.Remove(trophyId, success => {
+				AddConsoleLine("Remove Trophy {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -235,7 +250,9 @@ namespace GameJolt.Demo.Console {
 					trophy.Difficulty, trophy.Unlocked ? "" : "Not ", trophy.IsSecret ? "" : "Not ");
 			}
 		}
+		#endregion
 
+		#region DataStore
 		public void GetDataStoreKey() {
 			Debug.Log("Get DataStore Key. Click to see source.");
 
@@ -294,7 +311,9 @@ namespace GameJolt.Demo.Console {
 				}
 			});
 		}
+		#endregion
 
+		#region Misc
 		public void GetTime() {
 			Debug.Log("Get Time. Click to see source.");
 
@@ -302,7 +321,7 @@ namespace GameJolt.Demo.Console {
 				AddConsoleLine("Server Time: {0}", time);
 			});
 		}
-		#endregion Click Actions
+		#endregion
 
 		#region Internal
 		private void Start() {

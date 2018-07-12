@@ -5,8 +5,8 @@
 		public const string Version = "2.4.0";
 
 		public const string ApiProtocol = "https://";
-		public const string ApiRoot = "gamejolt.com/api/game/";
-		public const string ApiVersion = "1_1"; // `1_1` actually targets the API version `1.2`..
+		public const string ApiRoot = "api.gamejolt.com/api/game/";
+		public const string ApiVersion = "1_2"; // `1_1` actually targets the API version `1.2`..
 		public const string ApiBaseUrl = ApiProtocol + ApiRoot + "v" + ApiVersion;
 
 		public const string ApiUsersAuth = "/users/auth";
@@ -22,6 +22,7 @@
 		public const string ApiScoresTablesFetch = "/scores/tables";
 
 		public const string ApiTrophiesAdd = "/trophies/add-achieved";
+		public const string ApiTrophiesRemove = "/trophies/remove-achieved";
 		public const string ApiTrophiesFetch = "/trophies";
 
 		public const string ApiDatastoreSet = "/data-store/set";
