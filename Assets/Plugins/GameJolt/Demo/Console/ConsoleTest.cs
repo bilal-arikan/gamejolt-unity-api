@@ -49,6 +49,8 @@ namespace GameJolt.Demo.Console {
 				},
 				userFetchSuccess => {
 					AddConsoleLine("User's Information Fetch {0}.", userFetchSuccess ? "Successful" : "Failed");
+					if(userFetchSuccess)
+						PrintUserInfo(user);
 				});
 		}
 
@@ -70,7 +72,7 @@ namespace GameJolt.Demo.Console {
 			Users.Get(ids, users => {
 				if(users != null) {
 					foreach(var user in users) {
-						AddConsoleLine("> {0} - {1}", user.Name, user.ID);
+						PrintUserInfo(user);
 					}
 					AddConsoleLine("Found {0} user(s).", users.Length);
 				}
@@ -319,6 +321,11 @@ namespace GameJolt.Demo.Console {
 			tr.GetComponent<Text>().text = string.Format(format, args);
 			tr.SetParent(ConsoleTransform);
 			tr.SetAsFirstSibling();
+		}
+
+		private void PrintUserInfo(User user) {
+			AddConsoleLine("> {0} ({1}) - {2}\n   SignedUp: {3}, LastLoggedIn: {4}",
+				user.Name, user.ID, user.Type, user.SignedUp, user.LastLoggedIn);
 		}
 
 		private char ValidateIdList(string text, int index, char addedChar) {
