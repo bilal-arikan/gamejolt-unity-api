@@ -33,7 +33,7 @@ namespace GameJolt.Demo.Console {
 		// DataStore
 		public InputField KeyField;
 		public InputField ValueField;
-		public InputField ModeField;
+		public Dropdown ModeField;
 		public InputField PatternField;
 		public Toggle GlobalToggle;
 		#endregion Inspector Fields
@@ -45,10 +45,10 @@ namespace GameJolt.Demo.Console {
 			var user = new User(UserNameField.text, UserTokenField.text);
 			user.SignIn(
 				signInSuccess => {
-					AddConsoleLine(string.Format("Sign In {0}.", signInSuccess ? "Successful" : "Failed"));
+					AddConsoleLine("Sign In {0}.", signInSuccess ? "Successful" : "Failed");
 				},
 				userFetchSuccess => {
-					AddConsoleLine(string.Format("User's Information Fetch {0}.", userFetchSuccess ? "Successful" : "Failed"));
+					AddConsoleLine("User's Information Fetch {0}.", userFetchSuccess ? "Successful" : "Failed");
 				});
 		}
 
@@ -60,7 +60,7 @@ namespace GameJolt.Demo.Console {
 				GameJoltAPI.Instance.CurrentUser.SignOut();
 			}
 
-			AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Successful" : "Failed"));
+			AddConsoleLine("Sign Out {0}.", isSignedIn ? "Successful" : "Failed");
 		}
 
 		public void GetUsersById() {
@@ -70,9 +70,9 @@ namespace GameJolt.Demo.Console {
 			Users.Get(ids, users => {
 				if(users != null) {
 					foreach(var user in users) {
-						AddConsoleLine(string.Format("> {0} - {1}", user.Name, user.ID));
+						AddConsoleLine("> {0} - {1}", user.Name, user.ID);
 					}
-					AddConsoleLine(string.Format("Found {0} user(s).", users.Length));
+					AddConsoleLine("Found {0} user(s).", users.Length);
 				}
 			});
 		}
@@ -81,7 +81,7 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Session Open. Click to see source.");
 
 			Sessions.Open(success => {
-				AddConsoleLine(string.Format("Session Open {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Session Open {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -89,7 +89,7 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Session Ping Active. Click to see source.");
 
 			Sessions.Ping(SessionStatus.Active, success => {
-				AddConsoleLine(string.Format("Session Ping Active {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Session Ping Active {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -97,7 +97,7 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Session Ping Idle. Click to see source.");
 
 			Sessions.Ping(SessionStatus.Idle, success => {
-				AddConsoleLine(string.Format("Session Ping Idle {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Session Ping Idle {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -105,7 +105,7 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Session Close. Click to see source.");
 
 			Sessions.Close(success => {
-				AddConsoleLine(string.Format("Session Close {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Session Close {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -115,9 +115,9 @@ namespace GameJolt.Demo.Console {
 			Scores.GetTables(tables => {
 				if(tables != null) {
 					foreach(var table in tables.Reverse()) {
-						AddConsoleLine(string.Format("> {0} - {1}", table.Name, table.ID));
+						AddConsoleLine("> {0} - {1}", table.Name, table.ID);
 					}
-					AddConsoleLine(string.Format("Found {0} table(s).", tables.Length));
+					AddConsoleLine("Found {0} table(s).", tables.Length);
 				}
 			});
 		}
@@ -130,7 +130,7 @@ namespace GameJolt.Demo.Console {
 				var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
 
 				Scores.Add(scoreValue, ScoreTextField.text, GuestNameField.text, tableId, "", success => {
-					AddConsoleLine(string.Format("Score Add (for Guest) {0}.", success ? "Successful" : "Failed"));
+					AddConsoleLine("Score Add (for Guest) {0}.", success ? "Successful" : "Failed");
 				});
 			} else {
 				Debug.Log("Add Score (for Guest). Click to see source.");
@@ -139,7 +139,7 @@ namespace GameJolt.Demo.Console {
 				var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
 
 				Scores.Add(scoreValue, ScoreTextField.text, tableId, "", success => {
-					AddConsoleLine(string.Format("Score Add {0}.", success ? "Successful" : "Failed"));
+					AddConsoleLine("Score Add {0}.", success ? "Successful" : "Failed");
 				});
 			}
 		}
@@ -152,9 +152,9 @@ namespace GameJolt.Demo.Console {
 			Scores.Get(scores => {
 				if(scores != null) {
 					foreach(var score in scores.Reverse()) {
-						AddConsoleLine(string.Format("> {0} - {1}", score.PlayerName, score.Value));
+						AddConsoleLine("> {0} - {1}", score.PlayerName, score.Value);
 					}
-					AddConsoleLine(string.Format("Found {0} scores(s).", scores.Length));
+					AddConsoleLine("Found {0} scores(s).", scores.Length);
 				}
 			}, tableId, limit, UserScoresToggle.isOn);
 		}
@@ -166,7 +166,7 @@ namespace GameJolt.Demo.Console {
 			var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
 
 			Scores.GetRank(scoreValue, tableId, rank => {
-				AddConsoleLine(string.Format("Rank {0}", rank));
+				AddConsoleLine("Rank {0}", rank);
 			});
 		}
 
@@ -175,7 +175,7 @@ namespace GameJolt.Demo.Console {
 
 			var trophyId = TrophyIdField.text != string.Empty ? int.Parse(TrophyIdField.text) : 0;
 			Trophies.Unlock(trophyId, success => {
-				AddConsoleLine(string.Format("Unlock Trophy {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Unlock Trophy {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -195,7 +195,7 @@ namespace GameJolt.Demo.Console {
 						foreach(var trophy in trophies.Reverse()) {
 							PrintTrophy(trophy);
 						}
-						AddConsoleLine(string.Format("Found {0} trophies.", trophies.Length));
+						AddConsoleLine("Found {0} trophies.", trophies.Length);
 					}
 				});
 			}
@@ -209,7 +209,7 @@ namespace GameJolt.Demo.Console {
 					foreach(var trophy in trophies.Reverse()) {
 						PrintTrophy(trophy);
 					}
-					AddConsoleLine(string.Format("Found {0} trophies.", trophies.Length));
+					AddConsoleLine("Found {0} trophies.", trophies.Length);
 				}
 			});
 		}
@@ -222,15 +222,15 @@ namespace GameJolt.Demo.Console {
 					foreach(var trophy in trophies.Reverse()) {
 						PrintTrophy(trophy);
 					}
-					AddConsoleLine(string.Format("Found {0} trophies.", trophies.Length));
+					AddConsoleLine("Found {0} trophies.", trophies.Length);
 				}
 			});
 		}
 
 		private void PrintTrophy(Trophy trophy) {
 			if(trophy != null) {
-				AddConsoleLine(string.Format("> {0} - {1} - {2} - {3}Unlocked - {4}Secret", trophy.Title, trophy.ID,
-					trophy.Difficulty, trophy.Unlocked ? "" : "Not ", trophy.IsSecret ? "" : "Not "));
+				AddConsoleLine("> {0} - {1} - {2} - {3}Unlocked - {4}Secret", trophy.Title, trophy.ID,
+					trophy.Difficulty, trophy.Unlocked ? "" : "Not ", trophy.IsSecret ? "" : "Not ");
 			}
 		}
 
@@ -239,7 +239,7 @@ namespace GameJolt.Demo.Console {
 
 			DataStore.Get(KeyField.text, GlobalToggle.isOn, value => {
 				if(value != null) {
-					AddConsoleLine(string.Format("> {0}", value));
+					AddConsoleLine("> {0}", value);
 				}
 			});
 		}
@@ -250,9 +250,9 @@ namespace GameJolt.Demo.Console {
 			DataStore.GetKeys(GlobalToggle.isOn, PatternField.text, keys => {
 				if(keys != null) {
 					foreach(var key in keys) {
-						AddConsoleLine(string.Format("> {0}", key));
+						AddConsoleLine("> {0}", key);
 					}
-					AddConsoleLine(string.Format("Found {0} keys.", keys.Length));
+					AddConsoleLine("Found {0} keys.", keys.Length);
 				} else {
 					AddConsoleLine("No keys found.");
 				}
@@ -263,7 +263,7 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Remove DataStore Key. Click to see source.");
 
 			DataStore.Delete(KeyField.text, GlobalToggle.isOn, success => {
-				AddConsoleLine(string.Format("Remove DataStore Key {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Remove DataStore Key {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
@@ -271,14 +271,14 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Set DataStore Key. Click to see source.");
 
 			DataStore.Set(KeyField.text, ValueField.text, GlobalToggle.isOn, success => {
-				AddConsoleLine(string.Format("Set DataStore Key {0}.", success ? "Successful" : "Failed"));
+				AddConsoleLine("Set DataStore Key {0}.", success ? "Successful" : "Failed");
 			});
 		}
 
 		public void UpdateDataStoreKey() {
 			DataStoreOperation mode;
 			try {
-				mode = (DataStoreOperation)System.Enum.Parse(typeof(DataStoreOperation), ModeField.text);
+				mode = (DataStoreOperation)System.Enum.Parse(typeof(DataStoreOperation), ModeField.captionText.text);
 			} catch {
 				Debug.LogWarning("Wrong Mode. Should be Add, Subtract, Multiply, Divide, Append or Prepend.");
 				return;
@@ -288,7 +288,7 @@ namespace GameJolt.Demo.Console {
 
 			DataStore.Update(KeyField.text, ValueField.text, mode, GlobalToggle.isOn, value => {
 				if(value != null) {
-					AddConsoleLine(string.Format("> {0}", value));
+					AddConsoleLine("> {0}", value);
 				}
 			});
 		}
@@ -297,7 +297,7 @@ namespace GameJolt.Demo.Console {
 			Debug.Log("Get Time. Click to see source.");
 
 			Misc.GetTime(time => {
-				AddConsoleLine(string.Format("Server Time: {0}", time));
+				AddConsoleLine("Server Time: {0}", time);
 			});
 		}
 		#endregion Click Actions
@@ -314,9 +314,9 @@ namespace GameJolt.Demo.Console {
 			TrophyIdsField.onValidateInput += ValidateIdList;
 		}
 
-		private void AddConsoleLine(string text) {
+		private void AddConsoleLine(string format, params object[] args) {
 			var tr = Instantiate(LinePrefab).transform;
-			tr.GetComponent<Text>().text = text;
+			tr.GetComponent<Text>().text = string.Format(format, args);
 			tr.SetParent(ConsoleTransform);
 			tr.SetAsFirstSibling();
 		}
@@ -327,7 +327,7 @@ namespace GameJolt.Demo.Console {
 		}
 
 		private int[] ParseIds(string text) {
-			return text.Split(',').Where(x => !string.IsNullOrEmpty(x)).Select(x => int.Parse(x)).ToArray();
+			return text.Split(',').Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
 		}
 		#endregion Internal
 	}
