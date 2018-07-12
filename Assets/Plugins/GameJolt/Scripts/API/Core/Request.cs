@@ -25,7 +25,7 @@ namespace GameJolt.API.Core {
 			if(error != null) {
 				callback(new Response(error));
 			} else {
-				var url = GetRequestURL(method, parameters);
+				var url = GetRequestUrl(method, parameters);
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.GetRequest(url, format, callback));
 			}
 		}
@@ -50,7 +50,7 @@ namespace GameJolt.API.Core {
 			if(error != null) {
 				callback(new Response(error));
 			} else {
-				var url = GetRequestURL(method, parameters);
+				var url = GetRequestUrl(method, parameters);
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.PostRequest(url, payload, format, callback));
 			}
 		}
@@ -85,7 +85,7 @@ namespace GameJolt.API.Core {
 		/// <returns>The formatted request UR.</returns>
 		/// <param name="method">The API endpoint.</param>
 		/// <param name="parameters">The parameters.</param>
-		private static string GetRequestURL(string method, Dictionary<string, string> parameters) {
+		private static string GetRequestUrl(string method, Dictionary<string, string> parameters) {
 			StringBuilder url = new StringBuilder();
 			url.Append(Constants.ApiBaseUrl);
 			url.Append(method);
@@ -112,7 +112,7 @@ namespace GameJolt.API.Core {
 		/// <returns>The API call signature.</returns>
 		/// <param name="input">The formatted request URL.</param>
 		private static string GetSignature(string input) {
-			return MD5(input + GameJoltAPI.Instance.Settings.PrivateKey);
+			return Md5(input + GameJoltAPI.Instance.Settings.PrivateKey);
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace GameJolt.API.Core {
 		/// </summary>
 		/// <returns>The MD5 Hash.</returns>
 		/// <param name="input">Input.</param>
-		private static string MD5(string input) {
+		private static string Md5(string input) {
 			var bytes = Encoding.UTF8.GetBytes(input);
 
 #if UNITY_WINRT

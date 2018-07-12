@@ -128,6 +128,46 @@ namespace GameJolt.API.Objects {
 		/// </para>
 		/// </remarks>
 		public Sprite Avatar { get; set; }
+
+		/// <summary>
+		/// How long ago the user signed up. 
+		/// Example: "1 year ago"
+		/// </summary>
+		public string SignedUp { get; private set; }
+
+		/// <summary>
+		/// The timestamp (in seconds) of when the user signed up. 
+		/// Example: 1502471604
+		/// </summary>
+		public int SignedUpTimestamp { get; private set; }
+
+		/// <summary>
+		/// How long ago the user was last logged in. Will be Online Now if the user is currently online. 
+		/// Example: 2 minutes ago
+		/// </summary>
+		public string LastLoggedIn { get; private set; }
+
+		/// <summary>
+		/// The timestamp (in seconds) of when the user was last logged in. 
+		/// Example: 1502471604
+		/// </summary>
+		public int LastLoggedInTimestamp { get; private set; }
+
+		/// <summary>
+		/// The user's display name.
+		/// </summary>
+		public string DeveloperName { get; private set; }
+
+		/// <summary>
+		/// The user's website (or empty string if not specified) 
+		/// </summary>
+		public string DeveloperWebsite { get; private set; }
+
+		/// <summary>
+		/// The user's profile description. HTML tags and line breaks will be removed. 
+		/// </summary>
+		public string DeveloperDescription { get; private set; }
+
 		#endregion Fields & Properties
 
 		#region Constructors
@@ -159,7 +199,7 @@ namespace GameJolt.API.Objects {
 		/// <param name="data">API JSON data.</param>
 		public User(JSONClass data) {
 			IsAuthenticated = false;
-			PopulateFromJSON(data);
+			PopulateFromJson(data);
 		}
 		#endregion Constructors
 
@@ -168,10 +208,18 @@ namespace GameJolt.API.Objects {
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data) {
+		protected override void PopulateFromJson(JSONClass data) {
 			Name = data["username"].Value;
 			ID = data["id"].AsInt;
 			AvatarURL = data["avatar_url"].Value;
+			SignedUp = data["signed_up"].Value;
+			SignedUpTimestamp = data["signed_up_timestamp"].AsInt;
+			LastLoggedIn = data["last_logged_in"].Value;
+			LastLoggedInTimestamp = data["last_logged_in_timestamp"].AsInt;
+			DeveloperName = data["developer_name"].Value;
+			DeveloperWebsite = data["developer_website"].Value;
+			DeveloperDescription = data["developer_description"].Value;
+
 
 			try {
 				Type = (UserType)Enum.Parse(typeof(UserType), data["type"].Value);

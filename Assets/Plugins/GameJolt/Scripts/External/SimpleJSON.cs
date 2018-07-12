@@ -1,8 +1,3 @@
-//#define USE_SharpZipLib
-#if !UNITY_WEBPLAYER
-#define USE_FileIO
-#endif
-
 /* Trimmed down version of SimpleJSON from Bunny83 tailored for the API use */
 using System;
 using System.Collections;

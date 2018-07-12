@@ -127,7 +127,7 @@ namespace GameJolt.API.Objects {
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
 		public Trophy(JSONClass data) {
-			PopulateFromJSON(data);
+			PopulateFromJson(data);
 		}
 		#endregion Constructors
 
@@ -136,7 +136,7 @@ namespace GameJolt.API.Objects {
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data) {
+		protected override void PopulateFromJson(JSONClass data) {
 			ID = data["id"].AsInt;
 			Title = data["title"].Value;
 			Description = data["description"].Value;
@@ -169,6 +169,17 @@ namespace GameJolt.API.Objects {
 				if(callback != null) {
 					callback(success);
 				}
+			});
+		}
+
+		/// <summary>
+		/// Locks the <see cref="Trophy"/> again.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
+		public void Remove(Action<bool> callback = null) {
+			Trophies.Remove(this, success => {
+				if(success) Unlocked = false;
+				if(callback != null) callback(success);
 			});
 		}
 

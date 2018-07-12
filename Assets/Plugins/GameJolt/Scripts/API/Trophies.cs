@@ -210,5 +210,34 @@ namespace GameJolt.API {
 			});
 		}
 		#endregion Get
+
+		#region Remove
+		/// <summary>
+		/// Removes the trophy.
+		/// </summary>
+		/// <param name="trophy">The trophy to lock again.</param>
+		/// <param name="callback">A callback function accepting a single parameter, 
+		/// a boolean indicating the success of this function.</param>
+		public static void Remove(Trophy trophy, Action<bool> callback = null) {
+			Remove(trophy.ID, callback);
+		}
+
+		/// <summary>
+		/// Removes the trophy.
+		/// </summary>
+		/// <param name="id">The trophy id to lock again.</param>
+		/// <param name="callback">A callback function accepting a single parameter, 
+		/// a boolean indicating the success of this function.</param>
+		public static void Remove(int id, Action<bool> callback = null) {
+			var parameters = new Dictionary<string, string> { { "trophy_id", id.ToString() }, };
+			Core.Request.Get(Constants.ApiTrophiesRemove, parameters, response => {
+				// Update the cache.
+				if(response.Success && cachedTrophies != null && cachedTrophies.ContainsKey(id))
+					cachedTrophies[id].Unlocked = false;
+				if(callback != null)
+					callback(response.Success);
+			});
+		}
+		#endregion
 	}
 }

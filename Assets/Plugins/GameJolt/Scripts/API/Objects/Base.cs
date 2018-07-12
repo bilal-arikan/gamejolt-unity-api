@@ -11,14 +11,14 @@ namespace GameJolt.API.Objects {
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
 		public void BulkUpdate(JSONClass data) {
-			PopulateFromJSON(data);
+			PopulateFromJson(data);
 		}
 
 		/// <summary>
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected abstract void PopulateFromJSON(JSONClass data);
+		protected abstract void PopulateFromJson(JSONClass data);
 		#endregion Update Attributes
 	}
 }

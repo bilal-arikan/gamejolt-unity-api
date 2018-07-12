@@ -4,6 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+### Add
+- More User Infos (see issue [#24](https://github.com/InfectedBytes/gj-unity-api/issues/24))
+  - SignedUp, SignedTimestamp, LastLoggedIn, LastLoggedinTimestamp, DeveloperName, DeveloperSite, DeveloperDescription
+- `Trophies.RemoveTrophy` API call (see issue [#25](https://github.com/InfectedBytes/gj-unity-api/issues/25))
+
+### Changed
+- Now using GameJolt API 1_2
+- Bumped minimum Version of Unity to 5.5 (see issue [#15](https://github.com/InfectedBytes/gj-unity-api/issues/15))
+- Replaced `WWW` with `UnityWebRequest` (see issue [#14](https://github.com/InfectedBytes/gj-unity-api/issues/14))
+
+### Removed
+- Removed WebPlayer, because Unity has dropped it in Version 5.4
+
 ## [2.4.0][v2_4_0] (2018-05-04)
 #### :warning: "BigRefactor"-Update, contains breaking changes
 

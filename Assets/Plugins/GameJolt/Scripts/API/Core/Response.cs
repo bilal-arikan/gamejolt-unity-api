@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using GameJolt.External.SimpleJSON;
+using UnityEngine.Networking;
 
 namespace GameJolt.API.Core {
 	/// <summary>
@@ -76,12 +77,12 @@ namespace GameJolt.API.Core {
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Response"/> class.
 		/// </summary>
-		/// <param name="www">The API Fesponse.</param>
+		/// <param name="response">The API Response.</param>
 		/// <param name="format">The format of the response.</param>
-		public Response(WWW www, ResponseFormat format = ResponseFormat.Json) {
-			if(!string.IsNullOrEmpty(www.error)) {
+		public Response(UnityWebRequest response, ResponseFormat format = ResponseFormat.Json) {
+			if(!string.IsNullOrEmpty(response.error)) {
 				Success = false;
-				LogHelper.Warning(www.error);
+				LogHelper.Warning(response.error);
 				return;
 			}
 
@@ -89,10 +90,11 @@ namespace GameJolt.API.Core {
 
 			switch(format) {
 				case ResponseFormat.Dump:
-					Success = www.text.StartsWith("SUCCESS");
-					var returnIndex = www.text.IndexOf('\n');
+					var text = response.downloadHandler.text;
+					Success = text.StartsWith("SUCCESS");
+					var returnIndex = text.IndexOf('\n');
 					if(returnIndex != -1) {
-						Dump = www.text.Substring(returnIndex + 1);
+						Dump = text.Substring(returnIndex + 1);
 					}
 
 					if(!Success) {
@@ -101,7 +103,7 @@ namespace GameJolt.API.Core {
 					}
 					break;
 				case ResponseFormat.Json:
-					Json = JSON.Parse(www.text)["response"];
+					Json = JSON.Parse(response.downloadHandler.text)["response"];
 					Success = Json["success"].AsBool;
 					if(!Success) {
 						LogHelper.Warning(Json["message"]);
@@ -110,11 +112,11 @@ namespace GameJolt.API.Core {
 					break;
 				case ResponseFormat.Raw:
 					Success = true;
-					Bytes = www.bytes;
+					Bytes = response.downloadHandler.data;
 					break;
 				case ResponseFormat.Texture:
 					Success = true;
-					Texture = www.texture;
+					Texture = ((DownloadHandlerTexture)response.downloadHandler).texture;
 					break;
 				default:
 					Success = false;

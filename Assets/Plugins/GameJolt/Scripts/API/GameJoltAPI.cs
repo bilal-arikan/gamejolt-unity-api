@@ -2,14 +2,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameJolt.API.Core;
 using GameJolt.API.Objects;
 using GameJolt.External;
+using UnityEngine.Networking;
 
 namespace GameJolt.API {
 	/// <summary>
 	/// The Core API Manager.
 	/// </summary>
-	public class GameJoltAPI : Core.MonoSingleton<GameJoltAPI> {
+	public class GameJoltAPI : MonoSingleton<GameJoltAPI> {
 		#region Fields & Properties
 		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
 
@@ -82,54 +84,53 @@ namespace GameJolt.API {
 		#endregion Init
 
 		#region Requests
-		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback) {
+		public IEnumerator GetRequest(string url, ResponseFormat format, Action<Response> callback) {
 			if(Settings.GameId == 0 || Settings.PrivateKey == null) {
-				callback(new Core.Response("Bad Credentials"));
+				callback(new Response("Bad Credentials"));
 				yield break;
 			}
 
 			float timeout = Time.time + Settings.Timeout;
-			var www = new WWW(url);
-			while(!www.isDone) {
+			var request = format == ResponseFormat.Texture
+				? UnityWebRequest.GetTexture(url) 
+				: UnityWebRequest.Get(url);
+			request.Send();
+			while(!request.isDone) {
 				if(Time.time > timeout) {
-					callback(new Core.Response("Timeout for " + url));
+					callback(new Response("Timeout for " + url));
 					yield break;
 				}
 				yield return new WaitForEndOfFrame();
 			}
-			callback(new Core.Response(www, format));
+			callback(new Response(request, format));
 		}
 
-		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, Core.ResponseFormat format,
-			Action<Core.Response> callback) {
+		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, ResponseFormat format,
+			Action<Response> callback) {
 			if(Settings.GameId == 0 || Settings.PrivateKey == null) {
-				callback(new Core.Response("Bad Credentials"));
+				callback(new Response("Bad Credentials"));
 				yield break;
-			}
-
-			var form = new WWWForm();
-			foreach(KeyValuePair<string, string> field in payload) {
-				form.AddField(field.Key, field.Value);
 			}
 
 			float timeout = Time.time + Settings.Timeout;
 
-			var www = new WWW(url, form);
-			while(!www.isDone) {
+			var request = UnityWebRequest.Post(url, payload);
+			request.Send();
+			while(!request.isDone) {
 				if(Time.time > timeout) {
-					callback(new Core.Response("Timeout for " + url));
+					callback(new Response("Timeout for " + url));
 					yield break;
 				}
 				yield return new WaitForEndOfFrame();
 			}
 
-			callback(new Core.Response(www, format));
+			callback(new Response(request, format));
 		}
 		#endregion Requests
 
 		#region Actions
 		private void AutoConnect() {
-#if UNITY_WEBPLAYER || UNITY_WEBGL
+#if UNITY_WEBGL
 			#region Autoconnect Web
 #if UNITY_EDITOR
 			if(Settings.DebugAutoConnect) {
@@ -146,9 +147,6 @@ namespace GameJolt.API {
 			var uri = new Uri(Application.absoluteURL);
 			if (uri.Host.EndsWith("gamejolt.net") || uri.Host.EndsWith("gamejolt.com"))
 			{
-#if UNITY_WEBPLAYER
-				Application.ExternalCall("GJAPI_AuthUser", this.gameObject.name, "OnAutoConnectWebPlayer");
-#elif UNITY_WEBGL
 				Application.ExternalEval(string.Format(@"
 var qs = location.search;
 var params = {{}};
@@ -169,7 +167,6 @@ else {{
 
 SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		", this.gameObject.name));
-#endif
 			} else {
 				LogHelper.Warning("Cannot AutoConnect, the game is not hosted on GameJolt.");
 			}
@@ -189,7 +186,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 #endif
 		}
 
-#if UNITY_WEBPLAYER || UNITY_WEBGL
+#if UNITY_WEBGL
 		public void OnAutoConnectWebPlayer(string response) {
 			if(response != string.Empty) {
 				var credentials = response.Split(new[] {':'}, 2);
