@@ -129,7 +129,7 @@ namespace GameJolt.API {
 
 		#region Actions
 		private void AutoConnect() {
-#if UNITY_WEBPLAYER || UNITY_WEBGL
+#if UNITY_WEBGL
 			#region Autoconnect Web
 #if UNITY_EDITOR
 			if(Settings.DebugAutoConnect) {
@@ -146,9 +146,6 @@ namespace GameJolt.API {
 			var uri = new Uri(Application.absoluteURL);
 			if (uri.Host.EndsWith("gamejolt.net") || uri.Host.EndsWith("gamejolt.com"))
 			{
-#if UNITY_WEBPLAYER
-				Application.ExternalCall("GJAPI_AuthUser", this.gameObject.name, "OnAutoConnectWebPlayer");
-#elif UNITY_WEBGL
 				Application.ExternalEval(string.Format(@"
 var qs = location.search;
 var params = {{}};
@@ -169,7 +166,6 @@ else {{
 
 SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		", this.gameObject.name));
-#endif
 			} else {
 				LogHelper.Warning("Cannot AutoConnect, the game is not hosted on GameJolt.");
 			}
@@ -189,7 +185,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 #endif
 		}
 
-#if UNITY_WEBPLAYER || UNITY_WEBGL
+#if UNITY_WEBGL
 		public void OnAutoConnectWebPlayer(string response) {
 			if(response != string.Empty) {
 				var credentials = response.Split(new[] {':'}, 2);
