@@ -159,7 +159,7 @@ namespace GameJolt.API.Objects {
 		/// <param name="data">API JSON data.</param>
 		public User(JSONClass data) {
 			IsAuthenticated = false;
-			PopulateFromJSON(data);
+			PopulateFromJson(data);
 		}
 		#endregion Constructors
 
@@ -168,7 +168,7 @@ namespace GameJolt.API.Objects {
 		/// Map JSON data to the object's attributes.
 		/// </summary>
 		/// <param name="data">JSON data from the API calls.</param>
-		protected override void PopulateFromJSON(JSONClass data) {
+		protected override void PopulateFromJson(JSONClass data) {
 			Name = data["username"].Value;
 			ID = data["id"].AsInt;
 			AvatarURL = data["avatar_url"].Value;
