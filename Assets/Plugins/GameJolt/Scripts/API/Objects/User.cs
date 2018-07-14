@@ -142,7 +142,7 @@ namespace GameJolt.API.Objects {
 		public int SignedUpTimestamp { get; private set; }
 
 		/// <summary>
-		/// How long ago the user was last logged in. Will be Online Now if the user is currently online. 
+		/// How long ago the user was last logged in. Will be "Online Now" if the user is currently online. 
 		/// Example: 2 minutes ago
 		/// </summary>
 		public string LastLoggedIn { get; private set; }
@@ -152,6 +152,11 @@ namespace GameJolt.API.Objects {
 		/// Example: 1502471604
 		/// </summary>
 		public int LastLoggedInTimestamp { get; private set; }
+
+		/// <summary>
+		/// Whether this user is currently logged in into Game Jolt.
+		/// </summary>
+		public bool IsOnline { get { return LastLoggedIn == "Online Now"; } }
 
 		/// <summary>
 		/// The user's display name.

@@ -12,6 +12,8 @@
 		public const string ApiUsersAuth = "/users/auth";
 		public const string ApiUsersFetch = "/users";
 
+		public const string ApiFriendsFetch= "/friends";
+
 		public const string ApiSessionsOpen = "/sessions/open";
 		public const string ApiSessionsPing = "/sessions/ping";
 		public const string ApiSessionsClose = "/sessions/close";
