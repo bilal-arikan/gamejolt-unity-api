@@ -17,6 +17,7 @@
 		public const string ApiSessionsOpen = "/sessions/open";
 		public const string ApiSessionsPing = "/sessions/ping";
 		public const string ApiSessionsClose = "/sessions/close";
+		public const string ApiSessionsCheck = "/sessions/check";
 
 		public const string ApiScoresAdd = "/scores/add";
 		public const string ApiScoresFetch = "/scores";
