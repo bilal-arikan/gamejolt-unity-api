@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GameJolt.API;
 using GameJolt.API.Objects;
 using UnityEngine;
@@ -327,10 +328,16 @@ namespace GameJolt.Demo.Console {
 
 		public void SetDataStoreKey() {
 			Debug.Log("Set DataStore Key. Click to see source.");
-
-			DataStore.Set(KeyField.text, ValueField.text, GlobalToggle.isOn, success => {
+			var data = ValueField.text;
+			
+			// for testing: limit the upload size
+			// if the data is larger than 50 bytes, it will be split into 5 packages
+			int uploadSize = 50;
+			if(data.Length > uploadSize) uploadSize = data.Length / 5 + 1;
+			DataStore.SetSegmented(KeyField.text, data, GlobalToggle.isOn, success => {
 				AddConsoleLine("Set DataStore Key {0}.", success ? "Successful" : "Failed");
-			});
+			}, progress => AddConsoleLine("uploaded {0}% ({1}/{2} bytes)",
+				progress * 100 / data.Length, progress, data.Length), uploadSize);
 		}
 
 		public void UpdateDataStoreKey() {

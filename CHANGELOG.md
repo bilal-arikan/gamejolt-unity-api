@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `Sessions.Check` (see issue [#4](https://github.com/InfectedBytes/gj-unity-api/issues/4))
   - Currently this method uses a little workaround, because GameJolt misuses the `success` argument for this check.
   - Once GameJolt has fixed it, we have to adapt the check method.
+- `DataStore.SetSegmented` (see issue [#16](https://github.com/InfectedBytes/gj-unity-api/issues/16))
+  - Workaround for GameJolt's 1MB per request limitation.
+  - This method will therefore upload the data in several smaller parts.
 
 ### Changed
 - Now using GameJolt API 1_2
