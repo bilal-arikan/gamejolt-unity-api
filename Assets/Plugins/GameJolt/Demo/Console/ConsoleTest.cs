@@ -65,6 +65,21 @@ namespace GameJolt.Demo.Console {
 			AddConsoleLine("Sign Out {0}.", isSignedIn ? "Successful" : "Failed");
 		}
 
+		public void GetFriends() {
+			Debug.Log("GetFriends. Click to see source.");
+			
+			Friends.Get(friends => {
+				if(friends == null) {
+					AddConsoleLine("GetFriends failed (are you signed in?)");
+				} else {
+					AddConsoleLine("You have {0} friends.", friends.Length);
+					foreach(var friend in friends) {
+						PrintUserInfo(friend);
+					}
+				}
+			});
+		}
+
 		public void GetUsersById() {
 			Debug.Log("Get Users By Id. Click to see source.");
 
