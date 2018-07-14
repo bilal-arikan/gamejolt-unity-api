@@ -24,6 +24,9 @@ namespace GameJolt.Demo.Console {
 		public InputField TableField;
 		public InputField LimitField;
 		public Toggle UserScoresToggle;
+		public InputField CompareValue;
+		public Dropdown ScoreOptions;
+		public Toggle UserScoresToggle2;
 
 		// Trophies
 		public InputField TrophyIdField;
@@ -165,19 +168,29 @@ namespace GameJolt.Demo.Console {
 			}
 		}
 
+		private void GetScoresCallback(Score[] scores) {
+			if(scores == null) return;
+			foreach(var score in scores.Reverse())
+				AddConsoleLine("> {0} - {1}", score.PlayerName, score.Value);
+			AddConsoleLine("Found {0} scores(s).", scores.Length);
+		}
+
 		public void GetScores() {
 			Debug.Log("Get Scores. Click to see source.");
 
 			var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
 			var limit = LimitField.text != string.Empty ? int.Parse(LimitField.text) : 10;
-			Scores.Get(scores => {
-				if(scores != null) {
-					foreach(var score in scores.Reverse()) {
-						AddConsoleLine("> {0} - {1}", score.PlayerName, score.Value);
-					}
-					AddConsoleLine("Found {0} scores(s).", scores.Length);
-				}
-			}, tableId, limit, UserScoresToggle.isOn);
+			Scores.Get(GetScoresCallback, tableId, limit, UserScoresToggle.isOn);
+		}
+
+		public void GetScoresWithOptions() {
+			var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
+			var limit = LimitField.text != string.Empty ? int.Parse(LimitField.text) : 10;
+			var score = CompareValue.text != string.Empty ? int.Parse(CompareValue.text) : 0;
+			if(ScoreOptions.value == 0)
+				Scores.GetBetterThan(score, GetScoresCallback, tableId, limit, UserScoresToggle2.isOn);
+			else
+				Scores.GetWorseThan(score, GetScoresCallback, tableId, limit, UserScoresToggle2.isOn);
 		}
 
 		public void GetRank() {
