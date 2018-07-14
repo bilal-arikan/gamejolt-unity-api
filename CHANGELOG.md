@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - More User Infos (see issue [#24](https://github.com/InfectedBytes/gj-unity-api/issues/24))
   - SignedUp, SignedTimestamp, LastLoggedIn, LastLoggedinTimestamp, DeveloperName, DeveloperSite, DeveloperDescription
 - `Trophies.RemoveTrophy` API call (see issue [#25](https://github.com/InfectedBytes/gj-unity-api/issues/25))
+- Implemented Scores get `better_than`/`worse_than` options (see issue [#22](https://github.com/InfectedBytes/gj-unity-api/issues/22))
 
 ### Changed
 - Now using GameJolt API 1_2
