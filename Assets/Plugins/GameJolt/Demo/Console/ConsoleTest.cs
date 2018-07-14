@@ -123,6 +123,17 @@ namespace GameJolt.Demo.Console {
 			});
 		}
 
+		public void SessionCheck() {
+			Debug.Log("Session Check. Click to see source.");
+
+			Sessions.Check(success => {
+				if(success == null)
+					AddConsoleLine("Session Check Failed");
+				else
+					AddConsoleLine("Session {0}.", success.Value ? "Active" : "Inactive");
+			});
+		}
+
 		public void SessionClose() {
 			Debug.Log("Session Close. Click to see source.");
 

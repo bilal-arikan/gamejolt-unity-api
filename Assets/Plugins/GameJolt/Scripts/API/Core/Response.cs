@@ -105,8 +105,17 @@ namespace GameJolt.API.Core {
 				case ResponseFormat.Json:
 					Json = JSON.Parse(response.downloadHandler.text)["response"];
 					Success = Json["success"].AsBool;
-					if(!Success) {
-						LogHelper.Warning(Json["message"]);
+					var msg = Json["message"].Value;
+					// success determines whether a request has succeeded or failed, but unfortunatelly
+					// currently GameJolt also uses the success variable for the Sessions.Check API.
+					// In that case even if success is false, it might still have succeeded and just tells us that 
+					// there is no open session. To distuingish these cases we have to also look at the message.
+					// In the case of an actually failed request, there must be a message field present. 
+					// This field is missing if the call was just a check-call and there was no open session.
+					// TODO: remove this workaround when GameJolt has fixed the behavior of Sessions.Check
+					// Also see Sessions.Check method.
+					if(!Success && !string.IsNullOrEmpty(msg)) {
+						LogHelper.Warning(msg);
 						Json = null;
 					}
 					break;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GameJolt.API.Core {
@@ -25,7 +26,7 @@ namespace GameJolt.API.Core {
 			if(error != null) {
 				callback(new Response(error));
 			} else {
-				var url = GetRequestUrl(method, parameters);
+				var url = GetRequestUrl(method, parameters, null);
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.GetRequest(url, format, callback));
 			}
 		}
@@ -50,7 +51,7 @@ namespace GameJolt.API.Core {
 			if(error != null) {
 				callback(new Response(error));
 			} else {
-				var url = GetRequestUrl(method, parameters);
+				var url = GetRequestUrl(method, parameters, payload);
 				GameJoltAPI.Instance.StartCoroutine(GameJoltAPI.Instance.PostRequest(url, payload, format, callback));
 			}
 		}
@@ -85,7 +86,8 @@ namespace GameJolt.API.Core {
 		/// <returns>The formatted request UR.</returns>
 		/// <param name="method">The API endpoint.</param>
 		/// <param name="parameters">The parameters.</param>
-		private static string GetRequestUrl(string method, Dictionary<string, string> parameters) {
+		/// <param name="payload">Payload used for POST requests.</param>
+		private static string GetRequestUrl(string method, Dictionary<string, string> parameters, Dictionary<string, string> payload) {
 			StringBuilder url = new StringBuilder();
 			url.Append(Constants.ApiBaseUrl);
 			url.Append(method);
@@ -99,7 +101,16 @@ namespace GameJolt.API.Core {
 				url.Append(parameter.Value.Replace(" ", "%20"));
 			}
 
-			string signature = GetSignature(url.ToString());
+			var sb = new StringBuilder();
+			sb.Append(url);
+			if(payload != null) {
+				foreach(var pair in payload.OrderBy(x => x.Key)) {
+					sb.Append(pair.Key);
+					sb.Append(pair.Value);
+				}
+			}
+			
+			string signature = GetSignature(sb.ToString());
 			url.Append("&signature=");
 			url.Append(signature);
 

@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `Trophies.RemoveTrophy` API call (see issue [#25](https://github.com/InfectedBytes/gj-unity-api/issues/25))
 - Implemented Scores get `better_than`/`worse_than` options (see issue [#22](https://github.com/InfectedBytes/gj-unity-api/issues/22))
 - Implemented Friends API (see issue [#23](https://github.com/InfectedBytes/gj-unity-api/issues/23))
+- `Sessions.Check` (see issue [#4](https://github.com/InfectedBytes/gj-unity-api/issues/4))
+  - Currently this method uses a little workaround, because GameJolt misuses the `success` argument for this check.
+  - Once GameJolt has fixed it, we have to adapt the check method.
 
 ### Changed
 - Now using GameJolt API 1_2
