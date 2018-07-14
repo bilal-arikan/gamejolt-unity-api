@@ -14,7 +14,7 @@ namespace GameJolt.API {
 		/// In case of an error, the array is null.
 		/// </param>
 		public static void GetIds(Action<int[]> callback) {
-			if(callback == null) throw new ArgumentNullException();
+			if(callback == null) return;
 			Request.Get(Constants.ApiFriendsFetch, null, response => {
 				int[] ids = null;
 				if(response.Success) {
@@ -35,6 +35,7 @@ namespace GameJolt.API {
 		/// In case of an error, the array is null.
 		/// </param>
 		public static void Get(Action<User[]> callback) {
+			if(callback == null) return;
 			GetIds(ids => {
 				if(ids == null) callback(null); // query failed
 				else Users.Get(ids, callback); // get user infos
