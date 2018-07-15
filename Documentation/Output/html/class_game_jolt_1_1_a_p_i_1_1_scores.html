@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.4.0</span>
+   &#160;<span id="projectnumber">v2.5.0</span>
    </div>
   </td>
  </tr>
@@ -68,6 +68,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5128687628c687558ed62901c29c194a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_scores.html#a5128687628c687558ed62901c29c194a">Get</a> (Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_score.html">Score</a>[]&gt; callback, int table=0, int limit=10, bool currentUserOnly=false)</td></tr>
 <tr class="memdesc:a5128687628c687558ed62901c29c194a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the specified callback, table, limit and currentUserOnly.  <a href="#a5128687628c687558ed62901c29c194a">More...</a><br /></td></tr>
 <tr class="separator:a5128687628c687558ed62901c29c194a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea28a13a2ac774262b6799dcd2c08dbf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_scores.html#aea28a13a2ac774262b6799dcd2c08dbf">GetBetterThan</a> (int score, Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_score.html">Score</a>[]&gt; callback, int table=0, int limit=10, bool currentUserOnly=false)</td></tr>
+<tr class="memdesc:aea28a13a2ac774262b6799dcd2c08dbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the specified callback, table, limit and currentUserOnly.  <a href="#aea28a13a2ac774262b6799dcd2c08dbf">More...</a><br /></td></tr>
+<tr class="separator:aea28a13a2ac774262b6799dcd2c08dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78a8dde364e4216e0bcec1a6439bd0c4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_scores.html#a78a8dde364e4216e0bcec1a6439bd0c4">GetWorseThan</a> (int score, Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_score.html">Score</a>[]&gt; callback, int table=0, int limit=10, bool currentUserOnly=false)</td></tr>
+<tr class="memdesc:a78a8dde364e4216e0bcec1a6439bd0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the specified callback, table, limit and currentUserOnly.  <a href="#a78a8dde364e4216e0bcec1a6439bd0c4">More...</a><br /></td></tr>
+<tr class="separator:a78a8dde364e4216e0bcec1a6439bd0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7148b260cf3512c285f269c8066c7908"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_scores.html#a7148b260cf3512c285f269c8066c7908">GetRank</a> (int value, int table=0, Action&lt; int &gt; callback=null)</td></tr>
 <tr class="memdesc:a7148b260cf3512c285f269c8066c7908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the score's rank.  <a href="#a7148b260cf3512c285f269c8066c7908">More...</a><br /></td></tr>
 <tr class="separator:a7148b260cf3512c285f269c8066c7908"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,6 +334,72 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aea28a13a2ac774262b6799dcd2c08dbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea28a13a2ac774262b6799dcd2c08dbf">&#9670;&nbsp;</a></span>GetBetterThan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.Scores.GetBetterThan </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>score</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_score.html">Score</a>[]&gt;&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>table</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>limit</em> = <code>10</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>currentUserOnly</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the specified callback, table, limit and currentUserOnly. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">score</td><td>Retrieve only scores better than this one.</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, an array of Scores</td></tr>
+    <tr><td class="paramname">table</td><td>The ID of the HighScore Table. Defaults to 0 (i.e. Primary Table).</td></tr>
+    <tr><td class="paramname">limit</td><td>The maximum number of Scores to return. Defaults to 10.</td></tr>
+    <tr><td class="paramname">currentUserOnly</td><td>If set to <code>true</code> only return scores of the current user; otherwise for all the users.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7148b260cf3512c285f269c8066c7908"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7148b260cf3512c285f269c8066c7908">&#9670;&nbsp;</a></span>GetRank()</h2>
 
@@ -408,6 +480,72 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, an array of HighScore Tables.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a78a8dde364e4216e0bcec1a6439bd0c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78a8dde364e4216e0bcec1a6439bd0c4">&#9670;&nbsp;</a></span>GetWorseThan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.Scores.GetWorseThan </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>score</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_score.html">Score</a>[]&gt;&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>table</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>limit</em> = <code>10</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>currentUserOnly</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the specified callback, table, limit and currentUserOnly. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">score</td><td>Retrieve only scores worse than this one.</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, an array of Scores</td></tr>
+    <tr><td class="paramname">table</td><td>The ID of the HighScore Table. Defaults to 0 (i.e. Primary Table).</td></tr>
+    <tr><td class="paramname">limit</td><td>The maximum number of Scores to return. Defaults to 10.</td></tr>
+    <tr><td class="paramname">currentUserOnly</td><td>If set to <code>true</code> only return scores of the current user; otherwise for all the users.</td></tr>
   </table>
   </dd>
 </dl>
