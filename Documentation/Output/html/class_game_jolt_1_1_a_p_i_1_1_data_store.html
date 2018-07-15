@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.4.0</span>
+   &#160;<span id="projectnumber">v2.5.0</span>
    </div>
   </td>
  </tr>
@@ -45,6 +45,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_game_jolt_1_1_a_p_i_1_1_data_store-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GameJolt.API.DataStore Class Reference</div>  </div>
@@ -57,8 +58,11 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5929c377c4710df93bcc77f5ac69dded"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5929c377c4710df93bcc77f5ac69dded">Set</a> (string key, string value, bool global, Action&lt; bool &gt; callback=null)</td></tr>
-<tr class="memdesc:a5929c377c4710df93bcc77f5ac69dded"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the key/value pair in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>.  <a href="#a5929c377c4710df93bcc77f5ac69dded">More...</a><br /></td></tr>
+<tr class="memdesc:a5929c377c4710df93bcc77f5ac69dded"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the key/value pair in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. Caution: <a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests with a payload of more than 1MB. The payload is composed of the key, the value and 10 bytes of meta data. Use <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a574e7865a9708e6b45c29bd70f3b47e8" title="Caution: Non atomic operation! Save the key/value pair in the DataStore. This method will split the p...">SetSegmented</a> for data larger than 1MB.  <a href="#a5929c377c4710df93bcc77f5ac69dded">More...</a><br /></td></tr>
 <tr class="separator:a5929c377c4710df93bcc77f5ac69dded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574e7865a9708e6b45c29bd70f3b47e8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a574e7865a9708e6b45c29bd70f3b47e8">SetSegmented</a> (string key, string value, bool global, Action&lt; bool &gt; callback, Action&lt; int &gt; progress=null, int maxSegmentSize=<a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a>)</td></tr>
+<tr class="memdesc:a574e7865a9708e6b45c29bd70f3b47e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caution: Non atomic operation! Save the key/value pair in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. This method will split the payload into multiple smaller packages, in order to overcome GameJolts 1MB limit. These packages will be appended via the update operation. If one or more parts are already uploaded and then an error occurs (for e.g. no network connection), this method will stop uploading further packages. If this happens the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a> might contain incomplete data, therefore you might want to delete the entry or try uploading again. By using the <em>progress</em>  callback, you could also try to continue from the last position.  <a href="#a574e7865a9708e6b45c29bd70f3b47e8">More...</a><br /></td></tr>
+<tr class="separator:a574e7865a9708e6b45c29bd70f3b47e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac02c0637c8bcbdb3c20bd46317dce22c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#ac02c0637c8bcbdb3c20bd46317dce22c">Update</a> (string key, string value, <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ae2ebbc79f84cb314588a173bb8720449">DataStoreOperation</a> operation, bool global, Action&lt; string &gt; callback=null)</td></tr>
 <tr class="memdesc:ac02c0637c8bcbdb3c20bd46317dce22c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the value for a given key in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>.  <a href="#ac02c0637c8bcbdb3c20bd46317dce22c">More...</a><br /></td></tr>
 <tr class="separator:ac02c0637c8bcbdb3c20bd46317dce22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -74,6 +78,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a03d87ffc1e38d825c52e0ab41b41b3df"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a03d87ffc1e38d825c52e0ab41b41b3df">GetKeys</a> (bool global, string pattern, Action&lt; string[]&gt; callback)</td></tr>
 <tr class="memdesc:a03d87ffc1e38d825c52e0ab41b41b3df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the list of available keys in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>.  <a href="#a03d87ffc1e38d825c52e0ab41b41b3df">More...</a><br /></td></tr>
 <tr class="separator:a03d87ffc1e38d825c52e0ab41b41b3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5339f9a5e5bb37fc580258c089f5a428"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a> = 1024 * 1024 - 10</td></tr>
+<tr class="memdesc:a5339f9a5e5bb37fc580258c089f5a428"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests larger than this. In order for an operation to succeed the key length + value length must not be larger than this.  <a href="#a5339f9a5e5bb37fc580258c089f5a428">More...</a><br /></td></tr>
+<tr class="separator:a5339f9a5e5bb37fc580258c089f5a428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64566caf04629213bada8c43ee45e413"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a64566caf04629213bada8c43ee45e413">HardLimit</a> = 16777000</td></tr>
+<tr class="memdesc:a64566caf04629213bada8c43ee45e413"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_game_jolt.html">GameJolt</a> allows only about 16MB per key-value pair.  <a href="#a64566caf04629213bada8c43ee45e413">More...</a><br /></td></tr>
+<tr class="separator:a64566caf04629213bada8c43ee45e413"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a> <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a> methods. </p>
@@ -325,13 +338,86 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Save the key/value pair in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. </p>
+<p>Save the key/value pair in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. Caution: <a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests with a payload of more than 1MB. The payload is composed of the key, the value and 10 bytes of meta data. Use <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a574e7865a9708e6b45c29bd70f3b47e8" title="Caution: Non atomic operation! Save the key/value pair in the DataStore. This method will split the p...">SetSegmented</a> for data larger than 1MB. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The key name.</td></tr>
     <tr><td class="paramname">value</td><td>The value to store.</td></tr>
     <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
     <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating success.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a574e7865a9708e6b45c29bd70f3b47e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a574e7865a9708e6b45c29bd70f3b47e8">&#9670;&nbsp;</a></span>SetSegmented()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.DataStore.SetSegmented </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>global</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; bool &gt;&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; int &gt;&#160;</td>
+          <td class="paramname"><em>progress</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxSegmentSize</em> = <code><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Caution: Non atomic operation! Save the key/value pair in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. This method will split the payload into multiple smaller packages, in order to overcome GameJolts 1MB limit. These packages will be appended via the update operation. If one or more parts are already uploaded and then an error occurs (for e.g. no network connection), this method will stop uploading further packages. If this happens the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a> might contain incomplete data, therefore you might want to delete the entry or try uploading again. By using the <em>progress</em>  callback, you could also try to continue from the last position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>The key name.</td></tr>
+    <tr><td class="paramname">value</td><td>The value to store.</td></tr>
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating success.</td></tr>
+    <tr><td class="paramname">progress</td><td>A callback function accepting a single parameter, the number of already uploaded bytes. This callback is called after each successfull segment upload.</td></tr>
+    <tr><td class="paramname">maxSegmentSize</td><td>Maximum segment size. The data to upload is split into segments of at most this size.</td></tr>
   </table>
   </dd>
 </dl>
@@ -401,6 +487,39 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a64566caf04629213bada8c43ee45e413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64566caf04629213bada8c43ee45e413">&#9670;&nbsp;</a></span>HardLimit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int GameJolt.API.DataStore.HardLimit = 16777000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="namespace_game_jolt.html">GameJolt</a> allows only about 16MB per key-value pair. </p>
+
+</div>
+</div>
+<a id="a5339f9a5e5bb37fc580258c089f5a428"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5339f9a5e5bb37fc580258c089f5a428">&#9670;&nbsp;</a></span>SoftLimit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int GameJolt.API.DataStore.SoftLimit = 1024 * 1024 - 10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests larger than this. In order for an operation to succeed the key length + value length must not be larger than this. </p>
 
 </div>
 </div>
