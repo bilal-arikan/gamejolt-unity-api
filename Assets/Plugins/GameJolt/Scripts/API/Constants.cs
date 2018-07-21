@@ -34,6 +34,6 @@
 		public const string ApiDatastoreRemove = "/data-store/remove";
 		public const string ApiDatastoreKeysFetch = "/data-store/get-keys";
 
-		public const string ApiTimeGet = "/get-time";
+		public const string ApiTimeGet = "/time";
 	}
 }
