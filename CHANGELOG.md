@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+## [2.5.1][v2_5_1] (2018-07-21)
+
+### Fixed
+- GameJolt changed `/get-time` API call to `/time`
+
 ## [2.5.0][v2_5_0] (2018-07-15)
 
 ### Add
@@ -150,7 +155,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.1...HEAD
+[v2_5_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.1
 [v2_5_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.0
 [v2_4_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.4.0
 [v2_3_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.3.1
