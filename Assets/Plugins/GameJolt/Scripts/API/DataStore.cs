@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using GameJolt.API.Core;
 
 namespace GameJolt.API {
@@ -74,7 +76,12 @@ namespace GameJolt.API {
 			Action<int> progress = null, int maxSegmentSize = SoftLimit) {
 			if(callback == null) throw new ArgumentNullException();
 			if(maxSegmentSize < 10 || maxSegmentSize > SoftLimit) throw new ArgumentOutOfRangeException();
-			if(key.Length + value.Length > HardLimit) {
+			maxSegmentSize = Math.Min(maxSegmentSize, SoftLimit - key.Length);
+			maxSegmentSize = Math.Min(maxSegmentSize, value.Length);
+
+			var segments = new Queue<string>();
+			int encodedSize = Segmentate(Encoding.ASCII.GetBytes(value), maxSegmentSize, segments);
+			if(key.Length + encodedSize > HardLimit) {
 				LogHelper.Error("Datset is larger than 16MB!");
 				callback(false);
 				return;
@@ -92,11 +99,8 @@ namespace GameJolt.API {
 			}
 
 			// set first segment
-			maxSegmentSize = Math.Min(maxSegmentSize, SoftLimit - key.Length);
-			maxSegmentSize = Math.Min(maxSegmentSize, value.Length);
-			var segmentSize = maxSegmentSize;
 			var dataSend = 0;
-			var segment = value.Substring(0, segmentSize);
+			var segment = segments.Dequeue();
 			var payload = new Dictionary<string, string> {{"key", key}, {"data", segment}};
 
 			Action<string> completedAction = null;
@@ -104,13 +108,12 @@ namespace GameJolt.API {
 				if(response == null) { // request failed
 					callback(false);
 				} else { // request succeeded
-					dataSend += segmentSize;
+					dataSend += segment.Length;
 					if(progress != null) progress(dataSend);
 					if(dataSend >= value.Length) { // data uploaded completely
 						callback(true);
 					} else { // append next segment
-						segmentSize = Math.Min(maxSegmentSize, value.Length - dataSend);
-						segment = value.Substring(dataSend, segmentSize);
+						segment = segments.Dequeue();
 						Update(key, segment, DataStoreOperation.Append, global, completedAction);
 					}
 				}
@@ -210,5 +213,43 @@ namespace GameJolt.API {
 				}
 			}, !global);
 		}
+
+		#region Utils
+		private static readonly byte[] EncodedSize = new byte[256];
+
+		static DataStore() {
+			for(char c = '\0'; c < 256; c++) {
+				// ASCII chars from 0-32 and 127-255 are invalid
+				// Furthermore the characters given by the string constant are also invalid
+				// Invalid characters must be percent encoded, for e.g. "!" becomes "%21"
+				EncodedSize[c] = (byte)((c <= 32 || c >= 127 || "@&;:<>=?\"'/\\!#%+$,{}|^[]`".Contains(c)) ? 3 : 1);
+			}
+		}
+
+		/// <summary>
+		/// Subdivide the given message into one or multiple smaller segments.
+		/// </summary>
+		/// <param name="bytes">The data bytes to split.</param>
+		/// <param name="maxSegmentSize">The maximum size of a single segment.</param>
+		/// <param name="result">The segments will be added to this queue.</param>
+		/// <returns></returns>
+		private static int Segmentate(byte[] bytes, int maxSegmentSize, Queue<string> result) {
+			int start = 0; // start of the current segment
+			int capacity = 0; // url encoded size of the current segment
+			int totalCapacity = 0; // url encoded size of the whole message
+			for(int i = 0; i < bytes.Length; i++) {
+				int charSize = EncodedSize[bytes[i]]; // invalid characters must be encoded, for e.g. "!" becomes "%21"
+				capacity += charSize;
+				totalCapacity += charSize;
+				if(capacity > maxSegmentSize) {
+					result.Enqueue(Encoding.ASCII.GetString(bytes, start, i - start));
+					start = i;
+					capacity = charSize;
+				}
+			}
+			result.Enqueue(Encoding.ASCII.GetString(bytes, start, bytes.Length - start));
+			return totalCapacity;
+		}
+		#endregion
 	}
 }
