@@ -25,7 +25,7 @@ namespace GameJolt.API {
 		/// GameJolt refuses requests larger than this.
 		/// In order for an operation to succeed the encoded key length + encoded value length must not be larger than this.
 		/// </summary>
-		public const int SoftLimit = 1024 * 1024 - 10;
+		public const int SoftLimit = 1024 * 1024 - 11;
 		/// <summary>
 		/// GameJolt allows only about 16MB per key-value pair.
 		/// </summary>
