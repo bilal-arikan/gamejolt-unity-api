@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+### Fixed
+- `DataStore.SetSegmented` error for large data which needs to be url encoded 
+(see issue [#31](https://github.com/InfectedBytes/gj-unity-api/issues/31))
+
 ## [2.5.1][v2_5_1] (2018-07-21)
 
 ### Fixed
