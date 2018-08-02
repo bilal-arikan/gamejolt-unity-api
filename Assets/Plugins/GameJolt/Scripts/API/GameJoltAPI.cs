@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameJolt.API.Core;
+using GameJolt.API.Internal;
 using GameJolt.API.Objects;
 using GameJolt.External;
 using UnityEngine.Networking;
@@ -91,12 +92,11 @@ namespace GameJolt.API {
 			}
 
 			float timeout = Time.time + Settings.Timeout;
-			var request = format == ResponseFormat.Texture
-				? UnityWebRequest.GetTexture(url) 
-				: UnityWebRequest.Get(url);
-			request.Send();
+			var request = UnityVersionAbstraction.GetRequest(url, format);
+			request.SendWebRequest();
 			while(!request.isDone) {
 				if(Time.time > timeout) {
+					request.Abort();
 					callback(new Response("Timeout for " + url));
 					yield break;
 				}
@@ -115,9 +115,10 @@ namespace GameJolt.API {
 			float timeout = Time.time + Settings.Timeout;
 
 			var request = UnityWebRequest.Post(url, payload);
-			request.Send();
+			request.SendWebRequest();
 			while(!request.isDone) {
 				if(Time.time > timeout) {
+					request.Abort();
 					callback(new Response("Timeout for " + url));
 					yield break;
 				}

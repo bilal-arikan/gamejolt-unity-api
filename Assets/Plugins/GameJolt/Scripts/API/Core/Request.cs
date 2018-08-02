@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GameJolt.API.Internal;
 
 namespace GameJolt.API.Core {
 	/// <summary>
@@ -133,19 +134,11 @@ namespace GameJolt.API.Core {
 		/// <param name="input">Input.</param>
 		private static string Md5(string input) {
 			var bytes = Encoding.UTF8.GetBytes(input);
-
-#if UNITY_WINRT
-			var hashBytes = UnityEngine.Windows.Crypto.ComputeMD5Hash(bytes);
-#else
-			var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-			var hashBytes = md5.ComputeHash(bytes);
-#endif
-
+			var hashBytes = UnityVersionAbstraction.ComputeHash(bytes);
 			var hashString = new StringBuilder();
 			foreach(byte b in hashBytes) {
 				hashString.Append(b.ToString("x2").ToLower());
 			}
-
 			return hashString.ToString().PadLeft(32, '0');
 		}
 	}
