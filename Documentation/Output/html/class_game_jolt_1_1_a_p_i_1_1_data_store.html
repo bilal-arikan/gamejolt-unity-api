@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.5.1</span>
+   &#160;<span id="projectnumber">v2.5.2</span>
    </div>
   </td>
  </tr>
@@ -81,12 +81,15 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5339f9a5e5bb37fc580258c089f5a428"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a> = 1024 * 1024 - 10</td></tr>
-<tr class="memdesc:a5339f9a5e5bb37fc580258c089f5a428"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests larger than this. In order for an operation to succeed the key length + value length must not be larger than this.  <a href="#a5339f9a5e5bb37fc580258c089f5a428">More...</a><br /></td></tr>
+<tr class="memitem:a5339f9a5e5bb37fc580258c089f5a428"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a> = 1024 * 1024 - 11</td></tr>
+<tr class="memdesc:a5339f9a5e5bb37fc580258c089f5a428"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests larger than this. In order for an operation to succeed the encoded key length + encoded value length must not be larger than this.  <a href="#a5339f9a5e5bb37fc580258c089f5a428">More...</a><br /></td></tr>
 <tr class="separator:a5339f9a5e5bb37fc580258c089f5a428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64566caf04629213bada8c43ee45e413"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a64566caf04629213bada8c43ee45e413">HardLimit</a> = 16777000</td></tr>
 <tr class="memdesc:a64566caf04629213bada8c43ee45e413"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_game_jolt.html">GameJolt</a> allows only about 16MB per key-value pair.  <a href="#a64566caf04629213bada8c43ee45e413">More...</a><br /></td></tr>
 <tr class="separator:a64566caf04629213bada8c43ee45e413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4fe7333b3da5ef63469d414dc378f05"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#ae4fe7333b3da5ef63469d414dc378f05">KeySizeLimit</a> = <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a> - 1024</td></tr>
+<tr class="memdesc:ae4fe7333b3da5ef63469d414dc378f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum size for dataset key.  <a href="#ae4fe7333b3da5ef63469d414dc378f05">More...</a><br /></td></tr>
+<tr class="separator:ae4fe7333b3da5ef63469d414dc378f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a> <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a> methods. </p>
@@ -507,6 +510,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae4fe7333b3da5ef63469d414dc378f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4fe7333b3da5ef63469d414dc378f05">&#9670;&nbsp;</a></span>KeySizeLimit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int GameJolt.API.DataStore.KeySizeLimit = <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a5339f9a5e5bb37fc580258c089f5a428">SoftLimit</a> - 1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum size for dataset key. </p>
+
+</div>
+</div>
 <a id="a5339f9a5e5bb37fc580258c089f5a428"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5339f9a5e5bb37fc580258c089f5a428">&#9670;&nbsp;</a></span>SoftLimit</h2>
 
@@ -514,12 +533,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int GameJolt.API.DataStore.SoftLimit = 1024 * 1024 - 10</td>
+          <td class="memname">const int GameJolt.API.DataStore.SoftLimit = 1024 * 1024 - 11</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests larger than this. In order for an operation to succeed the key length + value length must not be larger than this. </p>
+<p><a class="el" href="namespace_game_jolt.html">GameJolt</a> refuses requests larger than this. In order for an operation to succeed the encoded key length + encoded value length must not be larger than this. </p>
 
 </div>
 </div>
