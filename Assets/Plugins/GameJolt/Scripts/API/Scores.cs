@@ -76,7 +76,18 @@ namespace GameJolt.API {
 		/// <param name="limit">The maximum number of <see cref="Score"/>s to return. Defaults to 10.</param>
 		/// <param name="currentUserOnly">If set to <c>true</c> only return scores of the current user; otherwise for all the users.</param>
 		public static void Get(Action<Score[]> callback, int table = 0, int limit = 10, bool currentUserOnly = false) {
-			Get(callback, table, limit, currentUserOnly, null, null);
+			Get(callback, table, limit, currentUserOnly, "", null, null);
+		}
+
+		/// <summary>
+		/// Get the specified callback, table, limit and guest.
+		/// </summary>
+		/// <param name="guest">Only return scores of the given guest.</param>
+		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Score"/>s</param>
+		/// <param name="table">The ID of the HighScore <see cref="Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="limit">The maximum number of <see cref="Score"/>s to return. Defaults to 10.</param>
+		public static void Get(string guest, Action<Score[]> callback, int table = 0, int limit = 10) {
+			Get(callback, table, limit, false, guest, null, null);
 		}
 
 		/// <summary>
@@ -88,7 +99,19 @@ namespace GameJolt.API {
 		/// <param name="limit">The maximum number of <see cref="Score"/>s to return. Defaults to 10.</param>
 		/// <param name="currentUserOnly">If set to <c>true</c> only return scores of the current user; otherwise for all the users.</param>
 		public static void GetBetterThan(int score, Action<Score[]> callback, int table = 0, int limit = 10, bool currentUserOnly = false) {
-			Get(callback, table, limit, currentUserOnly, score, null);
+			Get(callback, table, limit, currentUserOnly, "", score, null);
+		}
+
+		/// <summary>
+		/// Get the specified callback, table, limit and currentUserOnly.
+		/// </summary>
+		/// <param name="guest">Only return scores of the given guest.</param>
+		/// <param name="score">Retrieve only scores better than this one.</param>
+		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Score"/>s</param>
+		/// <param name="table">The ID of the HighScore <see cref="Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="limit">The maximum number of <see cref="Score"/>s to return. Defaults to 10.</param>
+		public static void GetBetterThan(string guest, int score, Action<Score[]> callback,int table = 0, int limit = 10) {
+			Get(callback, table, limit, false, guest, score, null);
 		}
 
 		/// <summary>
@@ -100,16 +123,36 @@ namespace GameJolt.API {
 		/// <param name="limit">The maximum number of <see cref="Score"/>s to return. Defaults to 10.</param>
 		/// <param name="currentUserOnly">If set to <c>true</c> only return scores of the current user; otherwise for all the users.</param>
 		public static void GetWorseThan(int score, Action<Score[]> callback, int table = 0, int limit = 10, bool currentUserOnly = false) {
-			Get(callback, table, limit, currentUserOnly, null, score);
+			Get(callback, table, limit, currentUserOnly, "", null, score);
 		}
 
-		private static void Get(Action<Score[]> callback, int table, int limit, bool currentUserOnly,
+		/// <summary>
+		/// Get the specified callback, table, limit and currentUserOnly.
+		/// </summary>
+		/// <param name="guest">Only return scores of the given guest.</param>
+		/// <param name="score">Retrieve only scores worse than this one.</param>
+		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="Score"/>s</param>
+		/// <param name="table">The ID of the HighScore <see cref="Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="limit">The maximum number of <see cref="Score"/>s to return. Defaults to 10.</param>
+		public static void GetWorseThan(string guest, int score, Action<Score[]> callback, int table = 0, int limit = 10) {
+			Get(callback, table, limit, false, guest, null, score);
+		}
+
+		private static void Get(Action<Score[]> callback, int table, int limit, bool currentUserOnly, string guest,
 			int? betterThan, int? worseThan) {
 			var parameters = new Dictionary<string, string>();
 			if(table != 0) parameters.Add("table_id", table.ToString());
 			if(betterThan != null) parameters.Add("better_than", betterThan.Value.ToString());
 			if(worseThan != null) parameters.Add("worse_than", worseThan.Value.ToString());
 			parameters.Add("limit", Math.Max(1, limit).ToString());
+
+			// If currentUserOnly is requested, it takes precedence over guest settings.
+			// (it might be better to throw an exception to let the devs know they are doing something weird)
+			if(currentUserOnly) {
+				guest = "";
+			} else if (guest != "") {
+				parameters.Add("guest", guest);
+			}
 
 			Core.Request.Get(Constants.ApiScoresFetch, parameters, response => {
 				Score[] scores;
