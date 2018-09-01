@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+### Add
+- Guest support for `Scores.Get*`
+
 ## [2.5.2][v2_5_2] (2018-08-05)
 
 ### Fixed

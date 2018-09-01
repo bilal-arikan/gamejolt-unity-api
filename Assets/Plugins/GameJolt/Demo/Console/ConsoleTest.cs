@@ -24,10 +24,10 @@ namespace GameJolt.Demo.Console {
 		public InputField GuestNameField;
 		public InputField TableField;
 		public InputField LimitField;
-		public Toggle UserScoresToggle;
+		public Dropdown UserScoreMode;
 		public InputField CompareValue;
 		public Dropdown ScoreOptions;
-		public Toggle UserScoresToggle2;
+		public Dropdown UserScoreMode2;
 
 		// Trophies
 		public InputField TrophyIdField;
@@ -192,17 +192,28 @@ namespace GameJolt.Demo.Console {
 
 			var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
 			var limit = LimitField.text != string.Empty ? int.Parse(LimitField.text) : 10;
-			Scores.Get(GetScoresCallback, tableId, limit, UserScoresToggle.isOn);
+			if(UserScoreMode.value == 2)
+				Scores.Get(GuestNameField.text, GetScoresCallback, tableId, limit);
+			else
+				Scores.Get(GetScoresCallback, tableId, limit, UserScoreMode.value == 1);
 		}
 
 		public void GetScoresWithOptions() {
 			var tableId = TableField.text != string.Empty ? int.Parse(TableField.text) : 0;
 			var limit = LimitField.text != string.Empty ? int.Parse(LimitField.text) : 10;
 			var score = CompareValue.text != string.Empty ? int.Parse(CompareValue.text) : 0;
-			if(ScoreOptions.value == 0)
-				Scores.GetBetterThan(score, GetScoresCallback, tableId, limit, UserScoresToggle2.isOn);
-			else
-				Scores.GetWorseThan(score, GetScoresCallback, tableId, limit, UserScoresToggle2.isOn);
+			if(UserScoreMode2.value == 2) { // guest mode
+				if(ScoreOptions.value == 0)
+					Scores.GetBetterThan(GuestNameField.text, score, GetScoresCallback, tableId, limit);
+				else
+					Scores.GetWorseThan(GuestNameField.text, score, GetScoresCallback, tableId, limit);
+			} else { // user mode
+				bool currentUserOnly = UserScoreMode2.value == 1;
+				if(ScoreOptions.value == 0)
+					Scores.GetBetterThan(score, GetScoresCallback, tableId, limit, currentUserOnly);
+				else
+					Scores.GetWorseThan(score, GetScoresCallback, tableId, limit, currentUserOnly);
+			}
 		}
 
 		public void GetRank() {

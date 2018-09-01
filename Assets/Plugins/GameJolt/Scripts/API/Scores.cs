@@ -148,9 +148,7 @@ namespace GameJolt.API {
 
 			// If currentUserOnly is requested, it takes precedence over guest settings.
 			// (it might be better to throw an exception to let the devs know they are doing something weird)
-			if(currentUserOnly) {
-				guest = "";
-			} else if (guest != "") {
+			if (!currentUserOnly && guest != "") {
 				parameters.Add("guest", guest);
 			}
 
