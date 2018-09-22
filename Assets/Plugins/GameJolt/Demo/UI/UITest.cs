@@ -8,6 +8,10 @@ namespace GameJolt.Demo.UI {
 		public Button ShowTrophiesButton;
 		private int notificationQueued;
 
+		public void AutoLoginCallback(AutoLoginResult result) {
+			Debug.Log(string.Format("Auto login result: {0}", result));
+		}
+
 		public void SignInButtonClicked() {
 			GameJoltUI.Instance.ShowSignIn(signInSuccess => {
 				if(signInSuccess) {

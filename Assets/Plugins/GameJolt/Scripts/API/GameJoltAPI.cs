@@ -17,6 +17,7 @@ namespace GameJolt.API {
 		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
 
 		[Tooltip("The GameJolt API settings.")] public Settings Settings;
+		[Tooltip("Event for the autologin mechanism.")] public AutoLoginEvent AutoLoginEvent;
 		[Tooltip("The default trophy image which is used if downloading the image failed.")] public Sprite DefaultTrophy;
 		[Tooltip("The default avatar image which is used if downloading the image failed.")] public Sprite DefaultAvatar;
 		[Tooltip("The default notification icon which is used if you don't provide an image yourself.")]
@@ -180,7 +181,9 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			string username, token;
 			if(GetStoredUserCredentials(out username, out token)) {
 				var user = new User(username, token);
-				user.SignIn();
+				user.SignIn(success => AutoLoginEvent.Invoke(success ? AutoLoginResult.Success : AutoLoginResult.Failed));
+			} else {
+				AutoLoginEvent.Invoke(AutoLoginResult.MissingCredentials);
 			}
 			#endregion
 
@@ -193,14 +196,16 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				var credentials = response.Split(new[] {':'}, 2);
 				if(credentials.Length == 2) {
 					var user = new Objects.User(credentials[0], credentials[1]);
-					user.SignIn();
+					user.SignIn(success => AutoLoginEvent.Invoke(success ? AutoLoginResult.Success : AutoLoginResult.Failed));
 					// TODO: Prompt "Welcome Back <username>!"
 				} else {
 					LogHelper.Info("Cannot AutoConnect.");
+					AutoLoginEvent.Invoke(AutoLoginResult.MissingCredentials);
 				}
 			} else {
 				// This is a Guest.
 				// TODO: Prompt "Hello Guest!" and encourage to signup/signin?
+				AutoLoginEvent.Invoke(AutoLoginResult.MissingCredentials);
 			}
 		}
 #endif

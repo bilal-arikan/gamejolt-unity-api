@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Add
 - Guest support for `Scores.Get*`
+- `AutoLoginEvent` which is called for the AutoLogin mechanism, for e.g. when the `Remember me` option was set.
 
 ## [2.5.2][v2_5_2] (2018-08-05)
 
