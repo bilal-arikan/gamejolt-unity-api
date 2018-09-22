@@ -20,7 +20,9 @@ The documentation is generated with [Doxygen](https://www.stack.nl/~dimitri/doxy
 
 The configuration file can be found at `/Documentation/Doxyfile`. Unfortunately the paths are absolute and will depend on the developer machine.
 
-To update the documentation, run `make doc_generate`. To preview it, run `make doc_serve` and visit `http://localhost:8000/`. Finally, to publish the documentation, `commit` the changes to `master` and `push` to `origin`, then run `make doc_publish` to copy the `Documentation/Output/html` subdirectory to the `gh-pages` branch so the documentation will be available at [InfectedBytes.github.io/gj-unity-api/](http://InfectedBytes.github.io/gj-unity-api/).
+To update the documentation, run `make doc_generate`. To preview it, run `make doc_serve` and visit `http://localhost:8000/`.
+The documentation is generated into the `docs` directory with is configured to be served for `GitHub pages`.
+Therefore the documentation is automatically published by just pushing the changes.
 
 ### Release new version
 
