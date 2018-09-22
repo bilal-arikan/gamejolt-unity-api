@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.5.2</span>
+   &#160;<span id="projectnumber">v2.5.3</span>
    </div>
   </td>
  </tr>
@@ -57,6 +57,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_auto_login_event.html">AutoLoginEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UnityEvent used for the inital auto login.  <a href="class_game_jolt_1_1_a_p_i_1_1_auto_login_event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_constants.html">Constants</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html">DataStore</a></td></tr>
@@ -92,6 +95,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:ac88b8012813ba34d364344362ca0baaf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ac88b8012813ba34d364344362ca0baaf">AutoLoginResult</a> { <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ac88b8012813ba34d364344362ca0baafa4776852a658d801091efd06666f716d8">AutoLoginResult.MissingCredentials</a>, 
+<a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ac88b8012813ba34d364344362ca0baafad7c8c85bf79bbe1b7188497c32c3b0ca">AutoLoginResult.Failed</a>, 
+<a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ac88b8012813ba34d364344362ca0baafa505a83f220c02df2f85c3810cd9ceb38">AutoLoginResult.Success</a>
+ }<tr class="memdesc:ac88b8012813ba34d364344362ca0baaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum represents the result of an automatic login attempt.  <a href="namespace_game_jolt_1_1_a_p_i.html#ac88b8012813ba34d364344362ca0baaf">More...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:ac88b8012813ba34d364344362ca0baaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2ebbc79f84cb314588a173bb8720449"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ae2ebbc79f84cb314588a173bb8720449">DataStoreOperation</a> { <br />
 &#160;&#160;<b>Add</b>, 
 <b>Subtract</b>, 
@@ -111,6 +120,38 @@ Enumerations</h2></td></tr>
 <tr class="separator:ac5582a582f2b78e71557c75051ccec32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ac88b8012813ba34d364344362ca0baaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac88b8012813ba34d364344362ca0baaf">&#9670;&nbsp;</a></span>AutoLoginResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ac88b8012813ba34d364344362ca0baaf">GameJolt.API.AutoLoginResult</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This enum represents the result of an automatic login attempt. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac88b8012813ba34d364344362ca0baafa4776852a658d801091efd06666f716d8"></a>MissingCredentials&#160;</td><td class="fielddoc"><p>There were no user credentials present. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac88b8012813ba34d364344362ca0baafad7c8c85bf79bbe1b7188497c32c3b0ca"></a>Failed&#160;</td><td class="fielddoc"><p>The login failed due to wrong credentials or an network error. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac88b8012813ba34d364344362ca0baafa505a83f220c02df2f85c3810cd9ceb38"></a>Success&#160;</td><td class="fielddoc"><p>The user was logged in successfully. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="ae2ebbc79f84cb314588a173bb8720449"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2ebbc79f84cb314588a173bb8720449">&#9670;&nbsp;</a></span>DataStoreOperation</h2>
 

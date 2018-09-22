@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+
+## [2.5.3][v2_5_3] (2018-09-22)
+
 ### Add
 - Guest support for `Scores.Get*`
 - `AutoLoginEvent` which is called for the AutoLogin mechanism, for e.g. when the `Remember me` option was set.
@@ -166,7 +169,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.2...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.3...HEAD
+[v2_5_3]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.3
 [v2_5_2]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.2
 [v2_5_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.1
 [v2_5_0]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.0
