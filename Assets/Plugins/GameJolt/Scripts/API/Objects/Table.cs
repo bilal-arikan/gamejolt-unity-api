@@ -15,6 +15,7 @@ namespace GameJolt.API.Objects {
 		/// Settings this will only affect your game and won't be saved to GameJolt.
 		/// </para>
 		/// </remarks>
+		// ReSharper disable once InconsistentNaming
 		public int ID { get; set; }
 
 		/// <summary>

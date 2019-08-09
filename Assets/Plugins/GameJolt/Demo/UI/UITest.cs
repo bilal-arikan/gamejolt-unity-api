@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameJolt.Demo.UI {
+	// ReSharper disable once InconsistentNaming
 	public class UITest : MonoBehaviour {
 		public Button ShowTrophiesButton;
 		private int notificationQueued;

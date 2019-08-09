@@ -35,6 +35,7 @@ namespace GameJolt.API.Objects {
 		/// Gets or sets the user ID.
 		/// </summary>
 		/// <value>The user ID.</value>
+		// ReSharper disable once InconsistentNaming
 		public int UserID { get; set; }
 
 		/// <summary>

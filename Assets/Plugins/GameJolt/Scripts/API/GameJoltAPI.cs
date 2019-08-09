@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+// ReSharper disable once RedundantUsingDirective, required for some parts inside an #ifdef
 using System.Linq;
 using GameJolt.API.Core;
 using GameJolt.API.Internal;

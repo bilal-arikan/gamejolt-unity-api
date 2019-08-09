@@ -354,7 +354,7 @@ namespace GameJolt.Demo.Console {
 		public void UpdateDataStoreKey() {
 			DataStoreOperation mode;
 			try {
-				mode = (DataStoreOperation)System.Enum.Parse(typeof(DataStoreOperation), ModeField.captionText.text);
+				mode = (DataStoreOperation)Enum.Parse(typeof(DataStoreOperation), ModeField.captionText.text);
 			} catch {
 				Debug.LogWarning("Wrong Mode. Should be Add, Subtract, Multiply, Divide, Append or Prepend.");
 				return;
