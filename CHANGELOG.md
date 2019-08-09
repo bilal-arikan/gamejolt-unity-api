@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][Unreleased]
 
 
+## [2.5.4][v2_5_4] (2019-08-09)
+
+### Add
+- Assembly Definition Files (asmdef)
+  - Now the GameJolt API resides in it's own assembly.
+  - This improves the build time
+  - if you're already using Assembly Definition files, you need to add a reference to the `GameJoltRuntime`
+
 ## [2.5.3][v2_5_3] (2018-09-22)
 
 ### Add
@@ -169,7 +177,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.3...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.4...HEAD
+[v2_5_4]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.4
 [v2_5_3]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.3
 [v2_5_2]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.2
 [v2_5_1]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.1
