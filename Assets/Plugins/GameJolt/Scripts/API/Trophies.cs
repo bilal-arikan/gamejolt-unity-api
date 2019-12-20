@@ -6,6 +6,24 @@ using GameJolt.UI;
 
 namespace GameJolt.API {
 	/// <summary>
+	/// Defines whether an unlock try succeeded and if so, whether the trophy was already unlocked before or not.
+	/// </summary>
+	public enum TryUnlockResult {
+		/// <summary>
+		/// Request failed, the Trophy could not be unlocked.
+		/// </summary>
+		Failure,
+		/// <summary>
+		/// The Trophy was successfully unlocked.
+		/// </summary>
+		Unlocked,
+		/// <summary>
+		/// The Trophy was already unlocked.
+		/// </summary>
+		AlreadyUnlocked
+	}
+
+	/// <summary>
 	/// Trophies API methods
 	/// </summary>
 	public static class Trophies {
@@ -55,6 +73,33 @@ namespace GameJolt.API {
 
 				if(callback != null) {
 					callback(response.Success);
+				}
+			});
+		}
+
+		/// <summary>
+		/// Unlocks the trophy if it was not already unlocked.
+		/// </summary>
+		/// <param name="trophy">The <see cref="Trophy"/> to unlock.</param>
+		/// <param name="callback">A callback function accepting a single parameter, an enum indicating success.</param>
+		public static void TryUnlock(Trophy trophy, Action<TryUnlockResult> callback = null) {
+			TryUnlock(trophy.ID, callback);
+		}
+
+		/// <summary>
+		/// Unlocks the trophy if it was not already unlocked.
+		/// </summary>
+		/// <param name="trophy">The <see cref="Trophy"/> ID.</param>
+		/// <param name="callback">A callback function accepting a single parameter, an enum indicating success.</param>
+		public static void TryUnlock(int id, Action<TryUnlockResult> callback = null) {
+			Get(id, trophy => {
+				if(trophy == null) { // something went wrong -> signal failure
+					if(callback != null) callback(TryUnlockResult.Failure);
+				} else if(!trophy.Unlocked) { // not unlocked yet, so unlock it now
+					var unlockCallback = callback == null ? (Action<bool>)null : success => callback(success ? TryUnlockResult.Unlocked : TryUnlockResult.Failure);
+					Unlock(id, unlockCallback);
+				} else if(callback != null) { // already unlocked, so if we have a callback, signal success
+					callback(TryUnlockResult.AlreadyUnlocked);
 				}
 			});
 		}

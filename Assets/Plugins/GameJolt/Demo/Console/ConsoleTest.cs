@@ -238,6 +238,15 @@ namespace GameJolt.Demo.Console {
 			});
 		}
 
+		public void TryUnlockTrophy() {
+			Debug.Log("Try Unlock Trophy. Click to see source.");
+
+			var trophyId = TrophyIdField.text != string.Empty ? int.Parse(TrophyIdField.text) : 0;
+			Trophies.TryUnlock(trophyId, success => {
+				AddConsoleLine("Unlock Trophy {0}.", success);
+			});
+		}
+
 		public void RemoveTrophy() {
 			Debug.Log("Remove Trophy. Click to see source.");
 
