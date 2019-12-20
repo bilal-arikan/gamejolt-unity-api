@@ -11,18 +11,36 @@ namespace GameJolt.Editor {
 		public override void OnInspectorGUI() {
 			var settings = target as Settings;
 			if(settings == null) return;
+			DrawSettings(settings);
+		}
+
+		public static void DrawSettings(Settings settings) {
 			if(string.IsNullOrEmpty(settings.EncryptionKey))
 				settings.EncryptionKey = GetRandomPassword();
-			base.OnInspectorGUI();
+			// draw all the normal properties
+			var obj = new SerializedObject(settings);
+			EditorGUI.BeginChangeCheck();
+			obj.Update();
+			SerializedProperty iterator = obj.GetIterator();
+			bool enterChildren = true;
+			while(iterator.NextVisible(enterChildren)) {
+				if(iterator.type != "PPtr<MonoScript>") {
+					EditorGUILayout.PropertyField(iterator, true, new GUILayoutOption[0]);
+					enterChildren = false;
+				}
+			}
+			obj.ApplyModifiedProperties();
+			EditorGUI.EndChangeCheck();
+			// end of normal properties
 			if(GUILayout.Button("Clear All Settings")) {
-				Undo.RecordObject(target, "Clear GameJolt API settings");
+				Undo.RecordObject(settings, "Clear GameJolt API settings");
 				var empty = CreateInstance<Settings>();
 				foreach(var fieldInfo in typeof(Settings).GetFields(BindingFlags.NonPublic | BindingFlags.Instance)) {
 					var value = fieldInfo.GetValue(empty);
 					fieldInfo.SetValue(settings, value);
 				}
 				DestroyImmediate(empty);
-				EditorUtility.SetDirty(target);
+				EditorUtility.SetDirty(settings);
 				Selection.activeObject = null;
 			}
 		}

@@ -87,7 +87,7 @@ GameJoltUI.Instance.ShowSignIn(
     Debug.Log(string.Format("Sign-in {0}", signInSuccess ? "successful" : "failed or user's dismissed the window"));
   },
   (bool userFetchedSuccess) => {
-    Debug.Log(string.Format("User details fetched {0}", signInSuccess ? "successfully" : "failed"));
+    Debug.Log(string.Format("User details fetched {0}", userFetchedSuccess ? "successfully" : "failed"));
   }
 });
 ```

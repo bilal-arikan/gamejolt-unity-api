@@ -2,32 +2,46 @@
 using UnityEngine.EventSystems;
 using UnityEditor;
 using GameJolt.API;
+using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
 namespace GameJolt.Editor {
-	public class Tools : MonoBehaviour {
+	public class Tools {
 		private const string DefaultSettingsPath = "Assets/Plugins/GameJolt/GJAPISettings.asset";
 		private const string ManagerPrefabPath = "Assets/Plugins/GameJolt/Prefabs/GameJoltAPI.prefab";
 
-		[MenuItem("Edit/Project Settings/Game Jolt API")]
-		public static void Settings() {
-			ScriptableObject asset;
+		private static Settings GetOrCreateSettings() {
+			Settings settings;
 			var assets = AssetDatabase.FindAssets("t:GameJolt.API.Settings");
 			if(assets.Length == 0) {
-				asset = ScriptableObject.CreateInstance<Settings>();
-				AssetDatabase.CreateAsset(asset, DefaultSettingsPath);
+				settings = ScriptableObject.CreateInstance<Settings>();
+				AssetDatabase.CreateAsset(settings, DefaultSettingsPath);
 				AssetDatabase.SaveAssets();
 			} else {
-				asset = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assets[0]), typeof(Settings)) as Settings;
+				settings = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assets[0]), typeof(Settings)) as Settings;
 			}
-
-			EditorUtility.FocusProjectWindow();
-			Selection.activeObject = asset;
+			return settings;
 		}
+
+#if UNITY_2018_3_OR_NEWER
+		[SettingsProvider]
+		public static SettingsProvider SettingsProvider() {
+			return new SettingsProvider("Project/Game Jolt API", SettingsScope.Project) {
+				guiHandler = (searchContext) => SettingsEditor.DrawSettings(GetOrCreateSettings()),
+				keywords = new HashSet<string> { "GameJolt", "Game Jolt" }
+			};
+		}
+#else
+		[MenuItem("Edit/Project Settings/Game Jolt API")]
+		public static void Settings() {
+			EditorUtility.FocusProjectWindow();
+			Selection.activeObject = GetOrCreateSettings();
+		}
+#endif
 
 		[MenuItem("GameObject/Game Jolt API Manager")]
 		public static void Manager() {
-			var manager = FindObjectOfType<GameJoltAPI>();
+			var manager = Object.FindObjectOfType<GameJoltAPI>();
 			if(manager != null) {
 				Selection.activeObject = manager;
 			} else {
@@ -38,7 +52,7 @@ namespace GameJolt.Editor {
 					var clone = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 					Selection.activeObject = clone;
 
-					if(FindObjectOfType<EventSystem>() == null) {
+					if(Object.FindObjectOfType<EventSystem>() == null) {
 						// ReSharper disable once ObjectCreationAsStatement
 						new GameObject(
 							"EventSystem",

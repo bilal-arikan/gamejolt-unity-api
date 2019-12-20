@@ -3,6 +3,8 @@
     "references": [
         "GameJoltRuntime"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+		"Editor"
+	],
     "excludePlatforms": []
 }
