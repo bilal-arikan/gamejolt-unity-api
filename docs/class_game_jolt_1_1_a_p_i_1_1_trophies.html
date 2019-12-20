@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.5.4</span>
+   &#160;<span id="projectnumber">v2.5.5</span>
    </div>
   </td>
  </tr>
@@ -62,6 +62,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af60c429d368a245358c320930b2ac54a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_trophies.html#af60c429d368a245358c320930b2ac54a">Unlock</a> (int id, Action&lt; bool &gt; callback=null)</td></tr>
 <tr class="memdesc:af60c429d368a245358c320930b2ac54a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the specified Trophy by its id.  <a href="#af60c429d368a245358c320930b2ac54a">More...</a><br /></td></tr>
 <tr class="separator:af60c429d368a245358c320930b2ac54a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a752811935a829d35a90bb6313bb5eac0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_trophies.html#a752811935a829d35a90bb6313bb5eac0">TryUnlock</a> (<a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_trophy.html">Trophy</a> trophy, Action&lt; <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ace9d1f5aab5fd11543b0fc770f785b0c">TryUnlockResult</a> &gt; callback=null)</td></tr>
+<tr class="memdesc:a752811935a829d35a90bb6313bb5eac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocks the trophy if it was not already unlocked.  <a href="#a752811935a829d35a90bb6313bb5eac0">More...</a><br /></td></tr>
+<tr class="separator:a752811935a829d35a90bb6313bb5eac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a324aaf9ad6430f12f8248d304a945db2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_trophies.html#a324aaf9ad6430f12f8248d304a945db2">TryUnlock</a> (int id, Action&lt; <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ace9d1f5aab5fd11543b0fc770f785b0c">TryUnlockResult</a> &gt; callback=null)</td></tr>
+<tr class="memdesc:a324aaf9ad6430f12f8248d304a945db2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocks the trophy if it was not already unlocked.  <a href="#a324aaf9ad6430f12f8248d304a945db2">More...</a><br /></td></tr>
+<tr class="separator:a324aaf9ad6430f12f8248d304a945db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1950a94d3a980ce7882ef29f49fddae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_trophies.html#af1950a94d3a980ce7882ef29f49fddae">Get</a> (int id, Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_trophy.html">Trophy</a> &gt; callback)</td></tr>
 <tr class="memdesc:af1950a94d3a980ce7882ef29f49fddae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Trophy by <code>id</code>.  <a href="#af1950a94d3a980ce7882ef29f49fddae">More...</a><br /></td></tr>
 <tr class="separator:af1950a94d3a980ce7882ef29f49fddae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -337,6 +343,96 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">id</td><td>The trophy id to lock again.</td></tr>
     <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating the success of this function.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a752811935a829d35a90bb6313bb5eac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a752811935a829d35a90bb6313bb5eac0">&#9670;&nbsp;</a></span>TryUnlock() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.Trophies.TryUnlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_trophy.html">Trophy</a>&#160;</td>
+          <td class="paramname"><em>trophy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ace9d1f5aab5fd11543b0fc770f785b0c">TryUnlockResult</a> &gt;&#160;</td>
+          <td class="paramname"><em>callback</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unlocks the trophy if it was not already unlocked. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trophy</td><td>The Trophy to unlock.</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, an enum indicating success.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a324aaf9ad6430f12f8248d304a945db2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a324aaf9ad6430f12f8248d304a945db2">&#9670;&nbsp;</a></span>TryUnlock() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.Trophies.TryUnlock </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ace9d1f5aab5fd11543b0fc770f785b0c">TryUnlockResult</a> &gt;&#160;</td>
+          <td class="paramname"><em>callback</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unlocks the trophy if it was not already unlocked. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trophy</td><td>The Trophy ID.</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, an enum indicating success.</td></tr>
   </table>
   </dd>
 </dl>

@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+## [2.5.5][v2_5_5] (2019-12-20)
+
+### Add
+- `SettingsProvider` for Unity 2018.3 or newer (see issue [#42](https://github.com/InfectedBytes/gj-unity-api/issues/42))
+- `Trophies.TryUnlock` method, which will first check if the trophy is already unlocked (see issue [#43](https://github.com/InfectedBytes/gj-unity-api/issues/43))
+
+### Fixed
+- Build error on newer Unity versions. Fixed `GameJoltEditor.asmdef` file
+- Fixed small error in `tutorial.md` (see issue [#40](https://github.com/InfectedBytes/gj-unity-api/issues/40))
 
 ## [2.5.4][v2_5_4] (2019-08-09)
 
