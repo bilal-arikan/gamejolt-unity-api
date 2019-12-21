@@ -186,7 +186,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.4...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.5...HEAD
+[v2_5_5]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.5
 [v2_5_4]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.4
 [v2_5_3]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.3
 [v2_5_2]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.2
