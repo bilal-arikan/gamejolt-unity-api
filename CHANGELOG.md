@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+## [2.5.6][v2_5_6] (2020-03-06)
+
+### Fixed
+- `NullReferenceException` when accessing the `GameJoltUI` from within the `AutoSignIn` callback (see issue [#45](https://github.com/InfectedBytes/gj-unity-api/issues/45))
+
 ## [2.5.5][v2_5_5] (2019-12-20)
 
 ### Add
@@ -186,7 +191,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.5...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.6...HEAD
+[v2_5_6]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.6
 [v2_5_5]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.5
 [v2_5_4]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.4
 [v2_5_3]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.3

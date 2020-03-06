@@ -65,7 +65,7 @@ namespace GameJolt.API {
 		/// </summary>
 		protected override void Init() {
 			Configure();
-			AutoConnect();
+			StartCoroutine(AutoConnect());
 			CacheTables();
 		}
 
@@ -133,7 +133,8 @@ namespace GameJolt.API {
 		#endregion Requests
 
 		#region Actions
-		private void AutoConnect() {
+		private IEnumerator AutoConnect() {
+			yield return null; // delay by one frame to make sure that the whole UI is already initialized
 #if UNITY_WEBGL
 			#region Autoconnect Web
 #if UNITY_EDITOR
