@@ -135,7 +135,7 @@ namespace GameJolt.API {
 		private static void ShowNotification(Trophy trophy) {
 			if(trophy.Unlocked) {
 				GameJoltUI.Instance.QueueNotification(
-					string.Format("Unlocked <b>#{0}</b>", trophy.Title),
+					string.Format("Unlocked <b>{0}</b>", trophy.Title),
 					trophy.Image);
 			}
 		}
