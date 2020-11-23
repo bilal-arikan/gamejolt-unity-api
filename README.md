@@ -6,6 +6,11 @@ Check out the [documentation](http://InfectedBytes.github.io/gj-unity-api/).
 ## License
 Released under [MIT](https://raw.githubusercontent.com/InfectedBytes/gj-unity-api/master/LICENSE.txt).
 
+## Support
+If you like this project, please consider buying me a coffee :D
+
+<a href="https://www.buymeacoffee.com/InfectedBytes" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## Development
 
 ### Changelog
