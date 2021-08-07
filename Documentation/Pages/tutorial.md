@@ -147,7 +147,7 @@ Trophies need a signed in user.
 **Tip:** Trophies can benefit a lot from caching. Don't forget to enable *Use Caching* in the API settings.
 
 ## Unlock
-Unlocking a trophy will automatically show a notification. Future version of the API will allow you to turn this off.
+Unlocking a trophy will automatically show a notification. But note that if yo ucall this multiple times, you will get multiple notifications. See `TryUnlock` if you only want the notification once.
 
 ```
 GameJolt.API.Trophies.Unlock(trophyID, (bool success) => {
@@ -158,6 +158,24 @@ GameJolt.API.Trophies.Unlock(trophyID, (bool success) => {
 	else
 	{
 		Debug.Log("Something went wrong");
+	}
+});
+```
+
+### TryUnlock
+Similar to the normal `Unlock`, but this will only show a notification once and it will also tell you if the trophy was already unlocked.
+```
+GameJolt.API.Trophies.TryUnlock(trophyID, (TryUnlockResult result) => {
+	switch(result) {
+		case TryUnlockResult.Unlocked:
+			Debug.Log("You've unlocked the trophy!");
+			break;
+		case TryUnlockResult.AlreadyUnlocked:
+			Debug.Log("The trophy was already unlocked");
+			break;
+		case TryUnlockResult.Failure:
+			Debug.LogError("Something went wrong!");
+			break;
 	}
 });
 ```

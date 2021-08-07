@@ -92,11 +92,17 @@ namespace GameJolt.API {
 		/// <param name="trophy">The <see cref="Trophy"/> ID.</param>
 		/// <param name="callback">A callback function accepting a single parameter, an enum indicating success.</param>
 		public static void TryUnlock(int id, Action<TryUnlockResult> callback = null) {
+			// early return in case we already know it's unlocked
+			if(cachedTrophies != null && cachedTrophies.ContainsKey(id) && cachedTrophies[id].Unlocked) {
+				if(callback != null) callback(TryUnlockResult.AlreadyUnlocked);
+				return;
+			}
 			Get(id, trophy => {
 				if(trophy == null) { // something went wrong -> signal failure
 					if(callback != null) callback(TryUnlockResult.Failure);
 				} else if(!trophy.Unlocked) { // not unlocked yet, so unlock it now
 					var unlockCallback = callback == null ? (Action<bool>)null : success => callback(success ? TryUnlockResult.Unlocked : TryUnlockResult.Failure);
+					trophy.Unlocked = true; // already set it as unlocked so if TryUnlock was called multiple times without waiting for a response, we still only show the notification once
 					Unlock(id, unlockCallback);
 				} else if(callback != null) { // already unlocked, so if we have a callback, signal success
 					callback(TryUnlockResult.AlreadyUnlocked);

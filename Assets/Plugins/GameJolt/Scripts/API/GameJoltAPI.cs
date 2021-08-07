@@ -95,17 +95,18 @@ namespace GameJolt.API {
 			}
 
 			float timeout = Time.time + Settings.Timeout;
-			var request = UnityVersionAbstraction.GetRequest(url, format);
-			request.SendWebRequest();
-			while(!request.isDone) {
-				if(Time.time > timeout) {
-					request.Abort();
-					callback(new Response("Timeout for " + url));
-					yield break;
+			using(var request = UnityVersionAbstraction.GetRequest(url, format)) {
+				request.SendWebRequest();
+				while(!request.isDone) {
+					if(Time.time > timeout) {
+						request.Abort();
+						callback(new Response("Timeout for " + url));
+						yield break;
+					}
+					yield return new WaitForEndOfFrame();
 				}
-				yield return new WaitForEndOfFrame();
+				callback(new Response(request, format));
 			}
-			callback(new Response(request, format));
 		}
 
 		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, ResponseFormat format,
@@ -117,18 +118,19 @@ namespace GameJolt.API {
 
 			float timeout = Time.time + Settings.Timeout;
 
-			var request = UnityWebRequest.Post(url, payload);
-			request.SendWebRequest();
-			while(!request.isDone) {
-				if(Time.time > timeout) {
-					request.Abort();
-					callback(new Response("Timeout for " + url));
-					yield break;
+			using(var request = UnityWebRequest.Post(url, payload)) {
+				request.SendWebRequest();
+				while(!request.isDone) {
+					if(Time.time > timeout) {
+						request.Abort();
+						callback(new Response("Timeout for " + url));
+						yield break;
+					}
+					yield return new WaitForEndOfFrame();
 				}
-				yield return new WaitForEndOfFrame();
-			}
 
-			callback(new Response(request, format));
+				callback(new Response(request, format));
+			}
 		}
 		#endregion Requests
 

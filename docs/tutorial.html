@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.5.6</span>
+   &#160;<span id="projectnumber">v2.5.7</span>
    </div>
   </td>
  </tr>
@@ -114,8 +114,9 @@ $(function() {
 <p>Trophies need a signed in user.</p>
 <p><b>Tip:</b> Trophies can benefit a lot from caching. Don't forget to enable <em>Use Caching</em> in the API settings.</p>
 <h2>Unlock</h2>
-<p>Unlocking a trophy will automatically show a notification. Future version of the API will allow you to turn this off.</p>
-<div class="fragment"><div class="line">GameJolt.API.Trophies.Unlock(trophyID, (bool success) =&gt; {</div><div class="line">    if (success)</div><div class="line">    {</div><div class="line">        Debug.Log(&quot;Success!&quot;);</div><div class="line">    }</div><div class="line">    else</div><div class="line">    {</div><div class="line">        Debug.Log(&quot;Something went wrong&quot;);</div><div class="line">    }</div><div class="line">});</div></div><!-- fragment --><h2>Show</h2>
+<p>Unlocking a trophy will automatically show a notification. But note that if yo ucall this multiple times, you will get multiple notifications. See <code>TryUnlock</code> if you only want the notification once.</p>
+<div class="fragment"><div class="line">GameJolt.API.Trophies.Unlock(trophyID, (bool success) =&gt; {</div><div class="line">    if (success)</div><div class="line">    {</div><div class="line">        Debug.Log(&quot;Success!&quot;);</div><div class="line">    }</div><div class="line">    else</div><div class="line">    {</div><div class="line">        Debug.Log(&quot;Something went wrong&quot;);</div><div class="line">    }</div><div class="line">});</div></div><!-- fragment --><h3>TryUnlock</h3>
+<p>Similar to the normal <code>Unlock</code>, but this will only show a notification once and it will also tell you if the trophy was already unlocked. </p><div class="fragment"><div class="line">GameJolt.API.Trophies.TryUnlock(trophyID, (TryUnlockResult result) =&gt; {</div><div class="line">    switch(result) {</div><div class="line">        case TryUnlockResult.Unlocked:</div><div class="line">            Debug.Log(&quot;You&#39;ve unlocked the trophy!&quot;);</div><div class="line">            break;</div><div class="line">        case TryUnlockResult.AlreadyUnlocked:</div><div class="line">            Debug.Log(&quot;The trophy was already unlocked&quot;);</div><div class="line">            break;</div><div class="line">        case TryUnlockResult.Failure:</div><div class="line">            Debug.LogError(&quot;Something went wrong!&quot;);</div><div class="line">            break;</div><div class="line">    }</div><div class="line">});</div></div><!-- fragment --><h2>Show</h2>
 <h3>Default UI</h3>
 <p>It's as simple as a single line!</p>
 <div class="fragment"><div class="line">GameJoltUI.Instance.ShowTrophies();</div></div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Trophies Collection</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowTrophies ()</em> from the dropdown.</p>
