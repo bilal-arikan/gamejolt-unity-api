@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+## [2.5.7][v2_5_7] (2021-08-07)
+
+### Fixed
+- `TryUnlock` would still show two notifications if requested faster than the server could reply
+- Get and Post requests were not wrapped in a `using` statement
+
 ## [2.5.6][v2_5_6] (2020-03-06)
 
 ### Fixed
@@ -191,7 +197,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.6...HEAD
+[Unreleased]: https://github.com/InfectedBytes/gj-unity-api/compare/v2.5.7...HEAD
+[v2_5_7]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.7
 [v2_5_6]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.6
 [v2_5_5]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.5
 [v2_5_4]: https://github.com/InfectedBytes/gj-unity-api/tree/v2.5.4
