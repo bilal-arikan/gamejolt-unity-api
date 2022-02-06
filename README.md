@@ -3,6 +3,11 @@ Game Jolt [Game API](http://gamejolt.com/api/doc/game/) wrapper for [Unity](http
 
 Check out the [documentation](http://InfectedBytes.github.io/gj-unity-api/).
 
+## How to use with Unity Package Manager
+Add to manifest.json
+```
+"com.gamejolt.api": "https://github.com/bilal-arikan/gamejolt-unity-api.git?path=/Assets/GameJolt#2.5.7",
+```
 ## License
 Released under [MIT](https://raw.githubusercontent.com/InfectedBytes/gj-unity-api/master/LICENSE.txt).
 

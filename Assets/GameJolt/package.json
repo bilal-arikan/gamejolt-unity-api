@@ -1,0 +1,7 @@
+{
+  "name": "com.gamejolt.api",
+  "displayName": "GameJolt Unity API",
+  "version": "2.5.7",
+  "unity": "2018.1",
+  "dependencies": {}
+}
