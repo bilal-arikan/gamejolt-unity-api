@@ -7,8 +7,8 @@ using System.Collections.Generic;
 // ReSharper disable once CheckNamespace
 namespace GameJolt.Editor {
 	public class Tools {
-		private const string DefaultSettingsPath = "Assets/Plugins/GameJolt/GJAPISettings.asset";
-		private const string ManagerPrefabPath = "Assets/Plugins/GameJolt/Prefabs/GameJoltAPI.prefab";
+        private const string DefaultSettingsPath = "Assets/Resources/GJAPISettings.asset";
+        private const string ManagerPrefabPath = "Packages/com.gamejolt.api/Runtime/Prefabs/GameJoltAPI.prefab";
 
 		private static Settings GetOrCreateSettings() {
 			Settings settings;

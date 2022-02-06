@@ -69,12 +69,24 @@ namespace GameJolt.API {
 			CacheTables();
 		}
 
+#if UNITY_EDITOR
+		private void OnValidate() {
+			if(Settings == null){
+				var assets = UnityEditor.AssetDatabase.FindAssets("t:GameJolt.API.Settings");
+				if(assets.Length > 0){
+					Settings = UnityEditor.AssetDatabase.LoadAssetAtPath(UnityEditor.AssetDatabase.GUIDToAssetPath(assets[0]), typeof(Settings)) as Settings;
+					UnityEditor.EditorUtility.SetDirty(this);
+				}
+			}
+		}
+#endif
+
 		/// <summary>
 		/// Configure this instance.
 		/// </summary>
 		private void Configure() {
 			if(Settings == null) {
-				LogHelper.Error("Missing settings reference! Fallback to empty default settings.");
+				LogHelper.Error("Missing settings reference! Fallback to empty default settings.", this);
 				Settings = ScriptableObject.CreateInstance<Settings>();
 			} else {
 				LogHelper.Level = Settings.LogLevel;
