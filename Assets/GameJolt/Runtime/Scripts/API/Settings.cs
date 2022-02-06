@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 
+using UnityEngine;
+
 namespace GameJolt.API
 {
 	/// <summary>
 	/// API Settings Config Object.
 	/// </summary>
 	[System.Serializable]
+	[CreateAssetMenu(fileName = "GJAPISettings", menuName = "GameObjects/GameJoltAPISettings", order = 0)]
 	public class Settings : ScriptableObject {
 		#region Serialized Fields
 		[Header("Game")]
