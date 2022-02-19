@@ -6,7 +6,7 @@ namespace GameJolt.API
 	/// API Settings Config Object.
 	/// </summary>
 	[System.Serializable]
-	[CreateAssetMenu(fileName = "GJAPISettings", menuName = "Assets/GameJoltAPISettings", order = 0)]
+	[CreateAssetMenu(fileName = "GJAPISettings", menuName = "GameJolt API Settings", order = 0)]
 	public class Settings : ScriptableObject {
 		#region Serialized Fields
 		[Header("Game")]
